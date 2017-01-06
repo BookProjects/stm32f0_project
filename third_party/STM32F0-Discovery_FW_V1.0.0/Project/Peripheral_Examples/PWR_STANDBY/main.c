@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    PWR_STANDBY/main.c 
+  * @file    PWR_STANDBY/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -53,7 +53,7 @@ void SysTick_Configuration(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -61,18 +61,18 @@ int main(void)
      */
   /* Configure Systick */
   SysTick_Configuration();
-  
+
   /* Configures the Userbutton */
   STM_EVAL_PBInit(BUTTON_USER,BUTTON_MODE_GPIO);
-  
+
   /* Configure LED3 */
   STM_EVAL_LEDInit(LED3);
-  
+
   while(STM_EVAL_PBGetState(BUTTON_USER) == RESET);
-  
+
   /* Configure RTC clock source and prescaler */
   RTC_Config();
- 
+
   while(1)
   {}
 }
@@ -83,36 +83,36 @@ int main(void)
   * @retval None
   */
 void RTC_Config(void)
-{  
+{
   RTC_InitTypeDef   RTC_InitStructure;
   RTC_AlarmTypeDef  RTC_AlarmStructure;
   RTC_TimeTypeDef   RTC_TimeStructure;
 
   /* Enable the PWR clock */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
-  
+
   /* Allow access to Backup Domain */
   PWR_BackupAccessCmd(ENABLE);
 
   /* Check if the StandBy flag is set */
   if (PWR_GetFlagStatus(PWR_FLAG_SB) != RESET)
-  {       
+  {
     /* Clear StandBy flag */
     PWR_ClearFlag(PWR_FLAG_SB);
-    
+
     /* Check if the StandBy flag is cleared */
     if (PWR_GetFlagStatus(PWR_FLAG_SB) != RESET)
     {
       while(1);
     }
-        
+
     RTC_WaitForSynchro();
-    
+
     /* No need to configure the RTC as the RTC config(clock source, enable,
     prescaler,...) are kept after wake-up from STANDBY */
   }
   else
-  {         
+  {
     /* RTC Configuration ******************************************************/
     /* Reset Backup Domain */
     RCC_BackupResetCmd(ENABLE);
@@ -148,30 +148,30 @@ void RTC_Config(void)
     RTC_AlarmStructure.RTC_AlarmDateWeekDaySel = RTC_AlarmDateWeekDaySel_Date;
     RTC_AlarmStructure.RTC_AlarmMask = RTC_AlarmMask_DateWeekDay;
     RTC_SetAlarm(RTC_Format_BCD, RTC_Alarm_A, &RTC_AlarmStructure);
-  
+
     /* Enable RTC Alarm A Interrupt */
     RTC_ITConfig(RTC_IT_ALRA, ENABLE);
-  
+
     /* Enable the alarm */
     RTC_AlarmCmd(RTC_Alarm_A, ENABLE);
   }
-    
+
   /* Set the time to 01h 00mn 00s AM */
   RTC_TimeStructure.RTC_H12     = RTC_H12_AM;
   RTC_TimeStructure.RTC_Hours   = 0x01;
   RTC_TimeStructure.RTC_Minutes = 0x00;
-  RTC_TimeStructure.RTC_Seconds = 0x00;  
-  
+  RTC_TimeStructure.RTC_Seconds = 0x00;
+
   RTC_SetTime(RTC_Format_BCD, &RTC_TimeStructure);
- 
-  
+
+
   /* Clear Wakeup flag */
-  PWR_ClearFlag(PWR_FLAG_WU);      
-  
+  PWR_ClearFlag(PWR_FLAG_WU);
+
   RTC_ClearFlag(RTC_FLAG_ALRAF);
-  
+
   /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
-  PWR_EnterSTANDBYMode(); 
+  PWR_EnterSTANDBYMode();
 }
 
 /**
@@ -183,8 +183,8 @@ void SysTick_Configuration(void)
 {
   /* SysTick interrupt each 250 ms */
   if (SysTick_Config((SystemCoreClock/8) / 4))
-  { 
-    /* Capture error */ 
+  {
+    /* Capture error */
     while (1);
   }
 

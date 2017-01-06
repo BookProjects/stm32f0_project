@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    IWDG_Reset/main.c 
+  * @file    IWDG_Reset/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -57,22 +57,22 @@ void TIM14_ConfigForLSI(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f0xx.c file
      */
 
-  /* Initialize LED3,4 and user Button mounted on STM32f0_discovery board */       
+  /* Initialize LED3,4 and user Button mounted on STM32f0_discovery board */
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
   STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI);
 
   /* Setup SysTick Timer for 1 msec interrupts  */
   if (SysTick_Config(SystemCoreClock / 1000))
-  { 
-    /* Capture error */ 
+  {
+    /* Capture error */
     while (1);
   }
 
@@ -96,7 +96,7 @@ int main(void)
 #ifdef LSI_TIM_MEASURE
   /* TIM Configuration -------------------------------------------------------*/
   TIM14_ConfigForLSI();
-  
+
   /* Wait until the TIM14 get 2 LSI edges */
   while(CaptureNumber != 2)
   {
@@ -105,7 +105,7 @@ int main(void)
   /* Disable TIM14 CC1 Interrupt Request */
   TIM_ITConfig(TIM14, TIM_IT_CC1, DISABLE);
 #endif
-  
+
   /* IWDG timeout equal to 250 ms (the timeout may varies due to LSI frequency
      dispersion) */
   /* Enable write access to IWDG_PR and IWDG_RLR registers */
@@ -138,7 +138,7 @@ int main(void)
     Delay(240);
 
     /* Reload IWDG counter */
-    IWDG_ReloadCounter();  
+    IWDG_ReloadCounter();
   }
 }
 
@@ -149,7 +149,7 @@ int main(void)
   * @retval None
   */
 void Delay(__IO uint32_t nTime)
-{ 
+{
   TimingDelay = nTime;
 
   while(TimingDelay != 0);
@@ -165,7 +165,7 @@ void TIM14_ConfigForLSI(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
   TIM_ICInitTypeDef  TIM_ICInitStructure;
-  
+
   /* Enable peripheral clocks ------------------------------------------------*/
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
 
@@ -175,42 +175,42 @@ void TIM14_ConfigForLSI(void)
   /* Reset RTC Domain */
   RCC_BackupResetCmd(ENABLE);
   RCC_BackupResetCmd(DISABLE);
-  
+
   /*!< LSI Enable */
   RCC_LSICmd(ENABLE);
-  
+
   /*!< Wait till LSI is ready */
   while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {}
-  
+
   /* Select the RTC Clock Source */
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
-   
+
   /* Enable the RTC Clock */
   RCC_RTCCLKCmd(ENABLE);
 
   /* Wait for RTC APB registers synchronisation */
   RTC_WaitForSynchro();
-  
+
   /* Enable TIM14 clocks */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, ENABLE);  
-  
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, ENABLE);
+
   /* Enable the TIM14 Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = TIM14_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
-  
+
   /* Configure TIM14 prescaler */
   TIM_PrescalerConfig(TIM14, 0, TIM_PSCReloadMode_Immediate);
-  
+
   /* Connect internally the TM14_CH1 Input Capture to the LSI clock output */
   TIM_RemapConfig(TIM14, TIM14_RTC_CLK);
-  
+
   /* TIM14 configuration: Input Capture mode ---------------------
      The LSI oscillator is connected to TIM14 CH1
      The Rising edge is used as active edge,
-     The TIM14 CCR1 is used to compute the frequency value 
+     The TIM14 CCR1 is used to compute the frequency value
   ------------------------------------------------------------ */
   TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;
   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;
@@ -218,15 +218,15 @@ void TIM14_ConfigForLSI(void)
   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV8;
   TIM_ICInitStructure.TIM_ICFilter = 0;
   TIM_ICInit(TIM14, &TIM_ICInitStructure);
-  
+
   /* TIM14 Counter Enable */
   TIM_Cmd(TIM14, ENABLE);
 
   /* Reset the flags */
   TIM14->SR = 0;
-    
-  /* Enable the CC1 Interrupt Request */  
-  TIM_ITConfig(TIM14, TIM_IT_CC1, ENABLE);  
+
+  /* Enable the CC1 Interrupt Request */
+  TIM_ITConfig(TIM14, TIM_IT_CC1, ENABLE);
 }
 #endif
 

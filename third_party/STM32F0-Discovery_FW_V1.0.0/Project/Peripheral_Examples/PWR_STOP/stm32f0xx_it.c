@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    PWR_STOP/stm32f0xx_it.c 
+  * @file    PWR_STOP/stm32f0xx_it.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -18,8 +18,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -100,7 +100,7 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   STM_EVAL_LEDToggle(LED3);
-  
+
   TimingDelay--;
 }
 
@@ -124,11 +124,11 @@ void RTC_IRQHandler(void)
 
     /* Clear the Alarm A Pending Bit */
     RTC_ClearITPendingBit(RTC_IT_ALRA);
-    
+
     /* Clear EXTI line17 pending bit */
-    EXTI_ClearITPendingBit(EXTI_Line17);    
+    EXTI_ClearITPendingBit(EXTI_Line17);
   }
-  
+
 }
 
 /**
@@ -139,7 +139,7 @@ void RTC_IRQHandler(void)
 void EXTI0_1_IRQHandler(void)
 {
   if(EXTI_GetITStatus(USER_BUTTON_EXTI_LINE) != RESET)
-  { 
+  {
     /* Clear the USER Button EXTI line pending bit */
     EXTI_ClearITPendingBit(USER_BUTTON_EXTI_LINE);
 

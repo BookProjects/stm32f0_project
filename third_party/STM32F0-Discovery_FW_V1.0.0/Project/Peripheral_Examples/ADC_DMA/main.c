@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC_DMA/main.c 
+  * @file    ADC_DMA/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -58,13 +58,13 @@ void ADC1_CH_DMA_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f0xx.c file
      */
-  
+
   /* ADC1 channel with DMA configuration */
   ADC1_CH_DMA_Config();
 
@@ -72,16 +72,16 @@ int main(void)
   while (1)
   {
     /* Test DMA1 TC flag */
-    while((DMA_GetFlagStatus(DMA1_FLAG_TC1)) == RESET ); 
-    
+    while((DMA_GetFlagStatus(DMA1_FLAG_TC1)) == RESET );
+
     /* Clear DMA TC flag */
     DMA_ClearFlag(DMA1_FLAG_TC1);
-    
+
     /* Convert temperature sensor voltage value in mv */
     TempSensVoltmv = (uint32_t)((RegularConvData_Tab[0]* 3300) / 0xFFF);
-    
+
     /* Convert Vref voltage value in mv */
-    VrefIntVoltmv  = (uint32_t)((RegularConvData_Tab[1]* 3300) / 0xFFF);  
+    VrefIntVoltmv  = (uint32_t)((RegularConvData_Tab[1]* 3300) / 0xFFF);
   }
 }
 
@@ -94,16 +94,16 @@ void ADC1_CH_DMA_Config(void)
 {
   ADC_InitTypeDef     ADC_InitStructure;
   DMA_InitTypeDef     DMA_InitStructure;
-  
-  /* ADC1 DeInit */  
+
+  /* ADC1 DeInit */
   ADC_DeInit(ADC1);
-  
+
   /* ADC1 Periph clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
-  
+
   /* DMA1 clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1 , ENABLE);
-  
+
   /* DMA1 Channel1 Config */
   DMA_DeInit(DMA1_Channel1);
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)ADC1_DR_Address;
@@ -118,45 +118,45 @@ void ADC1_CH_DMA_Config(void)
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;
   DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
   DMA_Init(DMA1_Channel1, &DMA_InitStructure);
-  
+
   /* DMA1 Channel1 enable */
   DMA_Cmd(DMA1_Channel1, ENABLE);
-  
+
   /* ADC DMA request in circular mode */
   ADC_DMARequestModeConfig(ADC1, ADC_DMAMode_Circular);
-  
+
   /* Enable ADC_DMA */
-  ADC_DMACmd(ADC1, ENABLE);  
-  
+  ADC_DMACmd(ADC1, ENABLE);
+
   /* Initialize ADC structure */
   ADC_StructInit(&ADC_InitStructure);
-  
+
   /* Configure the ADC1 in continous mode withe a resolutuion equal to 12 bits  */
   ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
-  ADC_InitStructure.ADC_ContinuousConvMode = ENABLE; 
+  ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Backward;
-  ADC_Init(ADC1, &ADC_InitStructure); 
- 
-  /* Convert the ADC1 temperature sensor  with 55.5 Cycles as sampling time */ 
-  ADC_ChannelConfig(ADC1, ADC_Channel_TempSensor , ADC_SampleTime_55_5Cycles);  
+  ADC_Init(ADC1, &ADC_InitStructure);
+
+  /* Convert the ADC1 temperature sensor  with 55.5 Cycles as sampling time */
+  ADC_ChannelConfig(ADC1, ADC_Channel_TempSensor , ADC_SampleTime_55_5Cycles);
   ADC_TempSensorCmd(ENABLE);
-  
-  /* Convert the ADC1 Vref  with 55.5 Cycles as sampling time */ 
-  ADC_ChannelConfig(ADC1, ADC_Channel_Vrefint , ADC_SampleTime_55_5Cycles); 
+
+  /* Convert the ADC1 Vref  with 55.5 Cycles as sampling time */
+  ADC_ChannelConfig(ADC1, ADC_Channel_Vrefint , ADC_SampleTime_55_5Cycles);
   ADC_VrefintCmd(ENABLE);
-  
+
   /* ADC Calibration */
   ADC_GetCalibrationFactor(ADC1);
-  
+
   /* Enable ADC1 */
-  ADC_Cmd(ADC1, ENABLE);     
-  
+  ADC_Cmd(ADC1, ENABLE);
+
   /* Wait the ADCEN falg */
-  while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_ADEN)); 
-  
-  /* ADC1 regular Software Start Conv */ 
+  while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_ADEN));
+
+  /* ADC1 regular Software Start Conv */
   ADC_StartOfConversion(ADC1);
 }
 

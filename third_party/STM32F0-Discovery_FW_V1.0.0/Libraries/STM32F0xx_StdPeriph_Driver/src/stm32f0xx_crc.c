@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file provides firmware functions to manage the following 
+  * @brief   This file provides firmware functions to manage the following
   *          functionalities of CRC computation unit peripheral:
   *            + Configuration of the CRC computation unit
   *            + CRC computation of one/many 32-bit data
@@ -15,22 +15,22 @@
                      ##### How to use this driver #####
  ===============================================================================
     [..]
-    
+
          (+) Enable CRC AHB clock using RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE)
              function
-         (+) If required, select the reverse operation on input data 
-             using CRC_ReverseInputDataSelect()  
+         (+) If required, select the reverse operation on input data
+             using CRC_ReverseInputDataSelect()
          (+) If required, enable the reverse operation on output data
              using CRC_ReverseOutputDataCmd(Enable)
          (+) use CRC_CalcCRC() function to compute the CRC of a 32-bit data
-             or use CRC_CalcBlockCRC() function to compute the CRC if a 32-bit 
+             or use CRC_CalcBlockCRC() function to compute the CRC if a 32-bit
              data buffer
             (@) To compute the CRC of a new data use CRC_ResetDR() to reset
                  the CRC computation unit before starting the computation
                  otherwise you can get wrong CRC values.
-      
+
      @endverbatim
-  *  
+  *
   ******************************************************************************
   * @attention
   *
@@ -42,8 +42,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -58,7 +58,7 @@
   * @{
   */
 
-/** @defgroup CRC 
+/** @defgroup CRC
   * @brief CRC driver modules
   * @{
   */
@@ -75,7 +75,7 @@
   */
 
 /** @defgroup CRC_Group1 Configuration of the CRC computation unit functions
- *  @brief   Configuration of the CRC computation unit functions 
+ *  @brief   Configuration of the CRC computation unit functions
  *
 @verbatim
  ===============================================================================
@@ -202,7 +202,7 @@ void CRC_SetInitRegister(uint32_t CRC_InitValue)
 uint32_t CRC_CalcCRC(uint32_t CRC_Data)
 {
   CRC->DR = CRC_Data;
-  
+
   return (CRC->DR);
 }
 
@@ -215,7 +215,7 @@ uint32_t CRC_CalcCRC(uint32_t CRC_Data)
 uint32_t CRC_CalcBlockCRC(uint32_t pBuffer[], uint32_t BufferLength)
 {
   uint32_t index = 0;
-  
+
   for(index = 0; index < BufferLength; index++)
   {
     CRC->DR = pBuffer[index];
@@ -251,7 +251,7 @@ uint32_t CRC_GetCRC(void)
 
 /**
   * @brief  Stores an 8-bit data in the Independent Data(ID) register.
-  * @param  CRC_IDValue: 8-bit value to be stored in the ID register 					
+  * @param  CRC_IDValue: 8-bit value to be stored in the ID register
   * @retval None
   */
 void CRC_SetIDRegister(uint8_t CRC_IDValue)
@@ -262,7 +262,7 @@ void CRC_SetIDRegister(uint8_t CRC_IDValue)
 /**
   * @brief  Returns the 8-bit data stored in the Independent Data(ID) register
   * @param  None
-  * @retval 8-bit value of the ID register 
+  * @retval 8-bit value of the ID register
   */
 uint8_t CRC_GetIDRegister(void)
 {

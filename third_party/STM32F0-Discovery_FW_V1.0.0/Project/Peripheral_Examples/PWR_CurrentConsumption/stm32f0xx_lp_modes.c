@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    PWR_CurrentConsumption/stm32f0xx_lp_modes.c 
+  * @file    PWR_CurrentConsumption/stm32f0xx_lp_modes.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file provides firmware functions to manage the following 
+  * @brief   This file provides firmware functions to manage the following
   *          functionalities of the STM32F0xx Low Power Modes:
   *           - Sleep Mode
   *           - STOP mode with RTC
@@ -21,14 +21,14 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx_lp_modes.h"
@@ -40,7 +40,7 @@
 
 /** @addtogroup PWR_CurrentConsumption
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -53,7 +53,7 @@
   * @brief  This function configures the system to enter Sleep mode for
   *         current consumption measurement purpose.
   *         Sleep Mode
-  *         ==========  
+  *         ==========
   *            - System Running at PLL (48MHz)
   *            - Flash 3 wait state
   *            - Prefetch and Cache enabled
@@ -72,7 +72,7 @@ void SleepMode_Measure(void)
   /* Enable GPIOs clock */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB | RCC_AHBPeriph_GPIOC |
                         RCC_AHBPeriph_GPIOD | RCC_AHBPeriph_GPIOF , ENABLE);
-  
+
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
@@ -80,7 +80,7 @@ void SleepMode_Measure(void)
   GPIO_Init(GPIOC, &GPIO_InitStructure);
   GPIO_Init(GPIOD, &GPIO_InitStructure);
   GPIO_Init(GPIOF, &GPIO_InitStructure);
-  GPIO_Init(GPIOA, &GPIO_InitStructure); 
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
   GPIO_Init(GPIOB, &GPIO_InitStructure);
 
   /* Disable GPIOs clock */
@@ -108,10 +108,10 @@ void SleepMode_Measure(void)
 }
 
 /**
-  * @brief  This function configures the system to enter Stop mode with RTC 
+  * @brief  This function configures the system to enter Stop mode with RTC
   *         clocked by LSI  for current consumption measurement purpose.
   *         STOP Mode with RTC clocked by LSI
-  *         =====================================   
+  *         =====================================
   *           - RTC Clocked by LSI
   *           - Regulator in LP mode
   *           - HSI, HSE OFF and LSI OFF if not used as RTC Clock source
@@ -130,15 +130,15 @@ void StopMode_Measure(void)
   RTC_InitTypeDef   RTC_InitStructure;
   RTC_TimeTypeDef   RTC_TimeStructure;
   RTC_AlarmTypeDef  RTC_AlarmStructure;
-  
+
   /* Allow access to RTC */
   PWR_BackupAccessCmd(ENABLE);
 
-/* The RTC Clock may varies due to LSI frequency dispersion. */   
-  /* Enable the LSI OSC */ 
+/* The RTC Clock may varies due to LSI frequency dispersion. */
+  /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);
 
-  /* Wait till LSI is ready */  
+  /* Wait till LSI is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {
   }
@@ -170,16 +170,16 @@ void StopMode_Measure(void)
   /* Disable GPIOs clock */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA |RCC_AHBPeriph_GPIOB | RCC_AHBPeriph_GPIOC |
                          RCC_AHBPeriph_GPIOD | RCC_AHBPeriph_GPIOF, DISABLE);
- 
+
   RTC_InitStructure.RTC_HourFormat = RTC_HourFormat_24;
   RTC_InitStructure.RTC_AsynchPrediv = 0x7F;
   RTC_InitStructure.RTC_SynchPrediv = 0x0138;
-  
+
   if (RTC_Init(&RTC_InitStructure) == ERROR)
   {
     while(1);
   }
-    
+
   /* EXTI configuration */
   EXTI_ClearITPendingBit(EXTI_Line17);
   EXTI_InitStructure.EXTI_Line = EXTI_Line17;
@@ -187,13 +187,13 @@ void StopMode_Measure(void)
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
   EXTI_InitStructure.EXTI_LineCmd = ENABLE;
   EXTI_Init(&EXTI_InitStructure);
-  
+
   /* NVIC configuration */
   NVIC_InitStructure.NVIC_IRQChannel = RTC_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
-  
+
   /* Set the alarm X+5s */
   RTC_AlarmStructure.RTC_AlarmTime.RTC_H12     = RTC_H12_AM;
   RTC_AlarmStructure.RTC_AlarmTime.RTC_Hours   = 0x01;
@@ -203,23 +203,23 @@ void StopMode_Measure(void)
   RTC_AlarmStructure.RTC_AlarmDateWeekDaySel = RTC_AlarmDateWeekDaySel_Date;
   RTC_AlarmStructure.RTC_AlarmMask = RTC_AlarmMask_DateWeekDay;
   RTC_SetAlarm(RTC_Format_BCD, RTC_Alarm_A, &RTC_AlarmStructure);
-  
+
   /* Enable the alarm */
   RTC_AlarmCmd(RTC_Alarm_A, ENABLE);
-  
+
   /* Enable the RTC Alarm A interrupt */
   RTC_ITConfig(RTC_IT_ALRA, ENABLE);
-  
+
   /* Set the time to 01h 00mn 00s AM */
   RTC_TimeStructure.RTC_H12     = RTC_H12_AM;
   RTC_TimeStructure.RTC_Hours   = 0x01;
   RTC_TimeStructure.RTC_Minutes = 0x00;
-  RTC_TimeStructure.RTC_Seconds = 0x00;  
-  
+  RTC_TimeStructure.RTC_Seconds = 0x00;
+
   RTC_SetTime(RTC_Format_BCD, &RTC_TimeStructure);
-  
+
   /* Clear the Alarm A Pending Bit */
-  RTC_ClearITPendingBit(RTC_IT_ALRA);  
+  RTC_ClearITPendingBit(RTC_IT_ALRA);
 
   /* Enter Stop Mode */
   PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
@@ -256,7 +256,7 @@ void StandbyMode_Measure(void)
 
   /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
   PWR_EnterSTANDBYMode();
-  
+
   /* Infinite loop */
   while (1)
   {
@@ -264,13 +264,13 @@ void StandbyMode_Measure(void)
 }
 
 /**
-  * @brief  This function configures the system to enter Standby mode with RTC 
+  * @brief  This function configures the system to enter Standby mode with RTC
   *         clocked by LSI for current consumption measurement purpose.
   *         STANDBY Mode with RTC clocked by LSI
   *         ========================================
   *           - RTC Clocked by LSI
   *           - IWDG OFF
-  *           - Automatic Wakeup using RTC clocked by LSI 
+  *           - Automatic Wakeup using RTC clocked by LSI
   * @param  None
   * @retval None
   */
@@ -279,34 +279,34 @@ void StandbyRTCMode_Measure(void)
   RTC_InitTypeDef   RTC_InitStructure;
   RTC_AlarmTypeDef  RTC_AlarmStructure;
   RTC_TimeTypeDef   RTC_TimeStructure;
-  
+
   /* Allow access to RTC */
   PWR_BackupAccessCmd(ENABLE);
-  
-  /* The RTC Clock may varies due to LSI frequency dispersion. */   
-  /* Enable the LSI OSC */ 
+
+  /* The RTC Clock may varies due to LSI frequency dispersion. */
+  /* Enable the LSI OSC */
   RCC_LSICmd(ENABLE);
-  
-  /* Wait till LSI is ready */  
+
+  /* Wait till LSI is ready */
   while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET)
   {
   }
-  
+
   /* Select the RTC Clock Source */
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
-  
+
   /* Enable the RTC Clock */
   RCC_RTCCLKCmd(ENABLE);
-  
+
   /* Wait for RTC APB registers synchronisation */
   RTC_WaitForSynchro();
-  
+
   RTC_InitStructure.RTC_HourFormat = RTC_HourFormat_24;
   RTC_InitStructure.RTC_AsynchPrediv = 0x7F;
   RTC_InitStructure.RTC_SynchPrediv = 0x0138;
-  
+
   RTC_Init(&RTC_InitStructure);
-  
+
   /* Set the alarm X+5s */
   RTC_AlarmStructure.RTC_AlarmTime.RTC_H12     = RTC_H12_AM;
   RTC_AlarmStructure.RTC_AlarmTime.RTC_Hours   = 0x01;
@@ -316,29 +316,29 @@ void StandbyRTCMode_Measure(void)
   RTC_AlarmStructure.RTC_AlarmDateWeekDaySel = RTC_AlarmDateWeekDaySel_Date;
   RTC_AlarmStructure.RTC_AlarmMask = RTC_AlarmMask_DateWeekDay;
   RTC_SetAlarm(RTC_Format_BCD, RTC_Alarm_A, &RTC_AlarmStructure);
-  
+
   /* Enable RTC Alarm A Interrupt */
   RTC_ITConfig(RTC_IT_ALRA, ENABLE);
-  
+
   /* Enable the alarm */
   RTC_AlarmCmd(RTC_Alarm_A, ENABLE);
-  
+
   /* Set the time to 01h 00mn 00s AM */
   RTC_TimeStructure.RTC_H12     = RTC_H12_AM;
   RTC_TimeStructure.RTC_Hours   = 0x01;
   RTC_TimeStructure.RTC_Minutes = 0x00;
-  RTC_TimeStructure.RTC_Seconds = 0x00;  
-  
+  RTC_TimeStructure.RTC_Seconds = 0x00;
+
   RTC_SetTime(RTC_Format_BCD, &RTC_TimeStructure);
-    
+
   /* Clear Wakeup flag */
-  PWR_ClearFlag(PWR_FLAG_WU);      
-  
+  PWR_ClearFlag(PWR_FLAG_WU);
+
   RTC_ClearFlag(RTC_FLAG_ALRAF);
-  
+
   /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
   PWR_EnterSTANDBYMode();
-  
+
   /* Infinite loop */
   while (1)
   {
@@ -347,10 +347,10 @@ void StandbyRTCMode_Measure(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM_PWM_Input/main.c 
+  * @file    TIM_PWM_Input/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -53,7 +53,7 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -62,20 +62,20 @@ int main(void)
 
   /* TIM Configuration */
   TIM_Config();
-  
-  /* --------------------------------------------------------------------------- 
+
+  /* ---------------------------------------------------------------------------
     TIM2 configuration: PWM Input mode
 
-    In this example TIM2 input clock (TIM2CLK) is set to APB1 clock (PCLK1)   
-      TIM2CLK = PCLK1 
+    In this example TIM2 input clock (TIM2CLK) is set to APB1 clock (PCLK1)
+      TIM2CLK = PCLK1
       => TIM2CLK = HCLK = SystemCoreClock
 
-    External Signal Frequency = TIM2 counter clock / TIM2_CCR2 in Hz. 
+    External Signal Frequency = TIM2 counter clock / TIM2_CCR2 in Hz.
 
     External Signal DutyCycle = (TIM2_CCR1*100)/(TIM2_CCR2) in %.
 
   --------------------------------------------------------------------------- */
-  
+
   TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;
   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
@@ -111,13 +111,13 @@ void TIM_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
-  
+
   /* TIM2 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-  
+
   /* GPIOA clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-  
+
   /* TIM2 chennel2 configuration : PA.01 */
   GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_1;
   GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF;
@@ -125,10 +125,10 @@ void TIM_Config(void)
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_UP ;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
-  
+
   /* Connect TIM pin to AF2 */
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_2);
-  
+
   /* Enable the TIM2 global Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPriority = 0;

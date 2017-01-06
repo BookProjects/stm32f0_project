@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file contains all the functions prototypes for the SPI 
+  * @brief   This file contains all the functions prototypes for the SPI
   *          firmware library.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -47,8 +47,8 @@
 
 /* Exported types ------------------------------------------------------------*/
 
-/** 
-  * @brief  SPI Init structure definition  
+/**
+  * @brief  SPI Init structure definition
   */
 
 typedef struct
@@ -58,7 +58,7 @@ typedef struct
 
   uint16_t SPI_Mode;                /*!< Specifies the SPI mode (Master/Slave).
                                          This parameter can be a value of @ref SPI_mode */
-  
+
   uint16_t SPI_DataSize;            /*!< Specifies the SPI data size.
                                          This parameter can be a value of @ref SPI_data_size */
 
@@ -71,7 +71,7 @@ typedef struct
   uint16_t SPI_NSS;                 /*!< Specifies whether the NSS signal is managed by
                                          hardware (NSS pin) or by software using the SSI bit.
                                          This parameter can be a value of @ref SPI_Slave_Select_management */
- 
+
   uint16_t SPI_BaudRatePrescaler;   /*!< Specifies the Baud Rate prescaler value which will be
                                          used to configure the transmit and receive SCK clock.
                                          This parameter can be a value of @ref SPI_BaudRate_Prescaler
@@ -85,8 +85,8 @@ typedef struct
 }SPI_InitTypeDef;
 
 
-/** 
-  * @brief  I2S Init structure definition  
+/**
+  * @brief  I2S Init structure definition
   */
 
 typedef struct
@@ -121,10 +121,10 @@ typedef struct
 
 #define IS_SPI_1_PERIPH(PERIPH) (((PERIPH) == SPI1))
 
-/** @defgroup SPI_data_direction 
+/** @defgroup SPI_data_direction
   * @{
   */
-  
+
 #define SPI_Direction_2Lines_FullDuplex ((uint16_t)0x0000)
 #define SPI_Direction_2Lines_RxOnly     ((uint16_t)0x0400)
 #define SPI_Direction_1Line_Rx          ((uint16_t)0x8000)
@@ -137,7 +137,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_mode 
+/** @defgroup SPI_mode
   * @{
   */
 
@@ -195,7 +195,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_Clock_Polarity 
+/** @defgroup SPI_Clock_Polarity
   * @{
   */
 
@@ -207,7 +207,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_Clock_Phase 
+/** @defgroup SPI_Clock_Phase
   * @{
   */
 
@@ -219,7 +219,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_Slave_Select_management 
+/** @defgroup SPI_Slave_Select_management
   * @{
   */
 
@@ -231,7 +231,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_BaudRate_Prescaler 
+/** @defgroup SPI_BaudRate_Prescaler
   * @{
   */
 
@@ -255,7 +255,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_MSB_LSB_transmission 
+/** @defgroup SPI_MSB_LSB_transmission
   * @{
   */
 
@@ -266,8 +266,8 @@ typedef struct
 /**
   * @}
   */
-  
-/** @defgroup SPI_I2S_Mode 
+
+/** @defgroup SPI_I2S_Mode
   * @{
   */
 
@@ -283,7 +283,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_I2S_Standard 
+/** @defgroup SPI_I2S_Standard
   * @{
   */
 
@@ -301,7 +301,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_I2S_Data_Format 
+/** @defgroup SPI_I2S_Data_Format
   * @{
   */
 
@@ -317,7 +317,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_I2S_MCLK_Output 
+/** @defgroup SPI_I2S_MCLK_Output
   * @{
   */
 
@@ -329,7 +329,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_I2S_Audio_Frequency 
+/** @defgroup SPI_I2S_Audio_Frequency
   * @{
   */
 
@@ -351,7 +351,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_I2S_Clock_Polarity 
+/** @defgroup SPI_I2S_Clock_Polarity
   * @{
   */
 
@@ -363,7 +363,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_FIFO_reception_threshold 
+/** @defgroup SPI_FIFO_reception_threshold
   * @{
   */
 
@@ -375,7 +375,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_I2S_DMA_transfer_requests 
+/** @defgroup SPI_I2S_DMA_transfer_requests
   * @{
   */
 
@@ -401,7 +401,7 @@ typedef struct
 /**
   * @}
   */
-/** @defgroup SPI_NSS_internal_software_management 
+/** @defgroup SPI_NSS_internal_software_management
   * @{
   */
 
@@ -413,7 +413,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_CRC_Transmit_Receive 
+/** @defgroup SPI_CRC_Transmit_Receive
   * @{
   */
 
@@ -424,7 +424,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_direction_transmit_receive 
+/** @defgroup SPI_direction_transmit_receive
   * @{
   */
 
@@ -436,7 +436,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_I2S_interrupts_definition 
+/** @defgroup SPI_I2S_interrupts_definition
   * @{
   */
 
@@ -461,33 +461,33 @@ typedef struct
   */
 
 
-/** @defgroup SPI_transmission_fifo_status_level 
+/** @defgroup SPI_transmission_fifo_status_level
   * @{
-  */ 
+  */
 
 #define SPI_TransmissionFIFOStatus_Empty           ((uint16_t)0x0000)
-#define SPI_TransmissionFIFOStatus_1QuarterFull    ((uint16_t)0x0800) 
-#define SPI_TransmissionFIFOStatus_HalfFull        ((uint16_t)0x1000) 
+#define SPI_TransmissionFIFOStatus_1QuarterFull    ((uint16_t)0x0800)
+#define SPI_TransmissionFIFOStatus_HalfFull        ((uint16_t)0x1000)
 #define SPI_TransmissionFIFOStatus_Full            ((uint16_t)0x1800)
 
 /**
   * @}
-  */ 
+  */
 
-/** @defgroup SPI_reception_fifo_status_level 
+/** @defgroup SPI_reception_fifo_status_level
   * @{
-  */ 
+  */
 #define SPI_ReceptionFIFOStatus_Empty           ((uint16_t)0x0000)
-#define SPI_ReceptionFIFOStatus_1QuarterFull    ((uint16_t)0x0200) 
-#define SPI_ReceptionFIFOStatus_HalfFull        ((uint16_t)0x0400) 
+#define SPI_ReceptionFIFOStatus_1QuarterFull    ((uint16_t)0x0200)
+#define SPI_ReceptionFIFOStatus_HalfFull        ((uint16_t)0x0400)
 #define SPI_ReceptionFIFOStatus_Full            ((uint16_t)0x0600)
 
 /**
   * @}
-  */ 
+  */
 
 
-/** @defgroup SPI_I2S_flags_definition 
+/** @defgroup SPI_I2S_flags_definition
   * @{
   */
 
@@ -513,7 +513,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup SPI_CRC_polynomial 
+/** @defgroup SPI_CRC_polynomial
   * @{
   */
 

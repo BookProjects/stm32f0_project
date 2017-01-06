@@ -17,97 +17,97 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
   *
   ******************************************************************************
   */
-  
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0_discovery.h"
 
 /** @addtogroup Utilities
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32F0_DISCOVERY
   * @{
-  */ 
-    
-/** @defgroup STM32F0_DISCOVERY_LOW_LEVEL 
-  * @brief This file provides firmware functions to manage Leds and push-buttons, 
+  */
+
+/** @defgroup STM32F0_DISCOVERY_LOW_LEVEL
+  * @brief This file provides firmware functions to manage Leds and push-buttons,
   *        available on STM32F0_DISCOVERY evaluation board from STMicroelectronics.
   * @{
-  */ 
+  */
 
 /** @defgroup STM32F0_DISCOVERY_LOW_LEVEL_Private_TypesDefinitions
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32F0_DISCOVERY_LOW_LEVEL_Private_Defines
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32F0_DISCOVERY_LOW_LEVEL_Private_Macros
   * @{
-  */ 
+  */
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32F0_DISCOVERY_LOW_LEVEL_Private_Variables
   * @{
-  */ 
+  */
 GPIO_TypeDef* GPIO_PORT[LEDn] = {LED3_GPIO_PORT, LED4_GPIO_PORT};
 const uint16_t GPIO_PIN[LEDn] = {LED3_PIN, LED4_PIN};
 const uint32_t GPIO_CLK[LEDn] = {LED3_GPIO_CLK, LED4_GPIO_CLK};
 
-GPIO_TypeDef* BUTTON_PORT[BUTTONn] = {USER_BUTTON_GPIO_PORT}; 
+GPIO_TypeDef* BUTTON_PORT[BUTTONn] = {USER_BUTTON_GPIO_PORT};
 
-const uint16_t BUTTON_PIN[BUTTONn] = {USER_BUTTON_PIN}; 
+const uint16_t BUTTON_PIN[BUTTONn] = {USER_BUTTON_PIN};
 
 const uint32_t BUTTON_CLK[BUTTONn] = {USER_BUTTON_GPIO_CLK};
 
 const uint16_t BUTTON_EXTI_LINE[BUTTONn] = {USER_BUTTON_EXTI_LINE};
 
 const uint16_t BUTTON_PORT_SOURCE[BUTTONn] = {USER_BUTTON_EXTI_PORT_SOURCE};
-								 
-const uint16_t BUTTON_PIN_SOURCE[BUTTONn] = {USER_BUTTON_EXTI_PIN_SOURCE}; 
+
+const uint16_t BUTTON_PIN_SOURCE[BUTTONn] = {USER_BUTTON_EXTI_PIN_SOURCE};
 
 const uint16_t BUTTON_IRQn[BUTTONn] = {USER_BUTTON_EXTI_IRQn};
 
 /**
   * @}
-  */ 
+  */
 
 
 /** @defgroup STM32F0_DISCOVERY_LOW_LEVEL_Private_FunctionPrototypes
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32F0_DISCOVERY_LOW_LEVEL_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  Configures LED GPIO.
-  * @param  Led: Specifies the Led to be configured. 
+  * @param  Led: Specifies the Led to be configured.
   *   This parameter can be one of following parameters:
   *     @arg LED3
   *     @arg LED4
@@ -116,7 +116,7 @@ const uint16_t BUTTON_IRQn[BUTTONn] = {USER_BUTTON_EXTI_IRQn};
 void STM_EVAL_LEDInit(Led_TypeDef Led)
 {
   GPIO_InitTypeDef  GPIO_InitStructure;
-  
+
   /* Enable the GPIO_LED Clock */
   RCC_AHBPeriphClockCmd(GPIO_CLK[Led], ENABLE);
 
@@ -131,10 +131,10 @@ void STM_EVAL_LEDInit(Led_TypeDef Led)
 
 /**
   * @brief  Turns selected LED On.
-  * @param  Led: Specifies the Led to be set on. 
+  * @param  Led: Specifies the Led to be set on.
   *   This parameter can be one of following parameters:
   *     @arg LED3
-  *     @arg LED4  
+  *     @arg LED4
   * @retval None
   */
 void STM_EVAL_LEDOn(Led_TypeDef Led)
@@ -144,10 +144,10 @@ void STM_EVAL_LEDOn(Led_TypeDef Led)
 
 /**
   * @brief  Turns selected LED Off.
-  * @param  Led: Specifies the Led to be set off. 
+  * @param  Led: Specifies the Led to be set off.
   *   This parameter can be one of following parameters:
   *     @arg LED3
-  *     @arg LED4 
+  *     @arg LED4
   * @retval None
   */
 void STM_EVAL_LEDOff(Led_TypeDef Led)
@@ -157,10 +157,10 @@ void STM_EVAL_LEDOff(Led_TypeDef Led)
 
 /**
   * @brief  Toggles the selected LED.
-  * @param  Led: Specifies the Led to be toggled. 
+  * @param  Led: Specifies the Led to be toggled.
   *   This parameter can be one of following parameters:
   *     @arg LED3
-  *     @arg LED4  
+  *     @arg LED4
   * @retval None
   */
 void STM_EVAL_LEDToggle(Led_TypeDef Led)
@@ -172,10 +172,10 @@ void STM_EVAL_LEDToggle(Led_TypeDef Led)
   * @brief  Configures Button GPIO and EXTI Line.
   * @param  Button: Specifies the Button to be configured.
   *   This parameter can be:
-  *     @arg BUTTON_USER: User Push Button      
+  *     @arg BUTTON_USER: User Push Button
   * @param  Button_Mode: Specifies Button mode.
-  *   This parameter can be one of following parameters:   
-  *     @arg BUTTON_MODE_GPIO: Button will be used as simple IO 
+  *   This parameter can be one of following parameters:
+  *     @arg BUTTON_MODE_GPIO: Button will be used as simple IO
   *     @arg BUTTON_MODE_EXTI: Button will be connected to EXTI line with interrupt
   *                            generation capability
   * @retval None
@@ -210,7 +210,7 @@ void STM_EVAL_PBInit(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
     }
     else
     {
-      EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;    
+      EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
     }
     EXTI_InitStructure.EXTI_LineCmd = ENABLE;
     EXTI_Init(&EXTI_InitStructure);
@@ -220,7 +220,7 @@ void STM_EVAL_PBInit(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
     NVIC_InitStructure.NVIC_IRQChannelPriority = 0x03;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 
-    NVIC_Init(&NVIC_InitStructure); 
+    NVIC_Init(&NVIC_InitStructure);
   }
 }
 
@@ -228,7 +228,7 @@ void STM_EVAL_PBInit(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
   * @brief  Returns the selected Button state.
   * @param  Button: Specifies the Button to be checked.
   *   This parameter can be one of following parameters:
-  *     @arg BUTTON_USER: User Push Button    
+  *     @arg BUTTON_USER: User Push Button
   * @retval The Button GPIO pin value.
   */
 uint32_t STM_EVAL_PBGetState(Button_TypeDef Button)
@@ -239,7 +239,11 @@ uint32_t STM_EVAL_PBGetState(Button_TypeDef Button)
 
 /**
   * @}
-  */ 
+  */
+
+/**
+  * @}
+  */
 
 /**
   * @}
@@ -249,8 +253,4 @@ uint32_t STM_EVAL_PBGetState(Button_TypeDef Button)
   * @}
   */
 
-/**
-  * @}
-  */ 
-    
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

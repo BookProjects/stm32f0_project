@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file contains all the functions prototypes for the CEC firmware 
+  * @brief   This file contains all the functions prototypes for the CEC firmware
   *          library.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -45,9 +45,9 @@
   * @{
   */
 /* Exported types ------------------------------------------------------------*/
-  
-/** 
-  * @brief CEC Init structure definition 
+
+/**
+  * @brief CEC Init structure definition
   */
 typedef struct
 {

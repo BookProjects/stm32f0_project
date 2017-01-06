@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -47,15 +47,15 @@
 
 /* Exported types ------------------------------------------------------------*/
 
-/** 
-  * @brief  NVIC Init Structure definition  
+/**
+  * @brief  NVIC Init Structure definition
   */
 
 typedef struct
 {
   uint8_t NVIC_IRQChannel;             /*!< Specifies the IRQ channel to be enabled or disabled.
-                                            This parameter can be a value of @ref IRQn_Type 
-                                            (For the complete STM32 Devices IRQ Channels list, 
+                                            This parameter can be a value of @ref IRQn_Type
+                                            (For the complete STM32 Devices IRQ Channels list,
                                             please refer to stm32f0xx.h file) */
 
   uint8_t NVIC_IRQChannelPriority;     /*!< Specifies the priority level for the IRQ channel specified
@@ -63,13 +63,13 @@ typedef struct
                                             between 0 and 3.  */
 
   FunctionalState NVIC_IRQChannelCmd;  /*!< Specifies whether the IRQ channel defined in NVIC_IRQChannel
-                                            will be enabled or disabled. 
-                                            This parameter can be set either to ENABLE or DISABLE */   
+                                            will be enabled or disabled.
+                                            This parameter can be set either to ENABLE or DISABLE */
 } NVIC_InitTypeDef;
 
-/**  
+/**
   *
-@verbatim   
+@verbatim
 
 @endverbatim
 */
@@ -80,7 +80,7 @@ typedef struct
   * @{
   */
 
-/** @defgroup MISC_System_Low_Power 
+/** @defgroup MISC_System_Low_Power
   * @{
   */
 
@@ -94,7 +94,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup MISC_Preemption_Priority_Group 
+/** @defgroup MISC_Preemption_Priority_Group
   * @{
   */
 #define IS_NVIC_PRIORITY(PRIORITY)  ((PRIORITY) < 0x04)
@@ -103,7 +103,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup MISC_SysTick_clock_source 
+/** @defgroup MISC_SysTick_clock_source
   * @{
   */
 
@@ -120,7 +120,7 @@ typedef struct
   */
 
 /* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */ 
+/* Exported functions ------------------------------------------------------- */
 
 void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct);
 void NVIC_SystemLPConfig(uint8_t LowPowerMode, FunctionalState NewState);

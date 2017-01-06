@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DAC_SignalsGeneration/main.c 
+  * @file    DAC_SignalsGeneration/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -49,12 +49,12 @@ DAC_InitTypeDef            DAC_InitStructure;
 DMA_InitTypeDef            DMA_InitStructure;
 const uint16_t Sine12bit[32] = {
                       2047, 2447, 2831, 3185, 3498, 3750, 3939, 4056, 4095, 4056,
-                      3939, 3750, 3495, 3185, 2831, 2447, 2047, 1647, 1263, 909, 
-                      599, 344, 155, 38, 0, 38, 155, 344, 599, 909, 1263, 1647};	  
+                      3939, 3750, 3495, 3185, 2831, 2447, 2047, 1647, 1263, 909,
+                      599, 344, 155, 38, 0, 38, 155, 344, 599, 909, 1263, 1647};
 const uint8_t Escalator8bit[6] = {0x0, 0x33, 0x66, 0x99, 0xCC, 0xFF};
 uint8_t Idx = 0;
 __IO uint8_t  SelectedWavesForm = 1;
-__IO uint8_t WaveChange = 1; 
+__IO uint8_t WaveChange = 1;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -67,33 +67,33 @@ void DAC_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f0xx.c file
-     */ 
+     */
 
   /* Preconfiguration before using DAC----------------------------------------*/
   DAC_Config();
-  
+
   /* TIM2 Periph clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-  
+
   /* Time base configuration */
-  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure); 
-  TIM_TimeBaseStructure.TIM_Period = 0xFF;          
-  TIM_TimeBaseStructure.TIM_Prescaler = 0x0;       
-  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
+  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+  TIM_TimeBaseStructure.TIM_Period = 0xFF;
+  TIM_TimeBaseStructure.TIM_Prescaler = 0x0;
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
   TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 
   /* TIM2 TRGO selection */
   TIM_SelectOutputTrigger(TIM2, TIM_TRGOSource_Update);
-  
+
   /* TIM2 enable counter */
   TIM_Cmd(TIM2, ENABLE);
-  
+
   /* Configures Button GPIO and EXTI Line */
   STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI);
 
@@ -102,20 +102,20 @@ int main(void)
   {
     /* If the wave form is changed */
     if (WaveChange == 1)
-    {  
+    {
       /* Switch the selected waves forms according the Button status */
       if (SelectedWavesForm == 1)
       {
           /* The sine wave has been selected */
           /* Sine Wave generator ---------------------------------------------*/
-          DAC_DeInit(); 
-          
+          DAC_DeInit();
+
           /* DAC channel1 Configuration */
           DAC_InitStructure.DAC_Trigger = DAC_Trigger_T2_TRGO;
           DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
-          
+
           /* DMA channel3 Configuration */
-          DMA_DeInit(DMA1_Channel3); 
+          DMA_DeInit(DMA1_Channel3);
           DMA_InitStructure.DMA_PeripheralBaseAddr = DAC_DHR12R1_ADDRESS;
           DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&Sine12bit;
           DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
@@ -135,26 +135,26 @@ int main(void)
           /* DAC Channel1 Init */
           DAC_Init(DAC_Channel_1, &DAC_InitStructure);
 
-          /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+          /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is
              automatically connected to the DAC converter. */
           DAC_Cmd(DAC_Channel_1, ENABLE);
 
           /* Enable DMA for DAC Channel1 */
           DAC_DMACmd(DAC_Channel_1, ENABLE);
-         
+
       }
           /* The Escalator wave has been selected */
        else
        {
-         
+
           /* Escalator Wave generator -----------------------------------------*/
           DAC_DeInit();
-          
+
           /* DAC channel1 Configuration */
           DAC_InitStructure.DAC_Trigger = DAC_Trigger_T2_TRGO;
           DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
-          
-  
+
+
           /* DMA1 channel2 configuration */
           DMA_DeInit(DMA1_Channel3);
 
@@ -164,14 +164,14 @@ int main(void)
           DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
           DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
           DMA_Init(DMA1_Channel3, &DMA_InitStructure);
-    
+
           /* Enable DMA1 Channel2 */
           DMA_Cmd(DMA1_Channel3, ENABLE);
-    
+
           /* DAC channel1 Configuration */
           DAC_Init(DAC_Channel_1, &DAC_InitStructure);
 
-          /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+          /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is
              automatically connected to the DAC converter. */
           DAC_Cmd(DAC_Channel_1, ENABLE);
 
@@ -202,7 +202,7 @@ void DAC_Config(void)
 
   /* GPIOA clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-  
+
   /* Configure PA.04 (DAC_OUT1) as analog */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_4;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
@@ -221,7 +221,7 @@ void DAC_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

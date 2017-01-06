@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file provides firmware functions to manage the following 
+  * @brief   This file provides firmware functions to manage the following
   *          functionalities of the Debug MCU (DBGMCU) peripheral:
   *           + Device and Revision ID management
   *           + Peripherals Configuration
@@ -22,8 +22,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -38,7 +38,7 @@
   * @{
   */
 
-/** @defgroup DBGMCU 
+/** @defgroup DBGMCU
   * @brief DBGMCU driver modules
   * @{
   */
@@ -52,10 +52,10 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
-/** @defgroup DBGMCU_Private_Functions 
+/** @defgroup DBGMCU_Private_Functions
   * @{
   */
-  
+
 
 /** @defgroup DBGMCU_Group1 Device and Revision ID management functions
  *  @brief   Device and Revision ID management functions
@@ -92,7 +92,7 @@ uint32_t DBGMCU_GetDEVID(void)
 /**
   * @}
   */
-  
+
 /** @defgroup DBGMCU_Group2 Peripherals Configuration functions
  *  @brief   Peripherals Configuration
  *
@@ -140,11 +140,11 @@ void DBGMCU_Config(uint32_t DBGMCU_Periph, FunctionalState NewState)
   *             @arg DBGMCU_TIM3_STOP: TIM3 counter stopped when Core is halted
   *             @arg DBGMCU_TIM6_STOP: TIM6 counter stopped when Core is halted
   *             @arg DBGMCU_TIM14_STOP: TIM14 counter stopped when Core is halted
-  *             @arg DBGMCU_RTC_STOP: RTC Calendar and Wakeup counter stopped 
+  *             @arg DBGMCU_RTC_STOP: RTC Calendar and Wakeup counter stopped
   *                  when Core is halted.
   *             @arg DBGMCU_WWDG_STOP: Debug WWDG stopped when Core is halted
   *             @arg DBGMCU_IWDG_STOP: Debug IWDG stopped when Core is halted
-  *             @arg DBGMCU_I2C1_SMBUS_TIMEOUT: I2C1 SMBUS timeout mode stopped 
+  *             @arg DBGMCU_I2C1_SMBUS_TIMEOUT: I2C1 SMBUS timeout mode stopped
   *                  when Core is halted
   * @param  NewState: new state of the specified APB1 peripheral in Debug mode.
   *         This parameter can be: ENABLE or DISABLE.
@@ -197,7 +197,7 @@ void DBGMCU_APB2PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState)
 /**
   * @}
   */
-  
+
 /**
   * @}
   */

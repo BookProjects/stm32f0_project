@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM_Complementary_signals/main.c 
+  * @file    TIM_Complementary_signals/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -57,7 +57,7 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -71,40 +71,40 @@ int main(void)
   TIM1 Configuration to:
 
   1/ Generate 3 complementary PWM signals with 3 different duty cycles:
-  
-    TIM1 input clock (TIM1CLK) is set to APB2 clock (PCLK2).   
-    TIM1CLK =  PCLK2  
-    PCLK2 = HCLK  
+
+    TIM1 input clock (TIM1CLK) is set to APB2 clock (PCLK2).
+    TIM1CLK =  PCLK2
+    PCLK2 = HCLK
     => TIM1CLK = HCLK = SystemCoreClock
-  
-    TIM1CLK is fixed to SystemCoreClock, the 
-	TIM1 Prescaler is equal to 0 so the 
+
+    TIM1CLK is fixed to SystemCoreClock, the
+	TIM1 Prescaler is equal to 0 so the
     TIM1 counter clock used is SystemCoreClock (48MHz).
 
     The objective is to generate PWM signal at 17.57 KHz:
     - TIM1_Period = (SystemCoreClock / 17570) - 1
 
-    The Three Duty cycles are computed as the following description: 
+    The Three Duty cycles are computed as the following description:
 
     The channel 1 duty cycle is set to 50% so channel 1N is set to 50%.
     The channel 2 duty cycle is set to 25% so channel 2N is set to 75%.
     The channel 3 duty cycle is set to 12.5% so channel 3N is set to 87.5%.
-    
+
     The Timer pulse is calculated as follows:
       - ChannelxPulse = DutyCycle * (TIM1_Period - 1) / 100
 
   2/ Insert a dead time equal to (11/SystemCoreClock) ns
 
-  3/ Configure the break feature, active at High level, and using the automatic 
+  3/ Configure the break feature, active at High level, and using the automatic
      output enable feature
 
-  4/ Use the Locking parameters level1. 
-  
-  Note: 
+  4/ Use the Locking parameters level1.
+
+  Note:
     SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f4xx.c file.
     Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
     function to update SystemCoreClock variable value. Otherwise, any configuration
-    based on this variable will be incorrect. 
+    based on this variable will be incorrect.
   --------------------------------------------------------------------------- */
 
   /* Compute the value to be set in ARR register to generate signal frequency at 17.57 Khz */
@@ -182,24 +182,24 @@ void TIM_Config(void)
 
   /* TIM1 clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
-                         
+
   /* GPIOA Configuration: Channel 1, 2 and 3 as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_Init(GPIOA, &GPIO_InitStructure);   
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
 
   /* GPIOB Configuration: 2N, 3N, BKin and 1N as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14 | GPIO_Pin_15 | GPIO_Pin_12 | GPIO_Pin_13;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
-  
+
   /* Connect TIM pins to AF2 */
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource8, GPIO_AF_2);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_2);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_2);
-  GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_2); 
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_2);
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_2);
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource12, GPIO_AF_2);
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_2);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
   @date: 29.07.2011
   @note    Copyright (C) 2011 ARM Limited. All rights reserved.
   @par
@@ -17,7 +17,7 @@
  -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="qualified" version="1.0">
-  
+
   <xs:simpleType name="registerNameType">
     <xs:restriction base="xs:string">
       <xs:pattern value="([_A-Za-z]{1}[_A-Za-z0-9]*(\[%s\])?)|([_A-Za-z]{1}[_A-Za-z0-9]*(%s)?[_A-Za-z0-9]*)"/>
@@ -146,8 +146,8 @@
   <xs:group name="bitRangeOffsetWidthStyle">
     <xs:sequence>
       <xs:element name="bitOffset" type="scaledNonNegativeInteger"/>
-      <xs:element name="bitWidth" type="scaledNonNegativeInteger" minOccurs="0"/>   
-    </xs:sequence> 
+      <xs:element name="bitWidth" type="scaledNonNegativeInteger" minOccurs="0"/>
+    </xs:sequence>
   </xs:group>
 
   <xs:group name="dimElementGroup">

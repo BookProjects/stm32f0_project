@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    NVIC_WFI_Mask/main.c 
+  * @file    NVIC_WFI_Mask/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -53,18 +53,18 @@ void Delay(__IO uint32_t nCount);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f0xx.c file
      */
-  
-  /* Initialize Led and USER Button mounted on STM32F0-Discovery Kit */       
+
+  /* Initialize Led and USER Button mounted on STM32F0-Discovery Kit */
   STM_EVAL_LEDInit(LED3);
-  
-  STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI); 
-    
+
+  STM_EVAL_PBInit(BUTTON_USER, BUTTON_MODE_EXTI);
+
   while (1)
   {
     if(LowPowerMode == 1)

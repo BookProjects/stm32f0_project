@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns:p="urn:schemas-microsoft-com:office:powerpoint" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head>
-  
+
   <title>CMSIS: Cortex-M4 SIMD Instructions</title><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
   <meta name="ProgId" content="FrontPage.Editor.Document">
   <style>
@@ -506,7 +506,7 @@ uint32_t __SADD8(uint32_t val1, uint32_t val2);</pre>
             <li>the addition of the third bytes of each operand, in the third byte of the return value.</li>
             <li>the addition of the fourth bytes of each operand, in the fourth byte of the return value.</li>
           </ul>
-          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on 
+          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
              the results of the operation.<br>
              If <i>res</i> is the return value, then:
           </p>
@@ -515,7 +515,7 @@ uint32_t __SADD8(uint32_t val1, uint32_t val2);</pre>
             <li>if res[15:8] &ge; 0 then APSR.GE[1] = 1 else 0</li>
             <li>if res[23:16] &ge; 0 then APSR.GE[2] = 1 else 0</li>
             <li>if res[31:24] &ge; 0 then APSR.GE[3] = 1 else 0</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -545,7 +545,7 @@ uint32_t __QADD8(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform four 8-bit integer additions, saturating the results to 
+      <td>This function enables you to perform four 8-bit integer additions, saturating the results to
           the 8-bit signed integer range -2<sup>7</sup> &le; x &le; 2<sup>7</sup> - 1.
       </td>
     </tr>
@@ -679,7 +679,7 @@ uint32_t __UADD8(uint32_t val1, uint32_t val2);</pre>
             <li>the addition of the third bytes in each operand, in the third byte of the return value.</li>
             <li>the addition of the fourth bytes in each operand, in the fourth byte of the return value.</li>
           </ul>
-          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on 
+          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
              the results of the operation.<br>
              If <i>res</i> is the return value, then:
           </p>
@@ -688,7 +688,7 @@ uint32_t __UADD8(uint32_t val1, uint32_t val2);</pre>
             <li>if res[15:8] &ge; 0x100 then APSR.GE[1] = 1 else 0</li>
             <li>if res[23:16] &ge; 0x100 then APSR.GE[2] = 1 else 0</li>
             <li>if res[31:24] &ge; 0x100 then APSR.GE[3] = 1 else 0</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -718,7 +718,7 @@ uint32_t __UQADD8(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform four unsigned 8-bit integer additions, saturating the 
+      <td>This function enables you to perform four unsigned 8-bit integer additions, saturating the
           results to the 8-bit unsigned integer range 0 &le; x &le; 2<sup>8</sup> - 1.
       </td>
     </tr>
@@ -847,16 +847,16 @@ uint32_t __SSUB8(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the first byte in the second operand from the first byte in the 
+            <li>the subtraction of the first byte in the second operand from the first byte in the
                 first operand, in the first bytes of the return value.</li>
-            <li>the subtraction of the second byte in the second operand from the second byte in 
+            <li>the subtraction of the second byte in the second operand from the second byte in
                 the first operand, in the second byte of the return value.</li>
-            <li>the subtraction of the third byte in the second operand from the third byte in the 
+            <li>the subtraction of the third byte in the second operand from the third byte in the
                 first operand, in the third byte of the return value.</li>
-            <li>the subtraction of the fourth byte in the second operand from the fourth byte in 
+            <li>the subtraction of the fourth byte in the second operand from the fourth byte in
                 the first operand, in the fourth byte of the return value.</li>
           </ul>
-          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on 
+          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
              the results of the operation. If <i>res</i> is the return value, then:
           </p>
           <ul style="margin-top:0px">
@@ -864,7 +864,7 @@ uint32_t __SSUB8(uint32_t val1, uint32_t val2);</pre>
             <li>if res[15:8] &ge; 0 then APSR.GE[1] = 1 else 0</li>
             <li>if res[23:16] &ge; 0 then APSR.GE[2] = 1 else 0</li>
             <li>if res[31:24] &ge; 0 then APSR.GE[3] = 1 else 0</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -894,7 +894,7 @@ uint32_t __QADD8(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform four 8-bit integer subtractions, saturating the results 
+      <td>This function enables you to perform four 8-bit integer subtractions, saturating the results
           to the 8-bit signed integer range -2<sup>7</sup> &le; x &le; 2<sup>7</sup> - 1.
       </td>
     </tr>
@@ -914,13 +914,13 @@ uint32_t __QADD8(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the first byte in the second operand from the first byte in the 
+            <li>the subtraction of the first byte in the second operand from the first byte in the
                 first operand, in the first byte of the return value.</li>
-            <li>the subtraction of the second byte in the second operand from the second byte in 
+            <li>the subtraction of the second byte in the second operand from the second byte in
                 the first operand, in the second byte of the return value.</li>
-            <li>the subtraction of the third byte in the second operand from the third byte in the 
+            <li>the subtraction of the third byte in the second operand from the third byte in the
                 first operand, in the third byte of the return value.</li>
-            <li>the subtraction of the fourth byte in the second operand from the fourth byte in 
+            <li>the subtraction of the fourth byte in the second operand from the fourth byte in
                 the first operand, in the fourth byte of the return value.</li>
           </ul>
           <p>The returned results are saturated to the 8-bit signed integer range -2<sup>7</sup> &le; x &le; 2<sup>7</sup> - 1.
@@ -954,7 +954,7 @@ uint32_t __SHSUB8(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform four signed 8-bit integer subtractions, halving the 
+      <td>This function enables you to perform four signed 8-bit integer subtractions, halving the
           results.
       </td>
     </tr>
@@ -974,13 +974,13 @@ uint32_t __SHSUB8(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved subtraction of the first byte in the second operand from the first byte 
+            <li>the halved subtraction of the first byte in the second operand from the first byte
                 in the first operand, in the first byte of the return value.</li>
-            <li>the halved subtraction of the second byte in the second operand from the second 
+            <li>the halved subtraction of the second byte in the second operand from the second
                 byte in the first operand, in the second byte of the return value.</li>
-            <li>the halved subtraction of the third byte in the second operand from the third byte 
+            <li>the halved subtraction of the third byte in the second operand from the third byte
                 in the first operand, in the third byte of the return value.</li>
-            <li>the halved subtraction of the fourth byte in the second operand from the fourth 
+            <li>the halved subtraction of the fourth byte in the second operand from the fourth
                 byte in the first operand, in the fourth byte of the return value.</li>
           </ul>
       </td>
@@ -1032,16 +1032,16 @@ uint32_t __USUB8(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the first byte in the second operand from the first byte in the 
+            <li>the subtraction of the first byte in the second operand from the first byte in the
                 first operand, in the first byte of the return value.</li>
-            <li>the subtraction of the second byte in the second operand from the second byte in 
+            <li>the subtraction of the second byte in the second operand from the second byte in
                 the first operand, in the second byte of the return value.</li>
-            <li>the subtraction of the third byte in the second operand from the third byte in the 
+            <li>the subtraction of the third byte in the second operand from the third byte in the
                 first operand, in the third byte of the return value.</li>
-            <li>the subtraction of the fourth byte in the second operand from the fourth byte in 
+            <li>the subtraction of the fourth byte in the second operand from the fourth byte in
                 the first operand, in the fourth byte of the return value.</li>
           </ul>
-          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on 
+          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
              the results of the operation.<br>
              If <i>res</i> is the return value, then:
           </p>
@@ -1050,7 +1050,7 @@ uint32_t __USUB8(uint32_t val1, uint32_t val2);</pre>
             <li>if res[15:8] &ge; 0 then APSR.GE[1] = 1 else 0</li>
             <li>if res[23:16] &ge; 0 then APSR.GE[2] = 1 else 0</li>
             <li>if res[31:24] &ge; 0 then APSR.GE[3] = 1 else 0</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -1080,7 +1080,7 @@ uint32_t __UQSUB8(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform four unsigned 8-bit integer subtractions, saturating 
+      <td>This function enables you to perform four unsigned 8-bit integer subtractions, saturating
           the results to the 8-bit unsigned integer range 0 &le; x &le; 2<sup>8</sup> - 1.
       </td>
     </tr>
@@ -1100,13 +1100,13 @@ uint32_t __UQSUB8(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the first byte in the second operand from the first byte in the 
+            <li>the subtraction of the first byte in the second operand from the first byte in the
                 first operand, in the first byte of the return value.</li>
-            <li>the subtraction of the second byte in the second operand from the second byte in 
+            <li>the subtraction of the second byte in the second operand from the second byte in
                 the first operand, in the second byte of the return value.</li>
-            <li>the subtraction of the third byte in the second operand from the third byte in the 
+            <li>the subtraction of the third byte in the second operand from the third byte in the
                 first operand, in the third byte of the return value.</li>
-            <li>the subtraction of the fourth byte in the second operand from the fourth byte in 
+            <li>the subtraction of the fourth byte in the second operand from the fourth byte in
                 the first operand, in the fourth byte of the return value.</li>
           </ul>
           <p>The results are saturated to the 8-bit unsigned integer range 0 &le; x &le; 2<sup>8</sup> - 1.
@@ -1140,7 +1140,7 @@ uint32_t __UHSUB8(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform four unsigned 8-bit integer subtractions, halving the 
+      <td>This function enables you to perform four unsigned 8-bit integer subtractions, halving the
           results.
       </td>
     </tr>
@@ -1160,13 +1160,13 @@ uint32_t __UHSUB8(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved subtraction of the first byte in the second operand from the first byte 
+            <li>the halved subtraction of the first byte in the second operand from the first byte
                 in the first operand, in the first byte of the return value.</li>
-            <li>the halved subtraction of the second byte in the second operand from the second 
+            <li>the halved subtraction of the second byte in the second operand from the second
                 byte in the first operand, in the second byte of the return value.</li>
-            <li>the halved subtraction of the third byte in the second operand from the third byte 
+            <li>the halved subtraction of the third byte in the second operand from the third byte
                 in the first operand, in the third byte of the return value.</li>
-            <li>the halved subtraction of the fourth byte in the second operand from the fourth 
+            <li>the halved subtraction of the fourth byte in the second operand from the fourth
                 byte in the first operand, in the fourth byte of the return value.</li>
           </ul>
       </td>
@@ -1228,7 +1228,7 @@ uint32_t __SADD16(uint32_t val1, uint32_t val2);</pre>
           <ul style="margin-top:0px">
             <li>if res[15:0] &ge; 0 then APSR.GE[1:0] = 11 else 00</li>
             <li>if res[31:16] &ge; 0 then APSR.GE[3:2] = 11 else 00</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -1256,7 +1256,7 @@ uint32_t __QADD16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two 16-bit integer arithmetic additions in parallel, 
+      <td>This function enables you to perform two 16-bit integer arithmetic additions in parallel,
           saturating the results to the 16-bit signed integer range -2<sup>15</sup> &le; x &le; 2<sup>15</sup> - 1.
       </td>
     </tr>
@@ -1279,7 +1279,7 @@ uint32_t __QADD16(uint32_t val1, uint32_t val2);</pre>
             <li>the saturated addition of the low halfwords in the low halfword of the return value.</li>
             <li>the saturated addition of the high halfwords in the high halfword of the return value.</li>
           </ul>
-          <p>The returned results are saturated to the 16-bit signed integer 
+          <p>The returned results are saturated to the 16-bit signed integer
              range -2<sup>15</sup> &le; x &le; 2<sup>15</sup> - 1
           </p>
       </td>
@@ -1309,7 +1309,7 @@ uint32_t __SHADD16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two signed 16-bit integer additions, halving the 
+      <td>This function enables you to perform two signed 16-bit integer additions, halving the
           results.
       </td>
     </tr>
@@ -1329,9 +1329,9 @@ uint32_t __SHADD16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved addition of the low halfwords from each operand, in the low halfword 
+            <li>the halved addition of the low halfwords from each operand, in the low halfword
                 of the return value.</li>
-            <li>the halved addition of the high halfwords from each operand, in the high halfword 
+            <li>the halved addition of the high halfwords from each operand, in the high halfword
                 of the return value.</li>
           </ul>
       </td>
@@ -1381,19 +1381,19 @@ uint32_t __UADD16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the addition of the low halfwords in each operand, in the low halfword of the 
+            <li>the addition of the low halfwords in each operand, in the low halfword of the
                 return value.</li>
-            <li>the addition of the high halfwords in each operand, in the high halfword of the 
+            <li>the addition of the high halfwords in each operand, in the high halfword of the
                 return value.</li>
           </ul>
-          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on 
+          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
              the results of the operation.<br>
              If <i>res</i> is the return value, then:
           </p>
           <ul style="margin-top:0px">
             <li>if res[15:0] &ge; 0x10000 then APSR.GE[0] = 11 else 00</li>
             <li>if res[31:16] &ge; 0x10000 then APSR.GE[1] = 11 else 00</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -1421,7 +1421,7 @@ uint32_t __UQADD16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two unsigned 16-bit integer additions, saturating the 
+      <td>This function enables you to perform two unsigned 16-bit integer additions, saturating the
           results to the 16-bit unsigned integer range 0 &le; x &le; 2<sup>16</sup> - 1.
       </td>
     </tr>
@@ -1441,12 +1441,12 @@ uint32_t __UQADD16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the addition of the low halfword in the first operand and the low halfword in the 
+            <li>the addition of the low halfword in the first operand and the low halfword in the
                 second operand, in the low halfword of the return value.</li>
-            <li>the addition of the high halfword in the first operand and the high halfword in the 
+            <li>the addition of the high halfword in the first operand and the high halfword in the
                 second operand, in the high halfword of the return value.</li>
           </ul>
-          <p>The results are saturated to the 16-bit unsigned integer 
+          <p>The results are saturated to the 16-bit unsigned integer
              range 0 &le; x &le; 2<sup>16</sup> - 1.
           </p>
       </td>
@@ -1476,7 +1476,7 @@ uint32_t __UHADD16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two unsigned 16-bit integer additions, halving the 
+      <td>This function enables you to perform two unsigned 16-bit integer additions, halving the
           results.
       </td>
     </tr>
@@ -1496,9 +1496,9 @@ uint32_t __UHADD16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved addition of the low halfwords in each operand, in the low halfword of 
+            <li>the halved addition of the low halfwords in each operand, in the low halfword of
                 the return value.</li>
-            <li>the halved addition of the high halfwords in each operand, in the high halfword 
+            <li>the halved addition of the high halfwords in each operand, in the high halfword
                 of the return value.</li>
           </ul>
       </td>
@@ -1548,19 +1548,19 @@ uint32_t __SSUB16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the low halfword in the second operand from the low halfword 
+            <li>the subtraction of the low halfword in the second operand from the low halfword
                 in the first operand, in the low halfword of the return value.</li>
-            <li>the subtraction of the high halfword in the second operand from the high halfword 
+            <li>the subtraction of the high halfword in the second operand from the high halfword
                 in the first operand, in the high halfword of the return value.</li>
           </ul>
-          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on 
+          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
              the results of the operation.<br>
              If <i>res</i> is the return value, then:
           </p>
           <ul style="margin-top:0px">
             <li>if res[15:0] &ge; 0 then APSR.GE[1:0] = 11 else 00</li>
             <li>if res[31:16] &ge; 0 then APSR.GE[3:2] = 11 else 00</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -1588,7 +1588,7 @@ uint32_t __QSUB16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two 16-bit integer subtractions, saturating the 
+      <td>This function enables you to perform two 16-bit integer subtractions, saturating the
           results to the 16-bit signed integer range -2<sup>15</sup> &le; x &le; 2<sup>15</sup> - 1.
       </td>
     </tr>
@@ -1608,12 +1608,12 @@ uint32_t __QSUB16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the saturated subtraction of the low halfword in the second operand from the low 
+            <li>the saturated subtraction of the low halfword in the second operand from the low
                 halfword in the first operand, in the low halfword of the returned result.</li>
-            <li>the saturated subtraction of the high halfword in the second operand from the high 
+            <li>the saturated subtraction of the high halfword in the second operand from the high
                 halfword in the first operand, in the high halfword of the returned result.</li>
           </ul>
-          <p>The returned results are saturated to the 16-bit signed integer 
+          <p>The returned results are saturated to the 16-bit signed integer
              range -2<sup>15</sup> &le; x &le; 2<sup>15</sup> - 1.
           </p>
       </td>
@@ -1643,7 +1643,7 @@ uint32_t __SHSUB16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two signed 16-bit integer subtractions, halving the 
+      <td>This function enables you to perform two signed 16-bit integer subtractions, halving the
           results.
       </td>
     </tr>
@@ -1663,9 +1663,9 @@ uint32_t __SHSUB16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved subtraction of the low halfword in the second operand from the low 
+            <li>the halved subtraction of the low halfword in the second operand from the low
                 halfword in the first operand, in the low halfword of the return value.</li>
-            <li>the halved subtraction of the high halfword in the second operand from the high 
+            <li>the halved subtraction of the high halfword in the second operand from the high
                 halfword in the first operand, in the high halfword of the return value.</li>
           </ul>
       </td>
@@ -1715,9 +1715,9 @@ uint32_t __USUB16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the low halfword in the second operand from the low halfword 
+            <li>the subtraction of the low halfword in the second operand from the low halfword
                 in the first operand, in the low halfword of the return value.</li>
-            <li>the subtraction of the high halfword in the second operand from the high halfword 
+            <li>the subtraction of the high halfword in the second operand from the high halfword
                 in the first operand, in the high halfword of the return value.</li>
           </ul>
           <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
@@ -1727,7 +1727,7 @@ uint32_t __USUB16(uint32_t val1, uint32_t val2);</pre>
           <ul style="margin-top:0px">
             <li>if res[15:0] &ge; 0 then APSR.GE[1:0] = 11 else 00</li>
             <li>if res[31:16] &ge; 0 then APSR.GE[3:2] = 11 else 00</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -1755,7 +1755,7 @@ uint32_t __UQSUB16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two unsigned 16-bit integer subtractions, saturating 
+      <td>This function enables you to perform two unsigned 16-bit integer subtractions, saturating
           the results to the 16-bit unsigned integer range 0 &le; x &le; 2<sup>16</sup> - 1.
       </td>
     </tr>
@@ -1775,9 +1775,9 @@ uint32_t __UQSUB16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the low halfword in the second operand from the low halfword 
+            <li>the subtraction of the low halfword in the second operand from the low halfword
                 in the first operand, in the low halfword of the return value.</li>
-            <li>the subtraction of the high halfword in the second operand from the high halfword 
+            <li>the subtraction of the high halfword in the second operand from the high halfword
                 in the first operand, in the high halfword of the return value.</li>
           </ul>
           <p>The results are saturated to the 16-bit unsigned integer range 0 &le; x &le; 2<sup>16</sup> - 1.
@@ -1809,7 +1809,7 @@ uint32_t __UHSUB16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two unsigned 16-bit integer subtractions, halving 
+      <td>This function enables you to perform two unsigned 16-bit integer subtractions, halving
           the results.
       </td>
     </tr>
@@ -1829,9 +1829,9 @@ uint32_t __UHSUB16(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved subtraction of the low halfword in the second operand from the low 
+            <li>the halved subtraction of the low halfword in the second operand from the low
                 halfword in the first operand, in the low halfword of the return value.</li>
-            <li>the halved subtraction of the high halfword in the second operand from the high 
+            <li>the halved subtraction of the high halfword in the second operand from the high
                 halfword in the first operand, in the high halfword of the return value.</li>
           </ul>
       </td>
@@ -1861,8 +1861,8 @@ uint32_t __SASX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function inserts an SASX instruction into the instruction stream generated by the 
-          compiler. It enables you to exchange the halfwords of the second operand, add the high 
+      <td>This function inserts an SASX instruction into the instruction stream generated by the
+          compiler. It enables you to exchange the halfwords of the second operand, add the high
           halfwords and subtract the low halfwords.<br>
           The GE bits in the APRS are set according to the results.
       </td>
@@ -1874,7 +1874,7 @@ uint32_t __SASX(uint32_t val1, uint32_t val2);</pre>
         <ul style="list-style-type:none; margin-left:0px; margin-top:0px">
           <li><b>val1</b>: first operand for the subtraction in the low halfword, and the
               first operand for the addition in the high halfword.</li>
-          <li><b>val2</b>: second operand for the subtraction in the high halfword, and the 
+          <li><b>val2</b>: second operand for the subtraction in the high halfword, and the
               second operand for the addition in the low halfword.</li>
         </ul>
       </td>
@@ -1885,9 +1885,9 @@ uint32_t __SASX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the high halfword in the second operand from the low halfword 
+            <li>the subtraction of the high halfword in the second operand from the low halfword
                 in the first operand, in the low halfword of the return value.</li>
-            <li>the addition of the high halfword in the first operand and the low halfword in the 
+            <li>the addition of the high halfword in the first operand and the low halfword in the
                 second operand, in the high halfword of the return value.</li>
           </ul>
           <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
@@ -1897,7 +1897,7 @@ uint32_t __SASX(uint32_t val1, uint32_t val2);</pre>
           <ul style="margin-top:0px">
             <li>if res[15:0] &ge; 0 then APSR.GE[1:0] = 11 else 00</li>
             <li>if res[31:16] &ge; 0 then APSR.GE[3:2] = 11 else 00</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -1926,7 +1926,7 @@ uint32_t __QASX(uint32_t val1, uint32_t val2);</pre>
     <tr>
       <td><b>Description</b></td>
       <td>This function enables you to exchange the halfwords of the one operand, then add the high
-          halfwords and subtract the low halfwords, saturating the results to the 16-bit signed 
+          halfwords and subtract the low halfwords, saturating the results to the 16-bit signed
           integer range -2<sup>15</sup> &le; x &le; 2<sup>15</sup> - 1.
       </td>
     </tr>
@@ -1935,7 +1935,7 @@ uint32_t __QASX(uint32_t val1, uint32_t val2);</pre>
       <td><b>Parameter</b></td>
       <td>
         <ul style="list-style-type:none; margin-left:0px; margin-top:0px">
-          <li><b>val1</b>: first operand for the subtraction in the low halfword, and the 
+          <li><b>val1</b>: first operand for the subtraction in the low halfword, and the
                        first operand for the addition in the high halfword.</li>
           <li><b>val2</b>: second operand for the subtraction in the high halfword, and the
                        second operand for the addition in the low halfword.</li>
@@ -1948,12 +1948,12 @@ uint32_t __QASX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the saturated subtraction of the high halfword in the second operand from the low 
+            <li>the saturated subtraction of the high halfword in the second operand from the low
                 halfword in the first operand, in the low halfword of the return value.</li>
-            <li>the saturated addition of the high halfword in the first operand and the low 
+            <li>the saturated addition of the high halfword in the first operand and the low
                 halfword in the second operand, in the high halfword of the return value.</li>
           </ul>
-          <p>The returned results are saturated to the 16-bit signed integer 
+          <p>The returned results are saturated to the 16-bit signed integer
              range -2<sup>15</sup> &le; x &le; 2<sup>15</sup> - 1.
           </p>
       </td>
@@ -1983,7 +1983,7 @@ uint32_t __SHASX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the two halfwords of one operand, perform one 
+      <td>This function enables you to exchange the two halfwords of one operand, perform one
           signed 16-bit integer addition and one signed 16-bit subtraction, and halve the results.
       </td>
     </tr>
@@ -2003,9 +2003,9 @@ uint32_t __SHASX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved subtraction of the high halfword in the second operand from the low 
+            <li>the halved subtraction of the high halfword in the second operand from the low
                 halfword in the first operand, in the low halfword of the return value.</li>
-            <li>the halved subtraction of the low halfword in the second operand from the high 
+            <li>the halved subtraction of the low halfword in the second operand from the high
                 halfword in the first operand, in the high halfword of the return value.</li>
           </ul>
       </td>
@@ -2035,7 +2035,7 @@ uint32_t __UASX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the two halfwords of the second operand, add the 
+      <td>This function enables you to exchange the two halfwords of the second operand, add the
           high halfwords and subtract the low halfwords.<br>
           The GE bits in the APSR are set according to the results.
       </td>
@@ -2058,19 +2058,19 @@ uint32_t __UASX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the high halfword in the second operand from the low halfword 
+            <li>the subtraction of the high halfword in the second operand from the low halfword
                 in the first operand, in the low halfword of the return value.</li>
-            <li>the addition of the high halfword in the first operand and the low halfword in the 
+            <li>the addition of the high halfword in the first operand and the low halfword in the
                 second operand, in the high halfword of the return value.</li>
           </ul>
-          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on 
+          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
              the results of the operation.<br>
              If <i>res</i> is the return value, then:
           </p>
           <ul style="margin-top:0px">
             <li>if res[15:0] &ge; 0 then APSR.GE[1:0] = 11 else 00</li>
             <li>if res[31:16] &ge; 0x10000 then APSR.GE[3:2] = 11 else 00</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -2098,8 +2098,8 @@ uint32_t __UQASX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the halfwords of the second operand and perform 
-          one unsigned 16-bit integer addition and one unsigned 16-bit subtraction, saturating the 
+      <td>This function enables you to exchange the halfwords of the second operand and perform
+          one unsigned 16-bit integer addition and one unsigned 16-bit subtraction, saturating the
           results to the 16-bit unsigned integer range 0 &le; x &le; 2<sup>16</sup> - 1.
       </td>
     </tr>
@@ -2119,12 +2119,12 @@ uint32_t __UQASX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the high halfword in the second operand from the low halfword 
+            <li>the subtraction of the high halfword in the second operand from the low halfword
                 in the first operand, in the low halfword of the return value.</li>
-            <li>the subtraction of the low halfword in the second operand from the high halfword 
+            <li>the subtraction of the low halfword in the second operand from the high halfword
                 in the first operand, in the high halfword of the return value.</li>
           </ul>
-          <p>The results are saturated to the 16-bit unsigned integer  
+          <p>The results are saturated to the 16-bit unsigned integer
              range 0 &le; x &le; 2<sup>16</sup> - 1.
           </p>
       </td>
@@ -2154,7 +2154,7 @@ uint32_t __UHASX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the halfwords of the second operand, add the high 
+      <td>This function enables you to exchange the halfwords of the second operand, add the high
           halfwords and subtract the low halfwords, halving the results.
       </td>
     </tr>
@@ -2165,7 +2165,7 @@ uint32_t __UHASX(uint32_t val1, uint32_t val2);</pre>
         <ul style="list-style-type:none; margin-left:0px; margin-top:0px">
           <li><b>val1</b>: first operand for the subtraction in the low halfword, and the
            first operand for the addition in the high halfword.</li>
-          <li><b>val2</b>: second operand for the subtraction in the high halfword, and the 
+          <li><b>val2</b>: second operand for the subtraction in the high halfword, and the
            second operand for the addition in the low halfword.</li>
         </ul>
       </td>
@@ -2176,9 +2176,9 @@ uint32_t __UHASX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved subtraction of the high halfword in the second operand from the low 
+            <li>the halved subtraction of the high halfword in the second operand from the low
                 halfword in the first operand.</li>
-            <li>the halved addition of the high halfword in the first operand and the low halfword 
+            <li>the halved addition of the high halfword in the first operand and the low halfword
                 in the second operand.</li>
           </ul>
       </td>
@@ -2208,7 +2208,7 @@ uint32_t __SSAX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the two halfwords of one operand and perform one 
+      <td>This function enables you to exchange the two halfwords of one operand and perform one
           16-bit integer subtraction and one 16-bit addition.<br>
           The GE bits in the APSR are set according to the results.
       </td>
@@ -2218,7 +2218,7 @@ uint32_t __SSAX(uint32_t val1, uint32_t val2);</pre>
       <td><b>Parameter</b></td>
       <td>
         <ul style="list-style-type:none; margin-left:0px; margin-top:0px">
-          <li><b>val1</b>: first operand for the addition in the low halfword, and the first 
+          <li><b>val1</b>: first operand for the addition in the low halfword, and the first
               operand for the subtraction in the high halfword.</li>
           <li><b>val2</b>: second operand for the addition in the high halfword, and the
               second operand for the subtraction in the low halfword.</li>
@@ -2231,19 +2231,19 @@ uint32_t __SSAX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the addition of the low halfword in the first operand and the high halfword in the 
+            <li>the addition of the low halfword in the first operand and the high halfword in the
                 second operand, in the low halfword of the return value.</li>
-            <li>the subtraction of the low halfword in the second operand from the high halfword 
+            <li>the subtraction of the low halfword in the second operand from the high halfword
                 in the first operand, in the high halfword of the return value.</li>
           </ul>
-          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on 
+          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
              the results of the operation.<br>
              If <i>res</i> is the return value, then:
           </p>
           <ul style="margin-top:0px">
             <li>if res[15:0] &ge; 0 then APSR.GE[1:0] = 11 else 00</li>
             <li>if res[31:16] &ge; 0 then APSR.GE[3:2] = 11 else 00</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -2271,8 +2271,8 @@ uint32_t __QSAX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the halfwords of one operand, then subtract the 
-          high halfwords and add the low halfwords, saturating the results to the 16-bit signed 
+      <td>This function enables you to exchange the halfwords of one operand, then subtract the
+          high halfwords and add the low halfwords, saturating the results to the 16-bit signed
           integer range -2<sup>15</sup> &le; x &le; 2<sup>15</sup> - 1.
       </td>
     </tr>
@@ -2283,7 +2283,7 @@ uint32_t __QSAX(uint32_t val1, uint32_t val2);</pre>
         <ul style="list-style-type:none; margin-left:0px; margin-top:0px">
           <li><b>val1</b>: first operand for the addition in the low halfword, and the first
            operand for the subtraction in the high halfword.</li>
-          <li><b>val2</b>: second operand for the addition in the high halfword, and the 
+          <li><b>val2</b>: second operand for the addition in the high halfword, and the
            second operand for the subtraction in the low halfword.</li>
         </ul>
       </td>
@@ -2294,12 +2294,12 @@ uint32_t __QSAX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the saturated addition of the low halfword of the first operand and the high 
+            <li>the saturated addition of the low halfword of the first operand and the high
                 halfword of the second operand, in the low halfword of the return value.</li>
-            <li>the saturated subtraction of the low halfword of the second operand from the high 
+            <li>the saturated subtraction of the low halfword of the second operand from the high
                 halfword of the first operand, in the high halfword of the return value.</li>
           </ul>
-          <p>The returned results are saturated to the 16-bit signed integer 
+          <p>The returned results are saturated to the 16-bit signed integer
              range -2<sup>15</sup> &le; x &le; 2<sup>15</sup> - 1.
           </p>
       </td>
@@ -2329,7 +2329,7 @@ uint32_t __SHSAX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the two halfwords of one operand, perform one 
+      <td>This function enables you to exchange the two halfwords of one operand, perform one
           signed 16-bit integer subtraction and one signed 16-bit addition, and halve the results.
       </td>
     </tr>
@@ -2349,9 +2349,9 @@ uint32_t __SHSAX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved addition of the low halfword in the first operand and the high halfword 
+            <li>the halved addition of the low halfword in the first operand and the high halfword
                 in the second operand, in the low halfword of the return value.</li>
-            <li>the halved subtraction of the low halfword in the second operand from the high 
+            <li>the halved subtraction of the low halfword in the second operand from the high
                 halfword in the first operand, in the high halfword of the return value.</li>
           </ul>
       </td>
@@ -2381,7 +2381,7 @@ uint32_t __USAX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the halfwords of the second operand, subtract the 
+      <td>This function enables you to exchange the halfwords of the second operand, subtract the
           high halfwords and add the low halfwords.<br>
           The GE bits in the APSR are set according to the results.
       </td>
@@ -2404,19 +2404,19 @@ uint32_t __USAX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the addition of the low halfword in the first operand and the high halfword in the 
+            <li>the addition of the low halfword in the first operand and the high halfword in the
                 second operand, in the low halfword of the return value.</li>
-            <li>the subtraction of the low halfword in the second operand from the high halfword 
+            <li>the subtraction of the low halfword in the second operand from the high halfword
                 in the first operand, in the high halfword of the return value.</li>
           </ul>
-          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on 
+          <p>Each bit in APSR.GE is set or cleared for each byte in the return value, depending on
              the results of the operation.<br>
              If <i>res</i> is the return value, then:
           </p>
           <ul style="margin-top:0px">
             <li>if res[15:0] &ge; 0x10000 then APSR.GE[1:0] = 11 else 00</li>
             <li>if res[31:16] &ge; 0 then APSR.GE[3:2] = 11 else 00</li>
-         </ul>      
+         </ul>
       </td>
     </tr>
 
@@ -2444,8 +2444,8 @@ uint32_t __UQSAX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the halfwords of the second operand and perform 
-          one unsigned 16-bit integer subtraction and one unsigned 16-bit addition, saturating the 
+      <td>This function enables you to exchange the halfwords of the second operand and perform
+          one unsigned 16-bit integer subtraction and one unsigned 16-bit addition, saturating the
           results to the 16-bit unsigned integer range 0 &le; x &le; 2<sup>16</sup> - 1.
       </td>
     </tr>
@@ -2467,12 +2467,12 @@ uint32_t __UQSAX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the addition of the low halfword in the first operand and the high halfword in the 
+            <li>the addition of the low halfword in the first operand and the high halfword in the
                 second operand, in the low halfword of the return value.</li>
-            <li>the subtraction of the low halfword in the second operand from the high halfword 
+            <li>the subtraction of the low halfword in the second operand from the high halfword
                 in the first operand, in the high halfword of the return value.</li>
           </ul>
-          <p>The results are saturated to the 16-bit unsigned integer 
+          <p>The results are saturated to the 16-bit unsigned integer
              range 0 &le; x &le; 2<sup>16</sup> - 1.
           </p>
       </td>
@@ -2502,7 +2502,7 @@ uint32_t __UHSAX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the halfwords of the second operand, subtract the 
+      <td>This function enables you to exchange the halfwords of the second operand, subtract the
           high halfwords and add the low halfwords, halving the results.
       </td>
     </tr>
@@ -2524,9 +2524,9 @@ uint32_t __UHSAX(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the halved addition of the high halfword in the second operand and the low 
+            <li>the halved addition of the high halfword in the second operand and the low
                 halfword in the first operand, in the low halfword of the return value.</li>
-            <li>the halved subtraction of the low halfword in the second operand from the high 
+            <li>the halved subtraction of the low halfword in the second operand from the high
                 halfword in the first operand, in the high halfword of the return value.</li>
           </ul>
       </td>
@@ -2556,8 +2556,8 @@ uint32_t __USAD8(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform four unsigned 8-bit subtractions, and add the 
-          absolute values of the differences together, returning the result as a single unsigned 
+      <td>This function enables you to perform four unsigned 8-bit subtractions, and add the
+          absolute values of the differences together, returning the result as a single unsigned
           integer.
       </td>
     </tr>
@@ -2577,13 +2577,13 @@ uint32_t __USAD8(uint32_t val1, uint32_t val2);</pre>
       <td>
          <p>The function returns the sum of the absolute differences of:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the first byte in the second operand from the first byte in the 
+            <li>the subtraction of the first byte in the second operand from the first byte in the
                 first operand.</li>
-            <li>the subtraction of the second byte in the second operand from the second byte in 
+            <li>the subtraction of the second byte in the second operand from the second byte in
                 the first operand.</li>
-            <li>the subtraction of the third byte in the second operand from the third byte in the 
+            <li>the subtraction of the third byte in the second operand from the third byte in the
                 first operand.</li>
-            <li>the subtraction of the fourth byte in the second operand from the fourth byte in 
+            <li>the subtraction of the fourth byte in the second operand from the fourth byte in
                 the first operand.</li>
           </ul>
           <p>The sum is returned as a single unsigned integer.</p>
@@ -2617,7 +2617,7 @@ uint32_t __USADA8(uint32_t val1, uint32_t val2, uint32_t val3);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform four unsigned 8-bit subtractions, and add the 
+      <td>This function enables you to perform four unsigned 8-bit subtractions, and add the
           absolute values of the differences to a 32-bit accumulate operand.
       </td>
     </tr>
@@ -2636,16 +2636,16 @@ uint32_t __USADA8(uint32_t val1, uint32_t val2, uint32_t val3);</pre>
     <tr>
       <td><b>Return Value</b></td>
       <td>
-         <p>The function returns the sum of the absolute differences of the following 
+         <p>The function returns the sum of the absolute differences of the following
             bytes, added to the accumulation value:</p>
          <ul style="margin-top:0px">
-            <li>the subtraction of the first byte in the second operand from the first byte in the 
+            <li>the subtraction of the first byte in the second operand from the first byte in the
                 first operand.</li>
-            <li>the subtraction of the second byte in the second operand from the second byte in 
+            <li>the subtraction of the second byte in the second operand from the second byte in
                 the first operand.</li>
-            <li>the subtraction of the third byte in the second operand from the third byte in the 
+            <li>the subtraction of the third byte in the second operand from the third byte in the
                 first operand.</li>
-            <li>the subtraction of the fourth byte in the second operand from the fourth byte in 
+            <li>the subtraction of the fourth byte in the second operand from the fourth byte in
                 the first operand.</li>
           </ul>
       </td>
@@ -2700,9 +2700,9 @@ uint32_t __SSAT16(uint32_t val1, const uint32_t val2);</pre>
       <td>
          <p>The function returns:</p>
          <ul style="margin-top:0px">
-            <li>the signed saturation of the low halfword in <i>val1</i>, saturated to the bit position 
+            <li>the signed saturation of the low halfword in <i>val1</i>, saturated to the bit position
                 specified in <i>val2</i> and returned in the low halfword of the return value.</li>
-            <li>the signed saturation of the high halfword in <i>val1</i>, saturated to the bit position 
+            <li>the signed saturation of the high halfword in <i>val1</i>, saturated to the bit position
                 specified in <i>val2</i> and returned in the high halfword of the return value.</li>
           </ul>
       </td>
@@ -2731,7 +2731,7 @@ uint32_t __USAT16(uint32_t val1, const uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to saturate two signed 16-bit values to a selected unsigned 
+      <td>This function enables you to saturate two signed 16-bit values to a selected unsigned
          range.<br>
          The Q bit is set if either operation saturates.
       </td>
@@ -2742,7 +2742,7 @@ uint32_t __USAT16(uint32_t val1, const uint32_t val2);</pre>
       <td>
         <ul style="list-style-type:none; margin-left:0px; margin-top:0px">
           <li><b>val1</b>: two 16-bit values that are to be saturated.</li>
-          <li><b>val2</b>: bit position for saturation, and must be an integral constant 
+          <li><b>val2</b>: bit position for saturation, and must be an integral constant
            expression in the range 0 to 15.</li>
         </ul>
       </td>
@@ -2753,9 +2753,9 @@ uint32_t __USAT16(uint32_t val1, const uint32_t val2);</pre>
       <td>
          <p>The function returns the saturation of the two signed 16-bit values, as non-negative values.</p>
          <ul style="margin-top:0px">
-            <li>the saturation of the low halfword in <i>val1</i>, saturated to the bit position 
+            <li>the saturation of the low halfword in <i>val1</i>, saturated to the bit position
                 specified in <i>val2</i> and returned in the low halfword of the return value.</li>
-            <li>the saturation of the high halfword in <i>val1</i>, saturated to the bit position 
+            <li>the saturation of the high halfword in <i>val1</i>, saturated to the bit position
                 specified in <i>val2</i> and returned in the high halfword of the return value.</li>
           </ul>
       </td>
@@ -2784,7 +2784,7 @@ uint32_t __UXTB16(uint32_t val);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to extract two 8-bit values from an operand and zero-extend 
+      <td>This function enables you to extract two 8-bit values from an operand and zero-extend
           them to 16 bits each.
       </td>
     </tr>
@@ -2833,7 +2833,7 @@ uint32_t __UXTAB16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to extract two 8-bit values from one operand, zero-extend them 
+      <td>This function enables you to extract two 8-bit values from one operand, zero-extend them
           to 16 bits each, and add the results to two 16-bit values from another operand.
       </td>
     </tr>
@@ -2851,7 +2851,7 @@ uint32_t __UXTAB16(uint32_t val1, uint32_t val2);</pre>
     <tr>
       <td><b>Return Value</b></td>
       <td>
-         <p>The function returns the 8-bit values in <i>val2</i>, zero-extended to 16-bit values 
+         <p>The function returns the 8-bit values in <i>val2</i>, zero-extended to 16-bit values
             and added to <i>val1</i>.</p>
       </td>
     </tr>
@@ -2880,7 +2880,7 @@ uint32_t __SXTB16(uint32_t val);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to extract two 8-bit values from an operand and sign-extend 
+      <td>This function enables you to extract two 8-bit values from an operand and sign-extend
           them to 16 bits each.
       </td>
     </tr>
@@ -2929,8 +2929,8 @@ uint32_t __SXTAB16(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to extract two 8-bit values from the second operand (at bit 
-          positions [7:0] and [23:16]), sign-extend them to 16-bits each, and add the results to the 
+      <td>This function enables you to extract two 8-bit values from the second operand (at bit
+          positions [7:0] and [23:16]), sign-extend them to 16-bits each, and add the results to the
           first operand.
       </td>
     </tr>
@@ -2948,7 +2948,7 @@ uint32_t __SXTAB16(uint32_t val1, uint32_t val2);</pre>
     <tr>
       <td><b>Return Value</b></td>
       <td>
-         <p>The function returns the addition of <i>val1</i> and <i>val2</i>, where the 8-bit values in 
+         <p>The function returns the addition of <i>val1</i> and <i>val2</i>, where the 8-bit values in
             val2[7:0] and val2[23:16] have been extracted and sign-extended prior to the addition.</p>
       </td>
     </tr>
@@ -2977,7 +2977,7 @@ uint32_t __SMUAD(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function It enables you to perform two 16-bit signed multiplications, adding the 
+      <td>This function It enables you to perform two 16-bit signed multiplications, adding the
           products together.<br>
           The Q bit is set if the addition overflows.
       </td>
@@ -3074,7 +3074,7 @@ uint32_t __SMLAD(uint32_t val1, uint32_t val2, uint32_t val3);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two signed 16-bit multiplications, adding both 
+      <td>This function enables you to perform two signed 16-bit multiplications, adding both
           results to a 32-bit accumulate operand.<br>
           The Q bit is set if the addition overflows. Overflow cannot occur during the multiplications.
       </td>
@@ -3094,7 +3094,7 @@ uint32_t __SMLAD(uint32_t val1, uint32_t val2, uint32_t val3);</pre>
     <tr>
       <td><b>Return Value</b></td>
       <td>
-         <p>The function returns the product of each multiplication added to the accumulate 
+         <p>The function returns the product of each multiplication added to the accumulate
             value, as a 32-bit integer.</p>
       </td>
     </tr>
@@ -3174,9 +3174,9 @@ uint64_t __SMLALD(uint32_t val1, uint32_t val2, uint64_t val3);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two signed 16-bit multiplications, adding both 
-          results to a 64-bit accumulate operand. Overflow is only possible as a result of the 64-bit 
-          addition. This overflow is not detected if it occurs. Instead, the result wraps around 
+      <td>This function enables you to perform two signed 16-bit multiplications, adding both
+          results to a 64-bit accumulate operand. Overflow is only possible as a result of the 64-bit
+          addition. This overflow is not detected if it occurs. Instead, the result wraps around
           modulo2<sup>64</sup>.
       </td>
     </tr>
@@ -3226,9 +3226,9 @@ unsigned long long __SMLALDX(uint32_t val1, uint32_t val2, unsigned long long va
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the halfwords of the second operand, and perform 
-          two signed 16-bit multiplications, adding both results to a 64-bit accumulate operand. 
-          Overflow is only possible as a result of the 64-bit addition. This overflow is not detected 
+      <td>This function enables you to exchange the halfwords of the second operand, and perform
+          two signed 16-bit multiplications, adding both results to a 64-bit accumulate operand.
+          Overflow is only possible as a result of the 64-bit addition. This overflow is not detected
           if it occurs. Instead, the result wraps around modulo2<sup>64</sup>.
       </td>
     </tr>
@@ -3278,8 +3278,8 @@ uint32_t __SMUSD(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two 16-bit signed multiplications, taking the 
-          difference of the products by subtracting the high halfword product from the low 
+      <td>This function enables you to perform two 16-bit signed multiplications, taking the
+          difference of the products by subtracting the high halfword product from the low
           halfword product.
       </td>
     </tr>
@@ -3326,9 +3326,9 @@ uint32_t __SMUSDX(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two 16-bit signed multiplications, subtracting one 
-          of the products from the other. The halfwords of the second operand are exchanged 
-          before performing the arithmetic. This produces top * bottom and bottom * top 
+      <td>This function enables you to perform two 16-bit signed multiplications, subtracting one
+          of the products from the other. The halfwords of the second operand are exchanged
+          before performing the arithmetic. This produces top * bottom and bottom * top
           multiplication.
       </td>
     </tr>
@@ -3375,10 +3375,10 @@ uint32_t __SMLSD(uint32_t val1, uint32_t val2, uint32_t val3);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to perform two 16-bit signed multiplications, take the 
-          difference of the products, subtracting the high halfword product from the low halfword 
+      <td>This function enables you to perform two 16-bit signed multiplications, take the
+          difference of the products, subtracting the high halfword product from the low halfword
           product, and add the difference to a 32-bit accumulate operand.<br>
-          The Q bit is set if the accumulation overflows. Overflow cannot occur during the multiplications or the 
+          The Q bit is set if the accumulation overflows. Overflow cannot occur during the multiplications or the
           subtraction.
       </td>
     </tr>
@@ -3397,7 +3397,7 @@ uint32_t __SMLSD(uint32_t val1, uint32_t val2, uint32_t val3);</pre>
     <tr>
       <td><b>Return Value</b></td>
       <td>
-         <p>The function returns the difference of the product of each multiplication, added 
+         <p>The function returns the difference of the product of each multiplication, added
             to the accumulate value.</p>
       </td>
     </tr>
@@ -3427,8 +3427,8 @@ uint32_t __SMLSDX(uint32_t val1, uint32_t val2, uint32_t val3);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the halfwords in the second operand, then perform 
-          two 16-bit signed multiplications. The difference of the products is added to a 32-bit 
+      <td>This function enables you to exchange the halfwords in the second operand, then perform
+          two 16-bit signed multiplications. The difference of the products is added to a 32-bit
           accumulate operand.<br>
           The Q bit is set if the addition overflows. Overflow cannot occur during the multiplications or the subtraction.
       </td>
@@ -3448,7 +3448,7 @@ uint32_t __SMLSDX(uint32_t val1, uint32_t val2, uint32_t val3);</pre>
     <tr>
       <td><b>Return Value</b></td>
       <td>
-         <p>The function returns the difference of the product of each multiplication, added 
+         <p>The function returns the difference of the product of each multiplication, added
             to the accumulate value.</p>
       </td>
     </tr>
@@ -3478,11 +3478,11 @@ uint64_t __SMLSLD(uint32_t val1, uint32_t val2, uint64_t val3);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function It enables you to perform two 16-bit signed multiplications, take the 
-          difference of the products, subtracting the high halfword product from the low halfword 
-          product, and add the difference to a 64-bit accumulate operand. Overflow cannot occur 
-          during the multiplications or the subtraction. Overflow can occur as a result of the 64-bit 
-          addition, and this overflow is not detected. Instead, the result wraps round to  
+      <td>This function It enables you to perform two 16-bit signed multiplications, take the
+          difference of the products, subtracting the high halfword product from the low halfword
+          product, and add the difference to a 64-bit accumulate operand. Overflow cannot occur
+          during the multiplications or the subtraction. Overflow can occur as a result of the 64-bit
+          addition, and this overflow is not detected. Instead, the result wraps round to
           modulo2<sup>64</sup>.
       </td>
     </tr>
@@ -3501,7 +3501,7 @@ uint64_t __SMLSLD(uint32_t val1, uint32_t val2, uint64_t val3);</pre>
     <tr>
       <td><b>Return Value</b></td>
       <td>
-         <p>The function returns the difference of the product of each multiplication, 
+         <p>The function returns the difference of the product of each multiplication,
             added to the accumulate value.</p>
       </td>
     </tr>
@@ -3531,10 +3531,10 @@ unsigned long long __SMLSLDX(uint32_t val1, uint32_t val2, unsigned long long va
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function enables you to exchange the halfwords of the second operand, perform two 
-          16-bit multiplications, adding the difference of the products to a 64-bit accumulate 
-          operand. Overflow cannot occur during the multiplications or the subtraction. Overflow 
-          can occur as a result of the 64-bit addition, and this overflow is not detected. Instead, 
+      <td>This function enables you to exchange the halfwords of the second operand, perform two
+          16-bit multiplications, adding the difference of the products to a 64-bit accumulate
+          operand. Overflow cannot occur during the multiplications or the subtraction. Overflow
+          can occur as a result of the 64-bit addition, and this overflow is not detected. Instead,
           the result wraps round to modulo2<sup>64</sup>.
       </td>
     </tr>
@@ -3553,7 +3553,7 @@ unsigned long long __SMLSLDX(uint32_t val1, uint32_t val2, unsigned long long va
     <tr>
       <td><b>Return Value</b></td>
       <td>
-         <p>The function returns the difference of the product of each multiplication, 
+         <p>The function returns the difference of the product of each multiplication,
             added to the accumulate value.</p>
       </td>
     </tr>
@@ -3584,13 +3584,13 @@ uint32_t __SEL(uint32_t val1, uint32_t val2);</pre>
 
     <tr>
       <td><b>Description</b></td>
-      <td>This function inserts a SEL instruction into the instruction stream generated by the 
-          compiler. It enables you to select bytes from the input parameters, whereby the bytes 
-          that are selected depend upon the results of previous SIMD instruction function. The 
-          results of previous SIMD instruction function are represented by the Greater than or 
+      <td>This function inserts a SEL instruction into the instruction stream generated by the
+          compiler. It enables you to select bytes from the input parameters, whereby the bytes
+          that are selected depend upon the results of previous SIMD instruction function. The
+          results of previous SIMD instruction function are represented by the Greater than or
           Equal flags in the Application Program Status Register (APSR).
-          The __SEL function works equally well on both halfword and byte operand function 
-          results. This is because halfword operand operations set two (duplicate) GE bits per 
+          The __SEL function works equally well on both halfword and byte operand function
+          results. This is because halfword operand operations set two (duplicate) GE bits per
           value.
       </td>
     </tr>
@@ -3608,7 +3608,7 @@ uint32_t __SEL(uint32_t val1, uint32_t val2);</pre>
     <tr>
       <td><b>Return Value</b></td>
       <td>
-         <p>The function selects bytes from the input parameters and returns them in the 
+         <p>The function selects bytes from the input parameters and returns them in the
             return value, res, according to the following criteria:</p>
          <ul style="margin-top:0px">
             <li>if APSR.GE[0] == 1 then res[7:0] = val1[7:0] else res[7:0] = val2[7:0]</li>
@@ -3727,7 +3727,7 @@ res[31:0] = SAT(val1 - SAT(val2 * 2))</pre>
       <th class="kt">Name</th>
       <th class="kt">Description</th>
     </tr>
- 
+
     <tr>
       <td class="kt"><b><a href="#Addition">Addition</a></b></td>
       <td class="kt">Add two values using SIMD function</td>

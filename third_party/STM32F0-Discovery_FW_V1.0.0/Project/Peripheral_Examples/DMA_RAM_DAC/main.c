@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA_RAM_DAC/main.c  
+  * @file    DMA_RAM_DAC/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -48,7 +48,7 @@ GPIO_InitTypeDef  GPIO_InitStructure;
 /* Private variables ---------------------------------------------------------*/
 uint16_t Sine12bit[32] = {
                       2047, 2447, 2831, 3185, 3498, 3750, 3939, 4056, 4095, 4056,
-                      3939, 3750, 3495, 3185, 2831, 2447, 2047, 1647, 1263, 909, 
+                      3939, 3750, 3495, 3185, 2831, 2447, 2047, 1647, 1263, 909,
                       599, 344, 155, 38, 0, 38, 155, 344, 599, 909, 1263, 1647};
 
 
@@ -66,12 +66,12 @@ void DMA_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f0xx.c file
-     */ 
+     */
 
   /* DMA1 channel3 configuration: Sine12bit is used as memory base address */
   DMA_Config();
@@ -100,11 +100,11 @@ void TIM_Config(void)
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
   /* Time base configuration */
-  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure); 
-  TIM_TimeBaseStructure.TIM_Period = 48;         
-  TIM_TimeBaseStructure.TIM_Prescaler = 0x0;       
-  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
+  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+  TIM_TimeBaseStructure.TIM_Period = 48;
+  TIM_TimeBaseStructure.TIM_Prescaler = 0x0;
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
   TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 
   /* TIM2 TRGO selection: update event is selected as trigger for DAC */
@@ -123,7 +123,7 @@ void DAC_Config(void)
 {
   /* Enable GPIOA Periph clock --------------------------------------*/
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-  
+
   /* Configure PA.04 DAC_OUT as analog */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_4 ;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
@@ -139,7 +139,7 @@ void DAC_Config(void)
   /* DAC channel1 Configuration */
   DAC_Init(DAC_Channel_1, &DAC_InitStructure);
 
-  /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+  /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is
      automatically connected to the DAC converter. */
   DAC_Cmd(DAC_Channel_1, ENABLE);
 

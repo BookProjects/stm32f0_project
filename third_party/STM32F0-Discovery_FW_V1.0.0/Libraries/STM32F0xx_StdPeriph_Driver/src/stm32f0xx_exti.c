@@ -4,35 +4,35 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file provides firmware functions to manage the following 
+  * @brief   This file provides firmware functions to manage the following
   *          functionalities of the EXTI peripheral:
   *           + Initialization and Configuration
   *           + Interrupts and flags management
   *
   *  @verbatim
   ==============================================================================
-                            ##### EXTI features ##### 
+                            ##### EXTI features #####
   ==============================================================================
     [..] External interrupt/event lines are mapped as following:
-         (#) All available GPIO pins are connected to the 16 external 
+         (#) All available GPIO pins are connected to the 16 external
              interrupt/event lines from EXTI0 to EXTI15.
          (#) EXTI line 16 is connected to the PVD output.
          (#) EXTI line 17 is connected to the RTC Alarm event.
          (#) EXTI line 19 is connected to the RTC Tamper and TimeStamp events
-         (#) EXTI line 21 is connected to the Comparator 1 wakeup event 
+         (#) EXTI line 21 is connected to the Comparator 1 wakeup event
          (#) EXTI line 22 is connected to the Comparator 2 wakeup event
          (#) EXTI line 23 is connected to the I2C1 wakeup event
          (#) EXTI line 25 is connected to the USART1 wakeup event
          (#) EXTI line 27 is connected to the CEC wakeup event
 
-                       ##### How to use this driver ##### 
+                       ##### How to use this driver #####
   ==============================================================================
     [..] In order to use an I/O pin as an external interrupt source, follow
          steps below:
     (#) Configure the I/O in input mode using GPIO_Init()
-    (#) Select the input source pin for the EXTI line using 
+    (#) Select the input source pin for the EXTI line using
         SYSCFG_EXTILineConfig().
-    (#) Select the mode(interrupt, event) and configure the trigger selection 
+    (#) Select the mode(interrupt, event) and configure the trigger selection
        (Rising, falling or both) using EXTI_Init(). For the internal interrupt,
        the trigger selection is not needed( the active edge is always the rising one).
     (#) Configure NVIC IRQ channel mapped to the EXTI line using NVIC_Init().
@@ -53,8 +53,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -69,7 +69,7 @@
   * @{
   */
 
-/** @defgroup EXTI 
+/** @defgroup EXTI
   * @brief EXTI driver modules
   * @{
   */
@@ -88,9 +88,9 @@
   */
 
 /** @defgroup EXTI_Group1 Initialization and Configuration functions
- *  @brief   Initialization and Configuration functions 
+ *  @brief   Initialization and Configuration functions
  *
-@verbatim   
+@verbatim
   ==============================================================================
             ##### Initialization and Configuration functions #####
   ==============================================================================
@@ -100,7 +100,7 @@
   */
 
 /**
-  * @brief  Deinitializes the EXTI peripheral registers to their default reset 
+  * @brief  Deinitializes the EXTI peripheral registers to their default reset
   *         values.
   * @param  None
   * @retval None
@@ -122,7 +122,7 @@ void EXTI_DeInit(void)
   *    EXTI_Trigger selects the trigger. When the trigger occurs, interrupt
   *                 pending bit will be set.
   *    EXTI_LineCmd controls (Enable/Disable) the EXTI line.
-  * @param  EXTI_InitStruct: pointer to a EXTI_InitTypeDef structure that 
+  * @param  EXTI_InitStruct: pointer to a EXTI_InitTypeDef structure that
   *         contains the configuration information for the EXTI peripheral.
   * @retval None
   */
@@ -210,13 +210,13 @@ void EXTI_GenerateSWInterrupt(uint32_t EXTI_Line)
   */
 
 /** @defgroup EXTI_Group2 Interrupts and flags management functions
- *  @brief    Interrupts and flags management functions 
+ *  @brief    Interrupts and flags management functions
  *
-@verbatim   
+@verbatim
   ==============================================================================
              ##### Interrupts and flags management functions #####
   ==============================================================================
-  
+
 @endverbatim
   * @{
   */
@@ -283,7 +283,7 @@ ITStatus EXTI_GetITStatus(uint32_t EXTI_Line)
     bitstatus = RESET;
   }
   return bitstatus;
-  
+
 }
 
 /**

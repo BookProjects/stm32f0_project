@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FLASH_Program/main.c 
+  * @file    FLASH_Program/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -62,21 +62,21 @@ __IO TestStatus MemoryProgramStatus = PASSED;
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f0xx.c file
      */
 
-  /* Unlock the Flash to enable the flash control register access *************/ 
+  /* Unlock the Flash to enable the flash control register access *************/
   FLASH_Unlock();
-    
+
   /* Erase the user Flash area
     (area defined by FLASH_USER_START_ADDR and FLASH_USER_END_ADDR) ***********/
 
-  /* Clear pending flags (if any) */  
-  FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPERR); 
+  /* Clear pending flags (if any) */
+  FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPERR);
 
   /* Define the number of page to be erased */
   NbrOfPage = (FLASH_USER_END_ADDR - FLASH_USER_START_ADDR) / FLASH_PAGE_SIZE;
@@ -86,7 +86,7 @@ int main(void)
   {
     if (FLASH_ErasePage(FLASH_USER_START_ADDR + (FLASH_PAGE_SIZE * EraseCounter))!= FLASH_COMPLETE)
     {
-     /* Error occurred while sector erase. 
+     /* Error occurred while sector erase.
          User can add here some code to deal with this error  */
       while (1)
       {
@@ -105,8 +105,8 @@ int main(void)
       Address = Address + 4;
     }
     else
-    { 
-      /* Error occurred while writing data in Flash memory. 
+    {
+      /* Error occurred while writing data in Flash memory.
          User can add here some code to deal with this error */
       while (1)
       {
@@ -116,22 +116,22 @@ int main(void)
 
   /* Lock the Flash to disable the flash control register access (recommended
      to protect the FLASH memory against possible unwanted operation) *********/
-  FLASH_Lock(); 
+  FLASH_Lock();
 
 
-  /* Check if the programmed data is OK 
+  /* Check if the programmed data is OK
       MemoryProgramStatus = 0: data programmed correctly
       MemoryProgramStatus != 0: number of words not programmed correctly ******/
   Address = FLASH_USER_START_ADDR;
   MemoryProgramStatus = PASSED;
-  
+
   while (Address < FLASH_USER_END_ADDR)
   {
     Data = *(__IO uint32_t *)Address;
 
     if (Data != DATA_32)
     {
-      MemoryProgramStatus = FAILED;  
+      MemoryProgramStatus = FAILED;
     }
 
     Address = Address + 4;

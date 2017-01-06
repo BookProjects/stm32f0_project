@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file contains all the functions prototypes for the PWR firmware 
+  * @brief   This file contains all the functions prototypes for the PWR firmware
   *          library.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -43,7 +43,7 @@
 
 /** @addtogroup PWR
   * @{
-  */ 
+  */
 
 /* Exported types ------------------------------------------------------------*/
 
@@ -51,11 +51,11 @@
 
 /** @defgroup PWR_Exported_Constants
   * @{
-  */ 
+  */
 
-/** @defgroup PWR_PVD_detection_level 
+/** @defgroup PWR_PVD_detection_level
   * @{
-  */ 
+  */
 
 #define PWR_PVDLevel_0                  PWR_CR_PLS_LEV0
 #define PWR_PVDLevel_1                  PWR_CR_PLS_LEV1
@@ -64,7 +64,7 @@
 #define PWR_PVDLevel_4                  PWR_CR_PLS_LEV4
 #define PWR_PVDLevel_5                  PWR_CR_PLS_LEV5
 #define PWR_PVDLevel_6                  PWR_CR_PLS_LEV6
-#define PWR_PVDLevel_7                  PWR_CR_PLS_LEV7 
+#define PWR_PVDLevel_7                  PWR_CR_PLS_LEV7
 
 #define IS_PWR_PVD_LEVEL(LEVEL) (((LEVEL) == PWR_PVDLevel_0) || ((LEVEL) == PWR_PVDLevel_1)|| \
                                  ((LEVEL) == PWR_PVDLevel_2) || ((LEVEL) == PWR_PVDLevel_3)|| \
@@ -74,7 +74,7 @@
   * @}
   */
 
-/** @defgroup PWR_WakeUp_Pins 
+/** @defgroup PWR_WakeUp_Pins
   * @{
   */
 
@@ -86,8 +86,8 @@
   * @}
   */
 
- 
-/** @defgroup PWR_Regulator_state_is_Sleep_STOP_mode 
+
+/** @defgroup PWR_Regulator_state_is_Sleep_STOP_mode
   * @{
   */
 
@@ -99,31 +99,31 @@
   * @}
   */
 
-/** @defgroup PWR_SLEEP_mode_entry 
+/** @defgroup PWR_SLEEP_mode_entry
   * @{
   */
 
 #define PWR_SLEEPEntry_WFI              ((uint8_t)0x01)
 #define PWR_SLEEPEntry_WFE              ((uint8_t)0x02)
 #define IS_PWR_SLEEP_ENTRY(ENTRY) (((ENTRY) == PWR_SLEEPEntry_WFI) || ((ENTRY) == PWR_SLEEPEntry_WFE))
- 
+
 /**
   * @}
   */
 
-/** @defgroup PWR_STOP_mode_entry 
+/** @defgroup PWR_STOP_mode_entry
   * @{
   */
 
 #define PWR_STOPEntry_WFI               ((uint8_t)0x01)
 #define PWR_STOPEntry_WFE               ((uint8_t)0x02)
 #define IS_PWR_STOP_ENTRY(ENTRY) (((ENTRY) == PWR_STOPEntry_WFI) || ((ENTRY) == PWR_STOPEntry_WFE))
- 
+
 /**
   * @}
   */
 
-/** @defgroup PWR_Flag 
+/** @defgroup PWR_Flag
   * @{
   */
 

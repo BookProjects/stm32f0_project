@@ -10,32 +10,32 @@
 /*-----------------------------------------------------------
 Keil Software CHM Style Sheet
 -----------------------------------------------------------*/
-body         { color: #000000; background-color: #FFFFFF; font-size: 75%; font-family: 
+body         { color: #000000; background-color: #FFFFFF; font-size: 75%; font-family:
                Verdana, Arial, 'Sans Serif' }
 a:link       { color: #0000FF; text-decoration: underline }
 a:visited    { color: #0000FF; text-decoration: underline }
 a:active     { color: #FF0000; text-decoration: underline }
 a:hover      { color: #FF0000; text-decoration: underline }
-h1           { font-family: Verdana; font-size: 18pt; color: #000080; font-weight: bold; 
+h1           { font-family: Verdana; font-size: 18pt; color: #000080; font-weight: bold;
                text-align: Center; margin-right: 3 }
-h2           { font-family: Verdana; font-size: 14pt; color: #000080; font-weight: bold; 
-               background-color: #CCCCCC; margin-top: 24; margin-bottom: 3; 
+h2           { font-family: Verdana; font-size: 14pt; color: #000080; font-weight: bold;
+               background-color: #CCCCCC; margin-top: 24; margin-bottom: 3;
                padding: 6 }
-h3           { font-family: Verdana; font-size: 10pt; font-weight: bold; background-color: 
+h3           { font-family: Verdana; font-size: 10pt; font-weight: bold; background-color:
                #CCCCCC; margin-top: 24; margin-bottom: 3; padding: 6 }
-pre          { font-family: Courier New; font-size: 10pt; background-color: #CCFFCC; 
+pre          { font-family: Courier New; font-size: 10pt; background-color: #CCFFCC;
                margin-left: 24; margin-right: 24 }
 ul           { list-style-type: square; margin-top: 6pt; margin-bottom: 0 }
 ol           { margin-top: 6pt; margin-bottom: 0 }
 li           { clear: both; margin-bottom: 6pt }
 table        { font-size: 100%; border-width: 0; padding: 0 }
-th           { color: #FFFFFF; background-color: #000080; text-align: left; vertical-align: 
+th           { color: #FFFFFF; background-color: #000080; text-align: left; vertical-align:
                bottom; padding-right: 6pt }
 tr           { text-align: left; vertical-align: top }
 td           { text-align: left; vertical-align: top; padding-right: 6pt }
 .ToolT       { font-size: 8pt; color: #808080 }
 .TinyT       { font-size: 8pt; text-align: Center }
-code         { color: #000000; background-color: #E0E0E0; font-family: 'Courier New', Courier; 
+code         { color: #000000; background-color: #E0E0E0; font-family: 'Courier New', Courier;
                line-height: 120%; font-style: normal }
 /*-----------------------------------------------------------
 Notes
@@ -52,18 +52,18 @@ Where List Tags
 -----------------------------------------------------------*/
 p.wh         { font-weight: bold; clear: both; margin-top: 6pt; margin-bottom: 3pt }
 table.wh     { width: 100% }
-td.whItem    { white-space: nowrap; font-style: italic; padding-right: 6pt; padding-bottom: 
+td.whItem    { white-space: nowrap; font-style: italic; padding-right: 6pt; padding-bottom:
                6pt }
 td.whDesc    { padding-bottom: 6pt }
 /*-----------------------------------------------------------
 Keil Table Tags
 -----------------------------------------------------------*/
 table.kt     { border: 1pt solid #000000 }
-th.kt        { white-space: nowrap; border-bottom: 1pt solid #000000; padding-left: 6pt; 
+th.kt        { white-space: nowrap; border-bottom: 1pt solid #000000; padding-left: 6pt;
                padding-right: 6pt; padding-top: 4pt; padding-bottom: 4pt }
 tr.kt        {  }
-td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid #A0A0A0; 
-               padding-left: 6pt; padding-right: 6pt; padding-top: 2pt; 
+td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid #A0A0A0;
+               padding-left: 6pt; padding-right: 6pt; padding-top: 2pt;
                padding-bottom: 2pt }
 /*-----------------------------------------------------------
 -----------------------------------------------------------*/
@@ -120,7 +120,7 @@ td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid 
 
 <h3>Added big endian support for DSP library</h3>
 <p>
-  The <strong>CMSIS DSP Software Library</strong> provides now also pre-build libraries 
+  The <strong>CMSIS DSP Software Library</strong> provides now also pre-build libraries
 	and projects for big endian devices.
 </p>
 <p>
@@ -130,7 +130,7 @@ td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid 
 
 <h3>Simplified folder structure for CMSIS include files</h3>
 <p>
-  All CMSIS core include files as well as the DSP-Library header files are located in 
+  All CMSIS core include files as well as the DSP-Library header files are located in
 	a single folder <strong>./CMSIS/Include</strong>.
 </p>
 
@@ -143,7 +143,7 @@ td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid 
   <ul>
      <li><b>Device</b></li>
        <ul>
-         <li>&lt;<b>Vendor</b>&gt; 
+         <li>&lt;<b>Vendor</b>&gt;
            <ul>
              <li>&lt;<b>Device</b>&gt; | &lt;<b>Device Series</b>&gt;
                <ul>
@@ -179,11 +179,11 @@ td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid 
 
 <h3>Removed CMSIS core source files</h3>
 <p>
-  The CMSIS core source files <strong>core_cm0.c, core_cm3.c, core_cm4.c</strong> 
+  The CMSIS core source files <strong>core_cm0.c, core_cm3.c, core_cm4.c</strong>
   containing helper functions for older ARM compiler versions got removed.
 </p>
 <p>
-  For the <b>ARM Compiler Toolchain </b>version <b>V4.0.677</b> or later is 
+  For the <b>ARM Compiler Toolchain </b>version <b>V4.0.677</b> or later is
 	required!</p>
 
 
@@ -191,9 +191,9 @@ td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid 
 
 <h3>Added CMSIS DSP Software Library</h3>
 <p>
-  The <strong>CMSIS DSP Software Library</strong> is a suite of common signal processing functions targeted 
-  to Cortex-M processor based microcontrollers. Even though the code has been specifically 
-  optimized towards using the extended DSP instruction set of the Cortex-M4 processor, 
+  The <strong>CMSIS DSP Software Library</strong> is a suite of common signal processing functions targeted
+  to Cortex-M processor based microcontrollers. Even though the code has been specifically
+  optimized towards using the extended DSP instruction set of the Cortex-M4 processor,
   the library can be compiled for any Cortex-M processor.
 </p>
 <p>
@@ -202,18 +202,18 @@ td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid 
 
 <h3>Added CMSIS System View Description</h3>
 <p>
-  The <strong>CMSIS System View Description</strong> answers the challenges of accurate, detailed and 
-  timely device aware peripheral debugging support for Cortex Microcontroller based 
+  The <strong>CMSIS System View Description</strong> answers the challenges of accurate, detailed and
+  timely device aware peripheral debugging support for Cortex Microcontroller based
   devices by the software development tools vendor community.
 </p>
 <p>
-  Silicon vendors shall create and maintain a formalized description of the debug view 
+  Silicon vendors shall create and maintain a formalized description of the debug view
   for all the peripherals contained in their Cortex Microcontroller based devices.
-  Tool vendors use such descriptions to establish device specific debug support in 
+  Tool vendors use such descriptions to establish device specific debug support in
   their debugging tools.
 </p>
 <p>
-  A standardized System View Description shall provide a common approach to 
+  A standardized System View Description shall provide a common approach to
   capturing peripheral debug related information in a machine readable files.
 </p>
 <p>
@@ -261,8 +261,8 @@ td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid 
 
 <h3>Changed startup concept</h3>
 <p>
-  The old startup concept (calling SystemInit_ExtMemCtl from startup file and calling SystemInit 
-  from main) has the weakness that it does not work for controllers which need a already 
+  The old startup concept (calling SystemInit_ExtMemCtl from startup file and calling SystemInit
+  from main) has the weakness that it does not work for controllers which need a already
   configuerd clock system to configure the external memory controller.
 </p>
 
@@ -289,7 +289,7 @@ td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid 
    the current core clock.
   </li>
 </ul>
-      
+
 
 <h3>Advanced Debug Functions</h3>
 <p>
@@ -309,14 +309,14 @@ td.kt        { color: #000000; background-color: #E0E0E0; border-top: 1pt solid 
 </ul>
 
 <p>
-  For detailed explanation see file <strong>CMSIS debug support.htm</strong>. 
+  For detailed explanation see file <strong>CMSIS debug support.htm</strong>.
 </p>
 
 
 <h3>Core Register Bit Definitions</h3>
 <p>
   Files core_cm3.h and core_cm0.h contain now bit definitions for Core Registers. The name for the
-  defines correspond with the Cortex-M Technical Reference Manual.  
+  defines correspond with the Cortex-M Technical Reference Manual.
 </p>
 <p>
   e.g. SysTick structure with bit definitions
@@ -383,7 +383,7 @@ typedef struct
          <li>CoreSupport</li>
          <li>DeviceSupport</li>
            <ul>
-             <li>Vendor 
+             <li>Vendor
                <ul>
                  <li>Device
                    <ul>
@@ -406,7 +406,7 @@ typedef struct
          </li>
          <li>Example <i>(optional)</i>
            <ul>
-             <li>Toolchain 
+             <li>Toolchain
                <ul>
                  <li>Device</li>
                  <li>Device</li>
@@ -419,7 +419,7 @@ typedef struct
          </li>
        </ul>
     </li>
-     
+
     <li>Documentation</li>
   </ul>
 
@@ -442,7 +442,7 @@ typedef struct
       Placing of HEAP in external RAM.
     </p>
     <p>
-      It must be possible to place HEAP in external RAM if the device supports an 
+      It must be possible to place HEAP in external RAM if the device supports an
       external memory controller.
     </p>
   </li>
@@ -466,7 +466,7 @@ typedef struct
 </p>
 <ul>
  <li>
-  No <strong>C startup files</strong> are available. 
+  No <strong>C startup files</strong> are available.
  </li>
 </ul>
 

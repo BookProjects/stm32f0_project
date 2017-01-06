@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM_PWM_Output/main.c 
+  * @file    TIM_PWM_Output/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -56,7 +56,7 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -65,14 +65,14 @@ int main(void)
 
   /* TIM Configuration */
   TIM_Config();
-  
+
   /* TIM1 Configuration ---------------------------------------------------
    Generate PWM signals with 4 different duty cycles:
-   TIM1 input clock (TIM1CLK) is set to APB2 clock (PCLK2)    
+   TIM1 input clock (TIM1CLK) is set to APB2 clock (PCLK2)
     => TIM1CLK = PCLK2 = SystemCoreClock
    TIM1CLK = SystemCoreClock, Prescaler = 0, TIM1 counter clock = SystemCoreClock
    SystemCoreClock is set to 48 MHz for STM32F0xx devices
-   
+
    The objective is to generate 4 PWM signal at 17.57 KHz:
      - TIM1_Period = (SystemCoreClock / 17570) - 1
    The channel 1 and channel 1N duty cycle is set to 50%
@@ -81,12 +81,12 @@ int main(void)
    The channel 4 duty cycle is set to 12.5%
    The Timer pulse is calculated as follows:
      - ChannelxPulse = DutyCycle * (TIM1_Period - 1) / 100
-   
-   Note: 
+
+   Note:
     SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f0xx.c file.
     Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
     function to update SystemCoreClock variable value. Otherwise, any configuration
-    based on this variable will be incorrect. 
+    based on this variable will be incorrect.
   ----------------------------------------------------------------------- */
   /* Compute the value to be set in ARR regiter to generate signal frequency at 17.57 Khz */
   TimerPeriod = (SystemCoreClock / 17570 ) - 1;
@@ -101,7 +101,7 @@ int main(void)
 
   /* TIM1 clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1 , ENABLE);
-  
+
   /* Time Base configuration */
   TIM_TimeBaseStructure.TIM_Prescaler = 0;
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
@@ -154,7 +154,7 @@ void TIM_Config(void)
 
   /* GPIOA Clocks enable */
   RCC_AHBPeriphClockCmd( RCC_AHBPeriph_GPIOA, ENABLE);
-  
+
   /* GPIOA Configuration: Channel 1, 2, 3 and 4 as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -162,7 +162,7 @@ void TIM_Config(void)
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP ;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
-  
+
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource8, GPIO_AF_2);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_2);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_2);

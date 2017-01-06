@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file contains all the functions prototypes for the EXTI 
+  * @brief   This file contains all the functions prototypes for the EXTI
   *          firmware library
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -46,8 +46,8 @@
   */
 /* Exported types ------------------------------------------------------------*/
 
-/** 
-  * @brief  EXTI mode enumeration  
+/**
+  * @brief  EXTI mode enumeration
   */
 
 typedef enum
@@ -58,8 +58,8 @@ typedef enum
 
 #define IS_EXTI_MODE(MODE) (((MODE) == EXTI_Mode_Interrupt) || ((MODE) == EXTI_Mode_Event))
 
-/** 
-  * @brief  EXTI Trigger enumeration  
+/**
+  * @brief  EXTI Trigger enumeration
   */
 
 typedef enum
@@ -96,7 +96,7 @@ typedef struct
 /** @defgroup EXTI_Exported_Constants
   * @{
   */
-/** @defgroup EXTI_Lines 
+/** @defgroup EXTI_Lines
   * @{
   */
 
@@ -116,10 +116,10 @@ typedef struct
 #define EXTI_Line13      ((uint32_t)0x00002000)  /*!< External interrupt line 13 */
 #define EXTI_Line14      ((uint32_t)0x00004000)  /*!< External interrupt line 14 */
 #define EXTI_Line15      ((uint32_t)0x00008000)  /*!< External interrupt line 15 */
-#define EXTI_Line16      ((uint32_t)0x00010000)  /*!< External interrupt line 16 
+#define EXTI_Line16      ((uint32_t)0x00010000)  /*!< External interrupt line 16
                                                       Connected to the PVD Output */
-#define EXTI_Line17      ((uint32_t)0x00020000)  /*!< Internal interrupt line 17 
-                                                      Connected to the RTC Alarm 
+#define EXTI_Line17      ((uint32_t)0x00020000)  /*!< Internal interrupt line 17
+                                                      Connected to the RTC Alarm
                                                       event */
 #define EXTI_Line19      ((uint32_t)0x00080000)  /*!< Internal interrupt line 19
                                                       Connected to the RTC Tamper

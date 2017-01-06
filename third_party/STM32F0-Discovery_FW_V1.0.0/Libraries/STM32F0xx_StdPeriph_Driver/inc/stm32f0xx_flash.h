@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file contains all the functions prototypes for the FLASH 
+  * @brief   This file contains all the functions prototypes for the FLASH
   *          firmware library.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -47,9 +47,9 @@
 
 /* Exported types ------------------------------------------------------------*/
 
-/** 
+/**
   * @brief  FLASH Status
-  */ 
+  */
 typedef enum
 {
   FLASH_BUSY = 1,
@@ -60,14 +60,14 @@ typedef enum
 }FLASH_Status;
 
 /* Exported constants --------------------------------------------------------*/
-  
+
 /** @defgroup FLASH_Exported_Constants
   * @{
-  */ 
-  
-/** @defgroup FLASH_Latency 
+  */
+
+/** @defgroup FLASH_Latency
   * @{
-  */ 
+  */
 #define FLASH_Latency_0                ((uint32_t)0x00000000)  /*!< FLASH Zero Latency cycle */
 #define FLASH_Latency_1                FLASH_ACR_LATENCY       /*!< FLASH One Latency cycle */
 
@@ -75,42 +75,42 @@ typedef enum
                                    ((LATENCY) == FLASH_Latency_1))
 /**
   * @}
-  */ 
+  */
 
-/** @defgroup FLASH_Interrupts 
+/** @defgroup FLASH_Interrupts
   * @{
   */
-   
+
 #define FLASH_IT_EOP                   FLASH_CR_EOPIE  /*!< End of programming interrupt source */
 #define FLASH_IT_ERR                   FLASH_CR_ERRIE  /*!< Error interrupt source */
 #define IS_FLASH_IT(IT) ((((IT) & (uint32_t)0xFFFFEBFF) == 0x00000000) && (((IT) != 0x00000000)))
 /**
   * @}
-  */ 
+  */
 
-/** @defgroup FLASH_Address 
+/** @defgroup FLASH_Address
   * @{
   */
-  
+
 #define IS_FLASH_PROGRAM_ADDRESS(ADDRESS) (((ADDRESS) >= 0x08000000) && ((ADDRESS) <= 0x0800FFFF))
 
 /**
   * @}
   */
 
-/** @defgroup FLASH_OB_DATA_ADDRESS 
+/** @defgroup FLASH_OB_DATA_ADDRESS
   * @{
-  */  
-#define IS_OB_DATA_ADDRESS(ADDRESS) (((ADDRESS) == 0x1FFFF804) || ((ADDRESS) == 0x1FFFF806)) 
+  */
+#define IS_OB_DATA_ADDRESS(ADDRESS) (((ADDRESS) == 0x1FFFF804) || ((ADDRESS) == 0x1FFFF806))
 
 /**
   * @}
   */
 
-/** @defgroup FLASH_Option_Bytes_Write_Protection 
+/** @defgroup FLASH_Option_Bytes_Write_Protection
   * @{
   */
-  
+
 
 #define OB_WRP_Pages0to3               ((uint32_t)0x00000001) /* Write protection of page 0 to 3 */
 #define OB_WRP_Pages4to7               ((uint32_t)0x00000002) /* Write protection of page 4 to 7 */
@@ -137,16 +137,16 @@ typedef enum
   * @}
   */
 
-/** @defgroup FLASH_Option_Bytes_Read_Protection 
+/** @defgroup FLASH_Option_Bytes_Read_Protection
   * @{
-  */ 
+  */
 
-/** 
-  * @brief  FLASH_Read Protection Level  
-  */ 
+/**
+  * @brief  FLASH_Read Protection Level
+  */
 #define OB_RDP_Level_0   ((uint8_t)0xAA)
 #define OB_RDP_Level_1   ((uint8_t)0xBB)
-/*#define OB_RDP_Level_2   ((uint8_t)0xCC)*/ /* Warning: When enabling read protection level 2 
+/*#define OB_RDP_Level_2   ((uint8_t)0xCC)*/ /* Warning: When enabling read protection level 2
                                                 it's no more possible to go back to level 1 or 0 */
 
 #define IS_OB_RDP(LEVEL) (((LEVEL) == OB_RDP_Level_0)||\
@@ -154,9 +154,9 @@ typedef enum
                           ((LEVEL) == OB_RDP_Level_2))*/
 /**
   * @}
-  */ 
+  */
 
-/** @defgroup FLASH_Option_Bytes_IWatchdog 
+/** @defgroup FLASH_Option_Bytes_IWatchdog
   * @{
   */
 
@@ -168,7 +168,7 @@ typedef enum
   * @}
   */
 
-/** @defgroup FLASH_Option_Bytes_nRST_STOP 
+/** @defgroup FLASH_Option_Bytes_nRST_STOP
   * @{
   */
 
@@ -180,7 +180,7 @@ typedef enum
   * @}
   */
 
-/** @defgroup FLASH_Option_Bytes_nRST_STDBY 
+/** @defgroup FLASH_Option_Bytes_nRST_STDBY
   * @{
   */
 
@@ -215,9 +215,9 @@ typedef enum
 
 /**
   * @}
-  */    
+  */
 
-/** @defgroup FLASH_Option_Bytes_SRAM_Parity_Enable 
+/** @defgroup FLASH_Option_Bytes_SRAM_Parity_Enable
   * @{
   */
 
@@ -228,44 +228,44 @@ typedef enum
 
 /**
   * @}
-  */ 
-  
-/** @defgroup FLASH_Flags 
+  */
+
+/** @defgroup FLASH_Flags
   * @{
-  */ 
+  */
 
 #define FLASH_FLAG_BSY                 FLASH_SR_BSY     /*!< FLASH Busy flag */
 #define FLASH_FLAG_PGERR               FLASH_SR_PGERR   /*!< FLASH Programming error flag */
 #define FLASH_FLAG_WRPERR              FLASH_SR_WRPERR  /*!< FLASH Write protected error flag */
 #define FLASH_FLAG_EOP                 FLASH_SR_EOP     /*!< FLASH End of Programming flag */
- 
+
 #define IS_FLASH_CLEAR_FLAG(FLAG) ((((FLAG) & (uint32_t)0xFFFFFFC3) == 0x00000000) && ((FLAG) != 0x00000000))
 
 #define IS_FLASH_GET_FLAG(FLAG)  (((FLAG) == FLASH_FLAG_BSY) || ((FLAG) == FLASH_FLAG_PGERR) || \
                                   ((FLAG) == FLASH_FLAG_WRPERR) || ((FLAG) == FLASH_FLAG_EOP))
 /**
   * @}
-  */ 
+  */
 
-/** @defgroup FLASH_Timeout_definition 
+/** @defgroup FLASH_Timeout_definition
   * @{
-  */ 
+  */
 #define FLASH_ER_PRG_TIMEOUT         ((uint32_t)0x000B0000)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-  
-/** 
-  * @brief  FLASH memory functions that can be executed from FLASH.  
-  */  
+
+/**
+  * @brief  FLASH memory functions that can be executed from FLASH.
+  */
 /* FLASH Interface configuration functions ************************************/
 void FLASH_SetLatency(uint32_t FLASH_Latency);
 void FLASH_PrefetchBufferCmd(FunctionalState NewState);
@@ -315,6 +315,6 @@ FLASH_Status FLASH_WaitForLastOperation(uint32_t Timeout);
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

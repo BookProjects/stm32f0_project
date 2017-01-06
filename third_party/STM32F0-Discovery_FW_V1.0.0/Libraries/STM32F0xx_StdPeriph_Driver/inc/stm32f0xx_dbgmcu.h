@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file contains all the functions prototypes for the DBGMCU firmware 
+  * @brief   This file contains all the functions prototypes for the DBGMCU firmware
   *          library.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -43,8 +43,8 @@
 
 /** @addtogroup DBGMCU
   * @{
-  */ 
-/* Exported types ------------------------------------------------------------*/ 
+  */
+/* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
 
@@ -74,16 +74,16 @@
 
 /**
   * @}
-  */ 
+  */
 
 /* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */ 
+/* Exported functions ------------------------------------------------------- */
 
-/* Device and Revision ID management functions ********************************/ 
+/* Device and Revision ID management functions ********************************/
 uint32_t DBGMCU_GetREVID(void);
 uint32_t DBGMCU_GetDEVID(void);
 
-/* Peripherals Configuration functions ****************************************/ 
+/* Peripherals Configuration functions ****************************************/
 void DBGMCU_Config(uint32_t DBGMCU_Periph, FunctionalState NewState);
 void DBGMCU_APB1PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState);
 void DBGMCU_APB2PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState);
@@ -96,10 +96,10 @@ void DBGMCU_APB2PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

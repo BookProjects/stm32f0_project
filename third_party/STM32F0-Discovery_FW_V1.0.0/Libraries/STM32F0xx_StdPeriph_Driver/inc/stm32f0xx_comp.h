@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file contains all the functions prototypes for the COMP firmware 
+  * @brief   This file contains all the functions prototypes for the COMP firmware
   *          library.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -47,10 +47,10 @@
 
 /* Exported types ------------------------------------------------------------*/
 
-/** 
-  * @brief  COMP Init structure definition  
+/**
+  * @brief  COMP Init structure definition
   */
-  
+
 typedef struct
 {
 
@@ -73,10 +73,10 @@ typedef struct
 }COMP_InitTypeDef;
 
 /* Exported constants --------------------------------------------------------*/
-   
+
 /** @defgroup COMP_Exported_Constants
   * @{
-  */ 
+  */
 
 /** @defgroup COMP_Selection
   * @{
@@ -87,10 +87,10 @@ typedef struct
 
 #define IS_COMP_ALL_PERIPH(PERIPH) (((PERIPH) == COMP_Selection_COMP1) || \
                                     ((PERIPH) == COMP_Selection_COMP2))
- 
+
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup COMP_InvertingInput
   * @{
@@ -112,8 +112,8 @@ typedef struct
                                         ((INPUT) == COMP_InvertingInput_IO))
 /**
   * @}
-  */ 
-  
+  */
+
 /** @defgroup COMP_Output
   * @{
   */
@@ -138,7 +138,7 @@ typedef struct
                                 ((OUTPUT) == COMP_Output_TIM3OCREFCLR))
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup COMP_OutputPolarity
   * @{
@@ -151,7 +151,7 @@ typedef struct
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup COMP_Hysteresis
   * @{
@@ -191,7 +191,7 @@ typedef struct
 
 /** @defgroup COMP_OutputLevel
   * @{
-  */ 
+  */
 /* When output polarity is not inverted, comparator output is high when
    the non-inverting input is at a higher voltage than the inverting input */
 #define COMP_OutputLevel_High                   COMP_CSR_COMP1OUT
@@ -201,11 +201,11 @@ typedef struct
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
@@ -234,7 +234,7 @@ void COMP_LockConfig(uint32_t COMP_Selection);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

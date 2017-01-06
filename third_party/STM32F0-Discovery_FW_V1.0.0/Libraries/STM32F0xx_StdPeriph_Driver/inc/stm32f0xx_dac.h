@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
-  * @brief   This file contains all the functions prototypes for the DAC firmware 
+  * @brief   This file contains all the functions prototypes for the DAC firmware
   *          library.
   ******************************************************************************
   * @attention
@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -36,7 +36,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx.h"
- 
+
 /** @addtogroup STM32F0xx_StdPeriph_Driver
   * @{
   */
@@ -47,10 +47,10 @@
 
 /* Exported types ------------------------------------------------------------*/
 
-/** 
+/**
   * @brief  DAC Init structure definition
   */
-  
+
 typedef struct
 {
   uint32_t DAC_Trigger;                      /*!< Specifies the external trigger for the selected DAC channel.
@@ -66,11 +66,11 @@ typedef struct
   * @{
   */
 
-/** @defgroup DAC_Trigger 
+/** @defgroup DAC_Trigger
   * @{
   */
-  
-#define DAC_Trigger_None                   ((uint32_t)0x00000000) /*!< Conversion is automatic once the DAC1_DHRxxxx register 
+
+#define DAC_Trigger_None                   ((uint32_t)0x00000000) /*!< Conversion is automatic once the DAC1_DHRxxxx register
                                                                        has been loaded, and not by external trigger */
 #define DAC_Trigger_T6_TRGO                ((uint32_t)0x00000004) /*!< TIM6 TRGO selected as external conversion trigger for DAC channel */
 #define DAC_Trigger_T3_TRGO                ((uint32_t)0x0000000C) /*!< TIM3 TRGO selected as external conversion trigger for DAC channel */
@@ -86,12 +86,12 @@ typedef struct
                                  ((TRIGGER) == DAC_Trigger_T2_TRGO) || \
                                  ((TRIGGER) == DAC_Trigger_Ext_IT9) || \
                                  ((TRIGGER) == DAC_Trigger_Software))
-                                 
+
 /**
   * @}
   */
 
-/** @defgroup DAC_OutputBuffer 
+/** @defgroup DAC_OutputBuffer
   * @{
   */
 
@@ -102,8 +102,8 @@ typedef struct
 /**
   * @}
   */
-  
-/** @defgroup DAC_Channel_selection 
+
+/** @defgroup DAC_Channel_selection
   * @{
   */
 
@@ -128,43 +128,43 @@ typedef struct
   * @}
   */
 
-/** @defgroup DAC_data 
+/** @defgroup DAC_data
   * @{
   */
 
-#define IS_DAC_DATA(DATA) ((DATA) <= 0xFFF0) 
+#define IS_DAC_DATA(DATA) ((DATA) <= 0xFFF0)
 
 /**
   * @}
   */
 
-/** @defgroup DAC_interrupts_definition 
+/** @defgroup DAC_interrupts_definition
   * @{
-  */ 
-  
+  */
+
 #define DAC_IT_DMAUDR                      DAC_SR_DMAUDR1
-#define IS_DAC_IT(IT) (((IT) == DAC_IT_DMAUDR)) 
+#define IS_DAC_IT(IT) (((IT) == DAC_IT_DMAUDR))
 
 /**
   * @}
-  */ 
+  */
 
 
-/** @defgroup DAC_flags_definition 
+/** @defgroup DAC_flags_definition
   * @{
-  */ 
-  
+  */
+
 #define DAC_FLAG_DMAUDR                    DAC_SR_DMAUDR1
-  
+
 #define IS_DAC_FLAG(FLAG) (((FLAG) == DAC_FLAG_DMAUDR))
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
@@ -198,10 +198,10 @@ void DAC_ClearITPendingBit(uint32_t DAC_Channel, uint32_t DAC_IT);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM_Time_Base/main.c 
+  * @file    TIM_Time_Base/main.c
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    23-March-2012
@@ -16,8 +16,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -57,7 +57,7 @@ void TIM_Config(void);
   */
 int main(void)
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
+  /*!< At this stage the microcontroller clock setting is already configured,
        this is done through SystemInit() function which is called from startup
        file (startup_stm32f0xx.s) before to branch to application main.
        To reconfigure the default setting of SystemInit() function, refer to
@@ -66,29 +66,29 @@ int main(void)
 
   /* TIM Configuration */
   TIM_Config();
-  
+
   /* -----------------------------------------------------------------------
     TIM3 Configuration: Output Compare Timing Mode:
-    
-    In this example TIM3 input clock (TIM3CLK) is set to APB1 clock (PCLK1),  
+
+    In this example TIM3 input clock (TIM3CLK) is set to APB1 clock (PCLK1),
       => TIM3CLK = PCLK1 = SystemCoreClock = 48 MHz
-          
+
     To get TIM3 counter clock at 6 MHz, the prescaler is computed as follows:
        Prescaler = (TIM3CLK / TIM3 counter clock) - 1
        Prescaler = (PCLK1 /6 MHz) - 1
-                                                  
+
     CC3 update rate = TIM3 counter clock / CCR3_Val = 439.4 Hz
     ==> Toggling frequency = 219.7 Hz
-    
+
     CC4 update rate = TIM3 counter clock / CCR4_Val = 878.9 Hz
     ==> Toggling frequency = 439.4 Hz
 
-    Note: 
+    Note:
      SystemCoreClock variable holds HCLK frequency and is defined in system_stm32f2xx.c file.
      Each time the core clock (HCLK) changes, user had to call SystemCoreClockUpdate()
      function to update SystemCoreClock variable value. Otherwise, any configuration
-     based on this variable will be incorrect.    
-  ----------------------------------------------------------------------- */   
+     based on this variable will be incorrect.
+  ----------------------------------------------------------------------- */
 
   /* Compute the prescaler value */
   PrescalerValue = (uint16_t) (SystemCoreClock  / 6000000) - 1;
@@ -123,7 +123,7 @@ int main(void)
   TIM_OC4Init(TIM3, &TIM_OCInitStructure);
 
   TIM_OC4PreloadConfig(TIM3, TIM_OCPreload_Disable);
-   
+
   /* TIM Interrupts enable */
   TIM_ITConfig(TIM3, TIM_IT_CC3 | TIM_IT_CC4, ENABLE);
 
