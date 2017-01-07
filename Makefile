@@ -1,12 +1,11 @@
 # Makefile for compiling executables onto the stm32f0
 #
 #Verbosity flags (Q=quiet, E=echo)
+E = @echo 
 ifdef VERBOSE
 	Q =
-	E = @echo
 else
 	Q = @
-	E = @echo 
 endif
 
 
@@ -18,6 +17,7 @@ STMUTILS_PATH := $(STMFW_PATH)/Utilities
 
 DRIVER_PATH := $(STMLIB_PATH)/STM32F0xx_StdPeriph_Driver
 DEMO_PATH := $(STMPROJ_PATH)/Demonstration
+PERIPH_EX_PATH := $(STMPROJ_PATH)/Peripheral_Examples
 
 CMSIS_PATH := $(STMLIB_PATH)/CMSIS
 
@@ -29,12 +29,12 @@ OBJ_PATH := $(BUILD_PATH)/obj
 STARTUP := $(CMSIS_PATH)/ST/STM32F0xx/Source/Templates/gcc_ride7/startup_stm32f0xx.s
 LINKER_SCRIPT := $(DEMO_PATH)/TrueSTUDIO/STM32F0-Discovery_Demo/stm32_flash.ld
 
-# Change to change example
+# Change path to change example
 SRC_PATH := $(DEMO_PATH)
-_SRC := system_stm32f0xx.c \
+_TARGET_SRC := system_stm32f0xx.c \
 		main.c \
 		stm32f0xx_it.c
-SRC := $(patsubst %,$(SRC_PATH)/%,$(_SRC))
+TARGET_SRC := $(patsubst %,$(SRC_PATH)/%,$(_TARGET_SRC))
 _DRIVER_SRC := stm32f0xx_adc.c \
 	stm32f0xx_cec.c \
 	stm32f0xx_comp.c \
@@ -61,14 +61,11 @@ DRIVER_SRC := $(patsubst %,$(DRIVER_PATH)/src/%,$(_DRIVER_SRC))
 _DISC_SRC := stm32f0_discovery.c
 DISC_SRC := $(patsubst %,$(STMUTILS_PATH)/STM32F0-Discovery/%,$(_DISC_SRC))
 
-_OBJ := $(_SRC:.c=.o)
+SRC := $(TARGET_SRC) $(DRIVER_SRC) $(DISC_SRC)
+
+_OBJ := $(SRC:.c=.o)
+_OBJ += $(STARTUP:.s=.o)
 OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_OBJ))
-_DRIVER_OBJ := $(_DRIVER_SRC:.c=.o)
-DRIVER_OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_DRIVER_OBJ))
-_DISC_OBJ := $(_DISC_SRC:.c=.o)
-DISC_OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_DISC_OBJ))
-_CROSS_OBJ := $(STARTUP:.s=.o)
-CROSS_OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_CROSS_OBJ))
 
 # Define files to get compiled
 CROSS_TARGET := $(BUILD_PATH)/hw_binary.bin
@@ -76,6 +73,43 @@ CROSS_HEX := $(CROSS_TARGET:.bin=.hex)
 CROSS_ELF := $(CROSS_TARGET:.bin=.elf)
 
 MAP_FILE := $(BUILD_PATH)/mapfile.map
+
+# Make commands
+.PHONY: all
+all: $(CROSS_TARGET)
+
+.PHONY: help
+help:
+	$(E)
+	$(E)"all:    Create the hw binary $(CROSS_TARGET)"
+	$(E)"flash:  Flash the hw binary to the chip"
+	$(E)"erase:  Erase the flash data on the chip (useful for getting out of error state)"
+	$(E)"debug:  Run gdb remotely on the chip"
+	$(E)"serial: Open up a serial communication (must setup hardware appropriately)"
+	$(E)"clean:  Remove any files created by this Makefile"
+	$(E)
+
+.PHONY: flash
+flash: $(CROSS_TARGET)
+	st-flash write $(CROSS_TARGET) 0x8000000
+
+.PHONY: erase
+erase:
+	st-flash erase
+
+.PHONY: debug
+debug: $(CROSS_ELF)
+	xterm -e st-util &
+	$(GDBTUI) --eval-command="target remote localhost:4242"  $(CROSS_ELF) -ex 'load'
+
+# Open up a serial connection
+.PHONY: serial
+serial:
+	minicom -c on
+
+.PHONY: clean
+clean:
+	rm -rf $(BUILD_PATH)
 
 # Cross compile commands
 CC_TYPE:=arm-none-eabi
@@ -113,42 +147,40 @@ CFLAGS := -c \
 	-I$(DRIVER_PATH)/inc \
 	$(BASE_CROSS_FLAGS) \
 	-fomit-frame-pointer \
-	-Wa,-amhls=$(<:.c=.lst) $(DEFS) $(OPT)
+	$(DEFS) $(OPT)
 ARFLAGS := r
+LDFLAGS := $(BASE_CROSS_FLAGS) \
+	-nostartfiles \
+	-T$(LINKER_SCRIPT) \
+	-Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
+ASSEMBLER_FLAGS := $(BASE_CROSS_FLAGS)
+# Optionally turn on listings
+# -Wa passes comma separated list of arguments onto assembler
+#  -a (turns on listings)
+#  m: include macro expansions
+#  h: include high-level source
+#  l: include assembly
+#  s: include symbols
+#  =: list to file
+ifdef VERBOSE
+	CFLAGS += -Wa,-amhls=$(<:.c=.lst)
+	ASSEMBLER_FLAGS += -Wa,-amhls=$(<:.s=.lst)
+endif
 
-LDFLAGS := $(BASE_CROSS_FLAGS) -nostartfiles -T$(LINKER_SCRIPT) -Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
-
-ASSEMBLER_FLAGS:= $(BASE_CROSS_FLAGS) -Wa,-amhls=$(<:.s=.lst)
-
-# Make commands
-.PHONY: all
-all: $(CROSS_TARGET)
-
-.PHONY: clean
-clean:
-	rm -rf $(BUILD_PATH)
+# Create all of the objects
 
 # $^ is shorthand for all of the dependencies
+# $< is shorthand for the first dependency
 # $@ is shorthand for the target
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+$(OBJ_PATH)/%.o: %.c
 	$(E)C Cross Compiling $< to $@
 	$(Q)mkdir -p `dirname $@`
-	$(CROSS_COMPILE) -o $@ $< $(CFLAGS)
-
-$(OBJ_PATH)/%.o: $(DRIVER_PATH)/src/%.c
-	$(E)C Cross Compiling $< to $@
-	$(Q)mkdir -p `dirname $@`
-	$(CROSS_COMPILE) -o $@ $< $(CFLAGS)
-
-$(OBJ_PATH)/%.o: $(STMUTILS_PATH)/STM32F0-Discovery/%.c
-	$(E)C Cross Compiling $< to $@
-	$(Q)mkdir -p `dirname $@`
-	$(CROSS_COMPILE) -o $@ $< $(CFLAGS)
+	$(Q)$(CROSS_COMPILE) -o $@ $< $(CFLAGS)
 
 $(OBJ_PATH)/%.o: %.s
 	$(E)Assembling $< to $@
 	$(Q)mkdir -p `dirname $@`
-	$(ASSEMBLE) -c $(ASSEMBLER_FLAGS) $< -o $@
+	$(Q)$(ASSEMBLE) -c $(ASSEMBLER_FLAGS) $< -o $@
 
 $(CROSS_TARGET): $(CROSS_ELF)
 	$(E)"Building" $@
@@ -158,6 +190,6 @@ $(CROSS_HEX): $(CROSS_ELF)
 	$(E)"Building" $@
 	$(Q)$(HEX) $< $@
 
-$(CROSS_ELF): $(OBJ) $(DRIVER_OBJ) $(DISC_OBJ) $(CROSS_OBJ)
+$(CROSS_ELF): $(OBJ)
 	$(E)"Linking" $@
 	$(Q)$(CROSS_LINK) $(LDFLAGS) -o $@ $^
