@@ -30,7 +30,7 @@ STARTUP := $(CMSIS_PATH)/ST/STM32F0xx/Source/Templates/gcc_ride7/startup_stm32f0
 LINKER_SCRIPT := $(DEMO_PATH)/TrueSTUDIO/STM32F0-Discovery_Demo/stm32_flash.ld
 
 # Change path to change example
-SRC_PATH := $(DEMO_PATH)
+SRC_PATH := examples/uart
 _TARGET_SRC := system_stm32f0xx.c \
 		main.c \
 		stm32f0xx_it.c
