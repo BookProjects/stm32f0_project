@@ -64,7 +64,8 @@ DRIVER_SRC := $(patsubst %,$(DRIVER_PATH)/src/%,$(_DRIVER_SRC))
 _DISC_SRC := stm32f0_discovery.c
 DISC_SRC := $(patsubst %,$(STMUTILS_PATH)/STM32F0-Discovery/%,$(_DISC_SRC))
 
-_BASE_SRC := stm32f0_usart.c
+_BASE_SRC := stm32f0_usart.c \
+			 std_utils.c
 BASE_SRC := $(patsubst %,$(BASE_PATH)/%,$(_BASE_SRC))
 
 SRC := $(TARGET_SRC) $(DRIVER_SRC) $(DISC_SRC) $(BASE_SRC)

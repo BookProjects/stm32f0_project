@@ -1,4 +1,5 @@
 #include "usart.h"
+#include "std_utils.h"
 
 int main (void)
 {
@@ -8,7 +9,7 @@ int main (void)
   while(1)
   {
     val = usart_block_receive_char();
-    usart_transmit_char(val + 1);
+    usart_send_char(val + 1);
   }
   usart_destroy();
   return 0;

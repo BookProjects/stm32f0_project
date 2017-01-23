@@ -41,14 +41,20 @@ void usart_configure(uint32_t baud_rate) {
   USART_Cmd(USART2,ENABLE);
 }
 
-uint8_t usart_block_receive_char() {
+char usart_block_receive_char() {
     // Wait to receive a character
     while (USART_GetFlagStatus(USART2, USART_FLAG_RXNE) == RESET);
     return USART_ReceiveData(USART2);
 }
 
-void usart_transmit_char(uint8_t c) {
+void usart_send_char(char c) {
     // Wait until we can send a character
     while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);
     USART_SendData(USART2, c);
+}
+
+void usart_send_string(const char *c_str) {
+    while(*c_str) {
+        usart_send_char(*c_str++);
+    }
 }

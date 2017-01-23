@@ -1,4 +1,3 @@
-
 #include "stm32f0xx.h"
 #include "stm32f0_discovery.h"
 
@@ -14,5 +13,6 @@ void usart_destroy();
 // * parity
 void usart_configure(uint32_t baud_rate);
 
-uint8_t usart_block_receive_char();
-void usart_transmit_char(uint8_t c);
+char usart_block_receive_char();
+void usart_send_char(char c);
+void usart_send_string(const char *c_str);
