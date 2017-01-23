@@ -29,6 +29,9 @@ OBJ_PATH := $(BUILD_PATH)/obj
 STARTUP := $(CMSIS_PATH)/ST/STM32F0xx/Source/Templates/gcc_ride7/startup_stm32f0xx.s
 LINKER_SCRIPT := $(DEMO_PATH)/TrueSTUDIO/STM32F0-Discovery_Demo/stm32_flash.ld
 
+BASE_PATH := src
+BASE_INC_PATH := inc
+
 # Change path to change example
 SRC_PATH := examples/uart
 _TARGET_SRC := system_stm32f0xx.c \
@@ -61,7 +64,10 @@ DRIVER_SRC := $(patsubst %,$(DRIVER_PATH)/src/%,$(_DRIVER_SRC))
 _DISC_SRC := stm32f0_discovery.c
 DISC_SRC := $(patsubst %,$(STMUTILS_PATH)/STM32F0-Discovery/%,$(_DISC_SRC))
 
-SRC := $(TARGET_SRC) $(DRIVER_SRC) $(DISC_SRC)
+_BASE_SRC := stm32f0_usart.c
+BASE_SRC := $(patsubst %,$(BASE_PATH)/%,$(_BASE_SRC))
+
+SRC := $(TARGET_SRC) $(DRIVER_SRC) $(DISC_SRC) $(BASE_SRC)
 
 _OBJ := $(SRC:.c=.o)
 _OBJ += $(STARTUP:.s=.o)
@@ -141,6 +147,7 @@ CFLAGS := -c \
 	-std=c99 \
 	-Wall \
 	-I$(SRC_PATH) \
+	-I$(BASE_INC_PATH) \
 	-I$(CMSIS_PATH)/Include \
 	-I$(CMSIS_PATH)/ST/STM32F0xx/Include \
 	-I$(STMUTILS_PATH)/STM32F0-Discovery \
