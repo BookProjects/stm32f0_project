@@ -33,7 +33,7 @@ BASE_PATH := src
 BASE_INC_PATH := inc
 
 # Change path to change example
-SRC_PATH := examples/uart
+SRC_PATH := examples/int_timer
 _TARGET_SRC := system_stm32f0xx.c \
 		main.c \
 		stm32f0xx_it.c
@@ -65,7 +65,8 @@ _DISC_SRC := stm32f0_discovery.c
 DISC_SRC := $(patsubst %,$(STMUTILS_PATH)/STM32F0-Discovery/%,$(_DISC_SRC))
 
 _BASE_SRC := stm32f0_usart.c \
-			 std_utils.c
+			 std_utils.c \
+			 stm32f0_timing.c
 BASE_SRC := $(patsubst %,$(BASE_PATH)/%,$(_BASE_SRC))
 
 SRC := $(TARGET_SRC) $(DRIVER_SRC) $(DISC_SRC) $(BASE_SRC)

@@ -1,4 +1,6 @@
 #include "usart.h"
+#include "stm32f0xx.h"
+#include "stm32f0_discovery.h"
 
 
 void usart_create() {

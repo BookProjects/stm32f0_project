@@ -1,5 +1,4 @@
 #include "usart.h"
-#include "std_utils.h"
 
 int main (void)
 {
