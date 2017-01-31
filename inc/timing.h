@@ -24,4 +24,4 @@ void timing_configure_systick(uint32_t num_per_sec);
  */
 void timing_configure_input_capture();
 
-void timing_get_capture_val(uint32_t *val);
+uint32_t timing_get_capture_val();

@@ -65,8 +65,8 @@ void timing_configure_input_capture() {
   TIM_Cmd(TIM2, ENABLE);
 }
 
-void timing_get_capture_val(uint32_t *val) {
+uint32_t timing_get_capture_val() {
   // Wait for flag
   while(TIM_GetFlagStatus(TIM2, TIM_FLAG_CC2) == RESET);
-  *val = TIM_GetCapture2(TIM2);
+  return TIM_GetCapture2(TIM2);
 }
