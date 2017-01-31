@@ -17,3 +17,11 @@ void timing_systick_handler();
  * divides into the clock frequency, which defaults to 48MHz.
  */
 void timing_configure_systick(uint32_t num_per_sec);
+
+/* Configure an input capture timer.
+ *
+ *
+ */
+void timing_configure_input_capture();
+
+void timing_get_capture_val(uint32_t *val);
