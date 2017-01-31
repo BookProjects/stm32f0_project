@@ -28,6 +28,7 @@ void timing_configure_input_capture() {
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 
   // Input config
+  // TIM2_CH2 = A1 or B3
   GPIO_InitTypeDef gpio_init_struct = {
     .GPIO_Pin   = GPIO_Pin_1,
     .GPIO_Mode  = GPIO_Mode_AF,
@@ -57,7 +58,9 @@ void timing_configure_input_capture() {
   };
   TIM_ICInit(TIM2, &tim_ic_init_struct);
   TIM_SelectInputTrigger(TIM2, TIM_TS_TI2FP2);
+  // Restart the counter when it triggers
   TIM_SelectSlaveMode(TIM2, TIM_SlaveMode_Reset);
+  // Master mode
   TIM_SelectMasterSlaveMode(TIM2, TIM_MasterSlaveMode_Enable);
   TIM_Cmd(TIM2, ENABLE);
 }
