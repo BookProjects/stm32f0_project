@@ -69,7 +69,8 @@ DISC_SRC := $(patsubst %,$(STMUTILS_PATH)/STM32F0-Discovery/%,$(_DISC_SRC))
 
 _BASE_SRC := stm32f0_usart.c \
 			 std_utils.c \
-			 stm32f0_timing.c
+			 stm32f0_timing.c \
+			 stm32f0_led7.c
 BASE_SRC := $(patsubst %,$(BASE_PATH)/%,$(_BASE_SRC))
 
 SRC := $(TARGET_SRC) $(CONFIG_SRC) $(DRIVER_SRC) $(DISC_SRC) $(BASE_SRC)
