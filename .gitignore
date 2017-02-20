@@ -32,7 +32,12 @@
 *.dSYM/
 *.su
 
+# Vim swap files
+*.swp
+*.swo
+
 
 # Custom 
 
 bin/
+.venv/
