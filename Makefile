@@ -33,7 +33,7 @@ BASE_PATH := src
 BASE_INC_PATH := inc
 
 # Change path to change example
-SRC_PATH := examples/int_timer
+SRC_PATH := examples/led7
 _TARGET_SRC := system_stm32f0xx.c \
 		main.c \
 		stm32f0xx_it.c
