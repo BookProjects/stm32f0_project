@@ -1,3 +1,10 @@
+#ifndef __TIMING_H
+#define __TIMING_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 
 /* Wait for however many ticks are specified.
@@ -25,3 +32,9 @@ void timing_configure_systick(uint32_t num_per_sec);
 void timing_configure_input_capture();
 
 uint32_t timing_get_capture_val();
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // __TIMING_H
