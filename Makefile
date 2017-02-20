@@ -32,11 +32,14 @@ LINKER_SCRIPT := $(DEMO_PATH)/TrueSTUDIO/STM32F0-Discovery_Demo/stm32_flash.ld
 BASE_PATH := src
 BASE_INC_PATH := inc
 
+CONFIG_PATH := system_configuration/stm32f0xx
+_CONFIG_SRC := system_stm32f0xx.c \
+	stm32f0xx_it.c
+CONFIG_SRC := $(patsubst %,$(CONFIG_PATH)/%,$(_CONFIG_SRC))
+
 # Change path to change example
 SRC_PATH := examples/led7
-_TARGET_SRC := system_stm32f0xx.c \
-		main.c \
-		stm32f0xx_it.c
+_TARGET_SRC := main.c
 TARGET_SRC := $(patsubst %,$(SRC_PATH)/%,$(_TARGET_SRC))
 _DRIVER_SRC := stm32f0xx_adc.c \
 	stm32f0xx_cec.c \
@@ -69,7 +72,7 @@ _BASE_SRC := stm32f0_usart.c \
 			 stm32f0_timing.c
 BASE_SRC := $(patsubst %,$(BASE_PATH)/%,$(_BASE_SRC))
 
-SRC := $(TARGET_SRC) $(DRIVER_SRC) $(DISC_SRC) $(BASE_SRC)
+SRC := $(TARGET_SRC) $(CONFIG_SRC) $(DRIVER_SRC) $(DISC_SRC) $(BASE_SRC)
 
 _OBJ := $(SRC:.c=.o)
 _OBJ += $(STARTUP:.s=.o)
@@ -149,6 +152,7 @@ CFLAGS := -c \
 	-std=c99 \
 	-Wall \
 	-I$(SRC_PATH) \
+	-I$(CONFIG_PATH) \
 	-I$(BASE_INC_PATH) \
 	-I$(CMSIS_PATH)/Include \
 	-I$(CMSIS_PATH)/ST/STM32F0xx/Include \
