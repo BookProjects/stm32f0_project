@@ -29,6 +29,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx_it.h"
+#include "timing.h"
 
 /** @addtogroup STM32F0-Discovery_Demo
   * @{
@@ -97,6 +98,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
+  timing_systick_handler();
 }
 
 /******************************************************************************/
