@@ -40,6 +40,9 @@ DRIVER_SRC := $(patsubst %,$(DRIVER_PATH)/src/%,$(_DRIVER_SRC))
 _DISC_SRC := stm32f0_discovery.c
 DISC_SRC := $(patsubst %,$(STMUTILS_PATH)/STM32F0-Discovery/%,$(_DISC_SRC))
 
+
+# Externally used variables
+
 MCU_CFLAGS := -I$(CMSIS_PATH)/Include \
 	-I$(CMSIS_PATH)/ST/STM32F0xx/Include \
 	-I$(STMUTILS_PATH)/STM32F0-Discovery \
@@ -47,3 +50,5 @@ MCU_CFLAGS := -I$(CMSIS_PATH)/Include \
 
 MCU_LDFLAGS := -nostartfiles \
 	-T$(LINKER_SCRIPT)
+
+MCU_SRC := $(DRIVER_SRC) $(DISC_SRC)

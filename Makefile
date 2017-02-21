@@ -15,9 +15,6 @@ BUILD_PATH := bin
 OBJ_PATH := $(BUILD_PATH)/obj
 
 
-BASE_PATH := src
-BASE_INC_PATH := inc
-
 CONFIG_PATH := system_configuration/stm32f0xx
 _CONFIG_SRC := system_stm32f0xx.c \
 	stm32f0xx_it.c
@@ -28,6 +25,9 @@ SRC_PATH := examples/led7
 _TARGET_SRC := main.c
 TARGET_SRC := $(patsubst %,$(SRC_PATH)/%,$(_TARGET_SRC))
 
+
+BASE_PATH := src
+BASE_INC_PATH := inc
 _BASE_SRC := stm32f0_usart.c \
 			 std_utils.c \
 			 stm32f0_timing.c \
