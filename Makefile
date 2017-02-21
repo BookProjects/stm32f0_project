@@ -8,26 +8,12 @@ else
 	Q = @
 endif
 
-
-# Define library paths
-STMFW_PATH := third_party/STM32F0-Discovery_FW_V1.0.0
-STMLIB_PATH := $(STMFW_PATH)/Libraries
-STMPROJ_PATH := $(STMFW_PATH)/Project
-STMUTILS_PATH := $(STMFW_PATH)/Utilities
-
-DRIVER_PATH := $(STMLIB_PATH)/STM32F0xx_StdPeriph_Driver
-DEMO_PATH := $(STMPROJ_PATH)/Demonstration
-PERIPH_EX_PATH := $(STMPROJ_PATH)/Peripheral_Examples
-
-CMSIS_PATH := $(STMLIB_PATH)/CMSIS
+include mcu.mk
 
 # Define result paths
 BUILD_PATH := bin
 OBJ_PATH := $(BUILD_PATH)/obj
 
-# Define files that will get compiled
-STARTUP := $(CMSIS_PATH)/ST/STM32F0xx/Source/Templates/gcc_ride7/startup_stm32f0xx.s
-LINKER_SCRIPT := $(DEMO_PATH)/TrueSTUDIO/STM32F0-Discovery_Demo/stm32_flash.ld
 
 BASE_PATH := src
 BASE_INC_PATH := inc
@@ -41,31 +27,6 @@ CONFIG_SRC := $(patsubst %,$(CONFIG_PATH)/%,$(_CONFIG_SRC))
 SRC_PATH := examples/led7
 _TARGET_SRC := main.c
 TARGET_SRC := $(patsubst %,$(SRC_PATH)/%,$(_TARGET_SRC))
-_DRIVER_SRC := stm32f0xx_adc.c \
-	stm32f0xx_cec.c \
-	stm32f0xx_comp.c \
-	stm32f0xx_crc.c \
-	stm32f0xx_dac.c \
-	stm32f0xx_dbgmcu.c \
-	stm32f0xx_dma.c \
-	stm32f0xx_exti.c \
-	stm32f0xx_flash.c \
-	stm32f0xx_gpio.c \
-	stm32f0xx_i2c.c \
-	stm32f0xx_iwdg.c \
-	stm32f0xx_misc.c \
-	stm32f0xx_pwr.c \
-	stm32f0xx_rcc.c \
-	stm32f0xx_rtc.c \
-	stm32f0xx_spi.c \
-	stm32f0xx_syscfg.c \
-	stm32f0xx_tim.c \
-	stm32f0xx_usart.c \
-	stm32f0xx_wwdg.c
-DRIVER_SRC := $(patsubst %,$(DRIVER_PATH)/src/%,$(_DRIVER_SRC))
-
-_DISC_SRC := stm32f0_discovery.c
-DISC_SRC := $(patsubst %,$(STMUTILS_PATH)/STM32F0-Discovery/%,$(_DISC_SRC))
 
 _BASE_SRC := stm32f0_usart.c \
 			 std_utils.c \
@@ -85,6 +46,7 @@ CROSS_HEX := $(CROSS_TARGET:.bin=.hex)
 CROSS_ELF := $(CROSS_TARGET:.bin=.elf)
 
 MAP_FILE := $(BUILD_PATH)/mapfile.map
+
 
 # Make commands
 .PHONY: all
@@ -126,10 +88,10 @@ clean:
 # Cross compile commands
 CC_TYPE:=arm-none-eabi
 CC_PREFIX:=$(CC_PATH)/$(CC_TYPE)
-CROSS_COMPILE:=$(CC_PREFIX)-gcc
-CROSS_LINK:=$(CROSS_COMPILE)
+CC:=$(CC_PREFIX)-gcc
+LD:=$(CC)
 GDBTUI = $(CC_PREFIX)-gdb
-ASSEMBLE:=$(CROSS_COMPILE) -x assembler-with-cpp
+ASSEMBLE:=$(CC) -x assembler-with-cpp
 OBJCOPY:=$(CC_PREFIX)-objcopy
 HEX:=$(OBJCOPY) -O ihex
 BIN:=$(OBJCOPY) -O binary -S
@@ -155,17 +117,13 @@ CFLAGS := -c \
 	-I$(SRC_PATH) \
 	-I$(CONFIG_PATH) \
 	-I$(BASE_INC_PATH) \
-	-I$(CMSIS_PATH)/Include \
-	-I$(CMSIS_PATH)/ST/STM32F0xx/Include \
-	-I$(STMUTILS_PATH)/STM32F0-Discovery \
-	-I$(DRIVER_PATH)/inc \
+	$(MCU_CFLAGS) \
 	$(BASE_CROSS_FLAGS) \
 	-fomit-frame-pointer \
 	$(DEFS) $(OPT)
 ARFLAGS := r
 LDFLAGS := $(BASE_CROSS_FLAGS) \
-	-nostartfiles \
-	-T$(LINKER_SCRIPT) \
+	$(MCU_LDFLAGS) \
 	-Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
 ASSEMBLER_FLAGS := $(BASE_CROSS_FLAGS)
 # Optionally turn on listings
@@ -189,7 +147,7 @@ endif
 $(OBJ_PATH)/%.o: %.c
 	$(E)C Cross Compiling $< to $@
 	$(Q)mkdir -p `dirname $@`
-	$(Q)$(CROSS_COMPILE) -o $@ $< $(CFLAGS)
+	$(Q)$(CC) -o $@ $< $(CFLAGS)
 
 $(OBJ_PATH)/%.o: %.s
 	$(E)Assembling $< to $@
@@ -206,4 +164,4 @@ $(CROSS_HEX): $(CROSS_ELF)
 
 $(CROSS_ELF): $(OBJ)
 	$(E)"Linking" $@
-	$(Q)$(CROSS_LINK) $(LDFLAGS) -o $@ $^
+	$(Q)$(LD) $(LDFLAGS) -o $@ $^
