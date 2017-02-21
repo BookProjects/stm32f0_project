@@ -15,7 +15,7 @@ BUILD_PATH := bin
 OBJ_PATH := $(BUILD_PATH)/obj
 
 
-# Define cross-target dependencies
+# Define cross-target dependencies and variables
 
 # Main target
 # Change path to change example
@@ -51,6 +51,58 @@ CROSS_ELF := $(CROSS_TARGET:.bin=.elf)
 
 MAP_FILE := $(BUILD_PATH)/mapfile.map
 
+# Cross compile commands
+CC_TYPE:=arm-none-eabi
+# CC_PATH must be defined in environment!
+CC_PREFIX:=$(CC_PATH)/$(CC_TYPE)
+
+CC:=$(CC_PREFIX)-gcc
+GDBTUI = $(CC_PREFIX)-gdb
+OBJCOPY:=$(CC_PREFIX)-objcopy
+HEX:=$(OBJCOPY) -O ihex
+BIN:=$(OBJCOPY) -O binary -S
+
+
+LD:=$(CC)
+AS:=$(CC) -x assembler-with-cpp
+
+# Define compiler options
+OPT =  # -Os
+
+DEBUG_FLAGS := -g \
+	-gdwarf-2
+
+BASE_CFLAGS := -c \
+	-std=c99 \
+	-Wall
+
+ARFLAGS := r
+ASFLAGS := $(DEBUG_FLAGS) $(MCU_ASFLAGS)
+
+# Define cross-compiler options
+CFLAGS := $(BASE_CFLAGS) \
+	-I$(SRC_PATH) \
+	-I$(CONFIG_PATH) \
+	-I$(BASE_INC_PATH) \
+	$(MCU_CFLAGS) \
+	$(DEBUG_FLAGS) \
+	$(DDEFS) $(OPT)
+LDFLAGS := $(DEBUG_FLAGS) \
+	$(MCU_LDFLAGS) \
+	-Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
+
+# Optionally turn on listings
+# -Wa passes comma separated list of arguments onto assembler
+#  -a (turns on listings)
+#  m: include macro expansions
+#  h: include high-level source
+#  l: include assembly
+#  s: include symbols
+#  =: list to file
+ifdef VERBOSE
+	CFLAGS += -Wa,-amhls=$(<:.c=.lst)
+	ASFLAGS += -Wa,-amhls=$(<:.s=.lst)
+endif
 
 # Make commands
 .PHONY: all
@@ -89,53 +141,6 @@ serial:
 clean:
 	rm -rf $(BUILD_PATH)
 
-# Cross compile commands
-CC_TYPE:=arm-none-eabi
-CC_PREFIX:=$(CC_PATH)/$(CC_TYPE)
-CC:=$(CC_PREFIX)-gcc
-LD:=$(CC)
-GDBTUI = $(CC_PREFIX)-gdb
-AS:=$(CC) -x assembler-with-cpp
-OBJCOPY:=$(CC_PREFIX)-objcopy
-HEX:=$(OBJCOPY) -O ihex
-BIN:=$(OBJCOPY) -O binary -S
-
-# Define compiler options
-OPT =  # -Os
-
-
-DEBUG_FLAGS := -g \
-	-gdwarf-2
-
-BASE_CFLAGS := -c \
-	-std=c99 \
-	-Wall
-
-# peripheral headers
-CFLAGS := $(BASE_CFLAGS) \
-	-I$(SRC_PATH) \
-	-I$(CONFIG_PATH) \
-	-I$(BASE_INC_PATH) \
-	$(MCU_CFLAGS) \
-	$(DEBUG_FLAGS) \
-	$(DDEFS) $(OPT)
-ARFLAGS := r
-LDFLAGS := $(DEBUG_FLAGS) \
-	$(MCU_LDFLAGS) \
-	-Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
-ASFLAGS := $(DEBUG_FLAGS) $(MCU_ASFLAGS)
-# Optionally turn on listings
-# -Wa passes comma separated list of arguments onto assembler
-#  -a (turns on listings)
-#  m: include macro expansions
-#  h: include high-level source
-#  l: include assembly
-#  s: include symbols
-#  =: list to file
-ifdef VERBOSE
-	CFLAGS += -Wa,-amhls=$(<:.c=.lst)
-	ASFLAGS += -Wa,-amhls=$(<:.s=.lst)
-endif
 
 # Create all of the objects
 
