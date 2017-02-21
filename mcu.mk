@@ -40,13 +40,22 @@ DRIVER_SRC := $(patsubst %,$(DRIVER_PATH)/src/%,$(_DRIVER_SRC))
 _DISC_SRC := stm32f0_discovery.c
 DISC_SRC := $(patsubst %,$(STMUTILS_PATH)/STM32F0-Discovery/%,$(_DISC_SRC))
 
+MCU:=cortex-m0
 
-# Externally used variables
-
-MCU_CFLAGS := -I$(CMSIS_PATH)/Include \
+# Include (arm headers, stm32f0xx headers, Discovery specific headers)
+INCLUDE_FLAGS := -I$(CMSIS_PATH)/Include \
 	-I$(CMSIS_PATH)/ST/STM32F0xx/Include \
 	-I$(STMUTILS_PATH)/STM32F0-Discovery \
 	-I$(DRIVER_PATH)/inc \
+
+
+# Externally used variables
+
+MCU_CFLAGS := $(INCLUDE_FLAGS) \
+	-fomit-frame-pointer \
+	-DRUN_FROM_FLASH=1 \
+	-mcpu=$(MCU) \
+	-mthumb
 
 MCU_LDFLAGS := -nostartfiles \
 	-T$(LINKER_SCRIPT)

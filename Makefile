@@ -15,17 +15,15 @@ BUILD_PATH := bin
 OBJ_PATH := $(BUILD_PATH)/obj
 
 
-CONFIG_PATH := system_configuration/stm32f0xx
-_CONFIG_SRC := system_stm32f0xx.c \
-	stm32f0xx_it.c
-CONFIG_SRC := $(patsubst %,$(CONFIG_PATH)/%,$(_CONFIG_SRC))
+# Define cross-target dependencies
 
+# Main target
 # Change path to change example
 SRC_PATH := examples/led7
 _TARGET_SRC := main.c
 TARGET_SRC := $(patsubst %,$(SRC_PATH)/%,$(_TARGET_SRC))
 
-
+# Modules
 BASE_PATH := src
 BASE_INC_PATH := inc
 _BASE_SRC := stm32f0_usart.c \
@@ -34,7 +32,13 @@ _BASE_SRC := stm32f0_usart.c \
 			 stm32f0_led7.c
 BASE_SRC := $(patsubst %,$(BASE_PATH)/%,$(_BASE_SRC))
 
-SRC := $(TARGET_SRC) $(CONFIG_SRC) $(DRIVER_SRC) $(DISC_SRC) $(BASE_SRC)
+# Board Configuration
+CONFIG_PATH := system_configuration/stm32f0xx
+_CONFIG_SRC := system_stm32f0xx.c \
+	stm32f0xx_it.c
+CONFIG_SRC := $(patsubst %,$(CONFIG_PATH)/%,$(_CONFIG_SRC))
+
+SRC := $(TARGET_SRC) $(BASE_SRC) $(CONFIG_SRC) $(MCU_SRC)
 
 _OBJ := $(SRC:.c=.o)
 _OBJ += $(STARTUP:.s=.o)
@@ -97,35 +101,29 @@ HEX:=$(OBJCOPY) -O ihex
 BIN:=$(OBJCOPY) -O binary -S
 
 # Define compiler options
-DEFS:= $(DDEFS) -DRUN_FROM_FLASH=1
-MCU:=cortex-m0
-MCFLAGS:= -mcpu=$(MCU)
 OPT =  # -Os
 
-BASE_CROSS_FLAGS := $(MCFLAGS) \
-	-g \
-	-gdwarf-2 \
-	-mthumb
 
-# arm headers
-# stm32f0xx headers
-# Discovery specific header
-# peripheral headers
-CFLAGS := -c \
+DEBUG_FLAGS := -g \
+	-gdwarf-2
+
+BASE_CFLAGS := -c \
 	-std=c99 \
-	-Wall \
+	-Wall
+
+# peripheral headers
+CFLAGS := $(BASE_CFLAGS) \
 	-I$(SRC_PATH) \
 	-I$(CONFIG_PATH) \
 	-I$(BASE_INC_PATH) \
 	$(MCU_CFLAGS) \
-	$(BASE_CROSS_FLAGS) \
-	-fomit-frame-pointer \
-	$(DEFS) $(OPT)
+	$(DEBUG_FLAGS) \
+	$(DDEFS) $(OPT)
 ARFLAGS := r
-LDFLAGS := $(BASE_CROSS_FLAGS) \
+LDFLAGS := $(DEBUG_FLAGS) \
 	$(MCU_LDFLAGS) \
 	-Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
-ASSEMBLER_FLAGS := $(BASE_CROSS_FLAGS)
+ASSEMBLER_FLAGS := $(DEBUG_FLAGS)
 # Optionally turn on listings
 # -Wa passes comma separated list of arguments onto assembler
 #  -a (turns on listings)
@@ -145,12 +143,12 @@ endif
 # $< is shorthand for the first dependency
 # $@ is shorthand for the target
 $(OBJ_PATH)/%.o: %.c
-	$(E)C Cross Compiling $< to $@
+	$(E)$(notdir $(CC)) compiling $(notdir $<) to $@
 	$(Q)mkdir -p `dirname $@`
 	$(Q)$(CC) -o $@ $< $(CFLAGS)
 
 $(OBJ_PATH)/%.o: %.s
-	$(E)Assembling $< to $@
+	$(E) Assembling $(notdir $<) to $@
 	$(Q)mkdir -p `dirname $@`
 	$(Q)$(ASSEMBLE) -c $(ASSEMBLER_FLAGS) $< -o $@
 
