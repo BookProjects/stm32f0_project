@@ -74,6 +74,7 @@ ARFLAGS := r
 
 # Define native options
 NTV_CFLAGS := $(BASE_CFLAGS) \
+	$(NTV_CPPFLAGS) \
 	$(DEBUG_FLAGS)
 NTV_LDFLAGS := $(DEBUG_FLAGS)
 
