@@ -11,7 +11,6 @@ PERIPH_EX_PATH := $(STMPROJ_PATH)/Peripheral_Examples
 CMSIS_PATH := $(STMLIB_PATH)/CMSIS
 
 # Define files that will get compiled
-STARTUP := $(CMSIS_PATH)/ST/STM32F0xx/Source/Templates/gcc_ride7/startup_stm32f0xx.s
 LINKER_SCRIPT := $(DEMO_PATH)/TrueSTUDIO/STM32F0-Discovery_Demo/stm32_flash.ld
 
 _DRIVER_SRC := stm32f0xx_adc.c \
@@ -52,6 +51,7 @@ GENERIC_MCU_FLAGS := -mcpu=$(MCU) \
 	-mthumb
 
 # Externally used variables
+MCU_STARTUP := $(CMSIS_PATH)/ST/STM32F0xx/Source/Templates/gcc_ride7/startup_stm32f0xx.s
 
 MCU_CFLAGS := $(INCLUDE_FLAGS) \
 	-fomit-frame-pointer \

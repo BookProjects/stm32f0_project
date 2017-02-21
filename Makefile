@@ -15,53 +15,24 @@ BUILD_PATH := bin
 OBJ_PATH := $(BUILD_PATH)/obj
 
 
-# Define dependencies and variables
+# Define dependencies and targets
 
 # Define native test dependencies and variables
-NATIVE_TEST_PATH := tests
-_NATIVE_TEST_SRC := native_sw_test.c
-NATIVE_TEST_SRC := $(patsubst %,$(NATIVE_TEST_PATH)/%,$(_NATIVE_TEST_SRC))
-
+include ntv.mk
 # Note using .native.o to separate from mcu compiled object files
-_NATIVE_TEST_OBJ := $(NATIVE_TEST_SRC:.c=.native.o)
-NATIVE_TEST_OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_NATIVE_TEST_OBJ))
+_NTV_OBJ := $(NTV_SRC:.c=.native.o)
+NTV_OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_NTV_OBJ))
 
+NTV_TEST_TARGET := $(BUILD_PATH)/test_natively
 
-# Define cross-target dependencies and variables
+# Define cross-compiled dependencies and variables
+include hw.mk
 
-# Main target
-# Change path to change example
-SRC_PATH := examples/led7
-_TARGET_SRC := main.c
-TARGET_SRC := $(patsubst %,$(SRC_PATH)/%,$(_TARGET_SRC))
+_HW_OBJ := $(HW_SRC:.c=.o)
+_HW_OBJ += $(MCU_STARTUP:.s=.o)
+HW_OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_HW_OBJ))
 
-# Modules
-BASE_PATH := src
-BASE_INC_PATH := inc
-_BASE_SRC := stm32f0_usart.c \
-			 std_utils.c \
-			 stm32f0_timing.c \
-			 stm32f0_led7.c
-BASE_SRC := $(patsubst %,$(BASE_PATH)/%,$(_BASE_SRC))
-
-# Board Configuration
-CONFIG_PATH := system_configuration/stm32f0xx
-_CONFIG_SRC := system_stm32f0xx.c \
-	stm32f0xx_it.c
-CONFIG_SRC := $(patsubst %,$(CONFIG_PATH)/%,$(_CONFIG_SRC))
-
-SRC := $(TARGET_SRC) $(BASE_SRC) $(CONFIG_SRC) $(MCU_SRC)
-
-_OBJ := $(SRC:.c=.o)
-_OBJ += $(STARTUP:.s=.o)
-OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_OBJ))
-
-# Define targets
-
-# Define native targets
-NATIVE_TEST_TARGET := $(BUILD_PATH)/test_natively
-
-# Define Cross compiled targets
+# Define cross-compiled targets
 CROSS_TARGET := $(BUILD_PATH)/hw_binary.bin
 CROSS_HEX := $(CROSS_TARGET:.bin=.hex)
 CROSS_ELF := $(CROSS_TARGET:.bin=.elf)
@@ -71,23 +42,23 @@ MAP_FILE := $(BUILD_PATH)/mapfile.map
 # Define commands necessary for creating targets
 
 # Native commands
-NATIVE_CC:=gcc
-NATIVE_LD:=$(NATIVE_CC)
+NTV_CC:=gcc
+NTV_LD:=$(NTV_CC)
 
 # Cross compile commands
 CC_TYPE:=arm-none-eabi
 # CC_PATH must be defined in environment!
 CC_PREFIX:=$(CC_PATH)/$(CC_TYPE)
 
-CC:=$(CC_PREFIX)-gcc
+HW_CC:=$(CC_PREFIX)-gcc
 GDBTUI = $(CC_PREFIX)-gdb
 OBJCOPY:=$(CC_PREFIX)-objcopy
 HEX:=$(OBJCOPY) -O ihex
 BIN:=$(OBJCOPY) -O binary -S
 
 
-LD:=$(CC)
-AS:=$(CC) -x assembler-with-cpp
+HW_LD:=$(HW_CC)
+HW_AS:=$(HW_CC) -x assembler-with-cpp
 
 # Define compiler options
 OPT =  # -Os
@@ -102,19 +73,17 @@ BASE_CFLAGS := -std=c99 \
 ARFLAGS := r
 
 # Define native options
-NATIVE_CFLAGS := $(BASE_CFLAGS) \
+NTV_CFLAGS := $(BASE_CFLAGS) \
 	$(DEBUG_FLAGS)
-NATIVE_LDFLAGS := $(DEBUG_FLAGS)
+NTV_LDFLAGS := $(DEBUG_FLAGS)
 
 # Define cross-compiler options
-ASFLAGS := $(DEBUG_FLAGS) $(MCU_ASFLAGS)
-CFLAGS := $(BASE_CFLAGS) \
-	-I$(SRC_PATH) \
-	-I$(CONFIG_PATH) \
-	-I$(BASE_INC_PATH) \
+HW_ASFLAGS := $(DEBUG_FLAGS) $(MCU_ASFLAGS)
+HW_CFLAGS := $(BASE_CFLAGS) \
+	$(HW_CPPFLAGS) \
 	$(MCU_CFLAGS) \
 	$(DEBUG_FLAGS)
-LDFLAGS := $(DEBUG_FLAGS) \
+HW_LDFLAGS := $(DEBUG_FLAGS) \
 	$(MCU_LDFLAGS) \
 	-Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
 
@@ -127,8 +96,10 @@ LDFLAGS := $(DEBUG_FLAGS) \
 #  s: include symbols
 #  =: list to file
 ifdef VERBOSE
-	CFLAGS += -Wa,-amhls=$(<:.c=.lst)
-	ASFLAGS += -Wa,-amhls=$(<:.s=.lst)
+	HW_CFLAGS += -Wa,-amhls=$(<:.c=.lst)
+	HW_ASFLAGS += -Wa,-amhls=$(<:.s=.lst)
+	NTV_CFLAGS += -Wa,-amhls=$(<:.c=.lst)
+	NTV_ASFLAGS += -Wa,-amhls=$(<:.s=.lst)
 endif
 
 # Make commands
@@ -136,13 +107,14 @@ endif
 all: $(CROSS_TARGET)
 
 .PHONY: test
-test: $(NATIVE_TEST_TARGET)
-	./$(NATIVE_TEST_TARGET)
+test: $(NTV_TEST_TARGET)
+	./$(NTV_TEST_TARGET)
 
 .PHONY: help
 help:
 	$(E)
 	$(E)"all:    Create the hw binary $(CROSS_TARGET)"
+	$(E)"test:   Create a native test binary and run it"
 	$(E)"flash:  Flash the hw binary to the chip"
 	$(E)"erase:  Erase the flash data on the chip (useful for getting out of error state)"
 	$(E)"debug:  Run gdb remotely on the chip"
@@ -179,19 +151,19 @@ clean:
 # $< is shorthand for the first dependency
 # $@ is shorthand for the target
 $(OBJ_PATH)/%.native.o: %.c
-	$(E)$(notdir $(NATIVE_CC)) compiling $(notdir $<) to $@
+	$(E)$(notdir $(NTV_CC)) compiling $(notdir $<) to $@
 	$(Q)mkdir -p `dirname $@`
-	$(Q)$(NATIVE_CC) -o $@ $< $(NATIVE_CFLAGS) -c
+	$(Q)$(NTV_CC) -o $@ $< $(NTV_CFLAGS) -c
 
 $(OBJ_PATH)/%.o: %.c
-	$(E)$(notdir $(CC)) compiling $(notdir $<) to $@
+	$(E)$(notdir $(HW_CC)) compiling $(notdir $<) to $@
 	$(Q)mkdir -p `dirname $@`
-	$(Q)$(CC) -o $@ $< $(CFLAGS) -c
+	$(Q)$(HW_CC) -o $@ $< $(HW_CFLAGS) -c
 
 $(OBJ_PATH)/%.o: %.s
 	$(E)$(notdir $(AS)) assembling $(notdir $<) to $@
 	$(Q)mkdir -p `dirname $@`
-	$(Q)$(AS) -c $(ASFLAGS) $< -o $@
+	$(Q)$(HW_AS) -c $(HW_ASFLAGS) $< -o $@
 
 $(CROSS_TARGET): $(CROSS_ELF)
 	$(E)Building $@
@@ -201,10 +173,10 @@ $(CROSS_HEX): $(CROSS_ELF)
 	$(E)Building $@
 	$(Q)$(HEX) $< $@
 
-$(CROSS_ELF): $(OBJ)
-	$(E)$(notdir $(LD)) linking $@
-	$(Q)$(LD) $(LDFLAGS) -o $@ $^
+$(CROSS_ELF): $(HW_OBJ)
+	$(E)$(notdir $(HW_LD)) linking $@
+	$(Q)$(HW_LD) $(HW_LDFLAGS) -o $@ $^
 
-$(NATIVE_TEST_TARGET): $(NATIVE_TEST_OBJ)
-	$(E)$(notdir $(NATIVE_LD)) linking $@
-	$(Q)$(NATIVE_LD) $(NATIVE_LDFLAGS) -o $@ $^
+$(NTV_TEST_TARGET): $(NTV_OBJ)
+	$(E)$(notdir $(NTV_LD)) linking $@
+	$(Q)$(NTV_LD) $(NTV_LDFLAGS) -o $@ $^
