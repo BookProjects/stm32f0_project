@@ -95,7 +95,7 @@ CC_PREFIX:=$(CC_PATH)/$(CC_TYPE)
 CC:=$(CC_PREFIX)-gcc
 LD:=$(CC)
 GDBTUI = $(CC_PREFIX)-gdb
-ASSEMBLE:=$(CC) -x assembler-with-cpp
+AS:=$(CC) -x assembler-with-cpp
 OBJCOPY:=$(CC_PREFIX)-objcopy
 HEX:=$(OBJCOPY) -O ihex
 BIN:=$(OBJCOPY) -O binary -S
@@ -123,7 +123,7 @@ ARFLAGS := r
 LDFLAGS := $(DEBUG_FLAGS) \
 	$(MCU_LDFLAGS) \
 	-Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
-ASSEMBLER_FLAGS := $(DEBUG_FLAGS)
+ASFLAGS := $(DEBUG_FLAGS)
 # Optionally turn on listings
 # -Wa passes comma separated list of arguments onto assembler
 #  -a (turns on listings)
@@ -134,7 +134,7 @@ ASSEMBLER_FLAGS := $(DEBUG_FLAGS)
 #  =: list to file
 ifdef VERBOSE
 	CFLAGS += -Wa,-amhls=$(<:.c=.lst)
-	ASSEMBLER_FLAGS += -Wa,-amhls=$(<:.s=.lst)
+	ASFLAGS += -Wa,-amhls=$(<:.s=.lst)
 endif
 
 # Create all of the objects
@@ -148,18 +148,18 @@ $(OBJ_PATH)/%.o: %.c
 	$(Q)$(CC) -o $@ $< $(CFLAGS)
 
 $(OBJ_PATH)/%.o: %.s
-	$(E) Assembling $(notdir $<) to $@
+	$(E)$(notdir $(AS)) assembling $(notdir $<) to $@
 	$(Q)mkdir -p `dirname $@`
-	$(Q)$(ASSEMBLE) -c $(ASSEMBLER_FLAGS) $< -o $@
+	$(Q)$(AS) -c $(ASFLAGS) $< -o $@
 
 $(CROSS_TARGET): $(CROSS_ELF)
-	$(E)"Building" $@
+	$(E)Building $@
 	$(Q)$(BIN) $< $@
 
 $(CROSS_HEX): $(CROSS_ELF)
-	$(E)"Building" $@
+	$(E)Building $@
 	$(Q)$(HEX) $< $@
 
 $(CROSS_ELF): $(OBJ)
-	$(E)"Linking" $@
+	$(E)$(notdir $(LD)) linking $@
 	$(Q)$(LD) $(LDFLAGS) -o $@ $^
