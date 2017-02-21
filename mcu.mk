@@ -48,16 +48,20 @@ INCLUDE_FLAGS := -I$(CMSIS_PATH)/Include \
 	-I$(STMUTILS_PATH)/STM32F0-Discovery \
 	-I$(DRIVER_PATH)/inc \
 
+GENERIC_MCU_FLAGS := -mcpu=$(MCU) \
+	-mthumb
 
 # Externally used variables
 
 MCU_CFLAGS := $(INCLUDE_FLAGS) \
 	-fomit-frame-pointer \
 	-DRUN_FROM_FLASH=1 \
-	-mcpu=$(MCU) \
-	-mthumb
+	$(GENERIC_MCU_FLAGS)
 
 MCU_LDFLAGS := -nostartfiles \
-	-T$(LINKER_SCRIPT)
+	-T$(LINKER_SCRIPT) \
+	$(GENERIC_MCU_FLAGS)
+
+MCU_ASFLAGS := $(GENERIC_MCU_FLAGS)
 
 MCU_SRC := $(DRIVER_SRC) $(DISC_SRC)

@@ -123,7 +123,7 @@ ARFLAGS := r
 LDFLAGS := $(DEBUG_FLAGS) \
 	$(MCU_LDFLAGS) \
 	-Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
-ASFLAGS := $(DEBUG_FLAGS)
+ASFLAGS := $(DEBUG_FLAGS) $(MCU_ASFLAGS)
 # Optionally turn on listings
 # -Wa passes comma separated list of arguments onto assembler
 #  -a (turns on listings)
