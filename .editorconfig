@@ -11,6 +11,7 @@ max_line_length = 80
 # Makefiles
 [Makefile]
 indent_style = tab
+trim_trailing_whitespace = false
 
 [*.mk]
 indent_style = tab
