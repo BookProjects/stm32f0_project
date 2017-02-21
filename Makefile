@@ -15,6 +15,18 @@ BUILD_PATH := bin
 OBJ_PATH := $(BUILD_PATH)/obj
 
 
+# Define dependencies and variables
+
+# Define native test dependencies and variables
+NATIVE_TEST_PATH := tests
+_NATIVE_TEST_SRC := native_sw_test.c
+NATIVE_TEST_SRC := $(patsubst %,$(NATIVE_TEST_PATH)/%,$(_NATIVE_TEST_SRC))
+
+# Note using .native.o to separate from mcu compiled object files
+_NATIVE_TEST_OBJ := $(NATIVE_TEST_SRC:.c=.native.o)
+NATIVE_TEST_OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_NATIVE_TEST_OBJ))
+
+
 # Define cross-target dependencies and variables
 
 # Main target
@@ -44,12 +56,23 @@ _OBJ := $(SRC:.c=.o)
 _OBJ += $(STARTUP:.s=.o)
 OBJ := $(patsubst %,$(OBJ_PATH)/%,$(_OBJ))
 
-# Define files to get compiled
+# Define targets
+
+# Define native targets
+NATIVE_TEST_TARGET := $(BUILD_PATH)/test_natively
+
+# Define Cross compiled targets
 CROSS_TARGET := $(BUILD_PATH)/hw_binary.bin
 CROSS_HEX := $(CROSS_TARGET:.bin=.hex)
 CROSS_ELF := $(CROSS_TARGET:.bin=.elf)
 
 MAP_FILE := $(BUILD_PATH)/mapfile.map
+
+# Define commands necessary for creating targets
+
+# Native commands
+NATIVE_CC:=gcc
+NATIVE_LD:=$(NATIVE_CC)
 
 # Cross compile commands
 CC_TYPE:=arm-none-eabi
@@ -72,21 +95,25 @@ OPT =  # -Os
 DEBUG_FLAGS := -g \
 	-gdwarf-2
 
-BASE_CFLAGS := -c \
-	-std=c99 \
-	-Wall
+BASE_CFLAGS := -std=c99 \
+	-Wall \
+	$(DDEFS) $(OPT)
 
 ARFLAGS := r
-ASFLAGS := $(DEBUG_FLAGS) $(MCU_ASFLAGS)
+
+# Define native options
+NATIVE_CFLAGS := $(BASE_CFLAGS) \
+	$(DEBUG_FLAGS)
+NATIVE_LDFLAGS := $(DEBUG_FLAGS)
 
 # Define cross-compiler options
+ASFLAGS := $(DEBUG_FLAGS) $(MCU_ASFLAGS)
 CFLAGS := $(BASE_CFLAGS) \
 	-I$(SRC_PATH) \
 	-I$(CONFIG_PATH) \
 	-I$(BASE_INC_PATH) \
 	$(MCU_CFLAGS) \
-	$(DEBUG_FLAGS) \
-	$(DDEFS) $(OPT)
+	$(DEBUG_FLAGS)
 LDFLAGS := $(DEBUG_FLAGS) \
 	$(MCU_LDFLAGS) \
 	-Wl,-Map=$(MAP_FILE),--cref,--no-warn-mismatch
@@ -107,6 +134,10 @@ endif
 # Make commands
 .PHONY: all
 all: $(CROSS_TARGET)
+
+.PHONY: test
+test: $(NATIVE_TEST_TARGET)
+	./$(NATIVE_TEST_TARGET)
 
 .PHONY: help
 help:
@@ -147,10 +178,15 @@ clean:
 # $^ is shorthand for all of the dependencies
 # $< is shorthand for the first dependency
 # $@ is shorthand for the target
+$(OBJ_PATH)/%.native.o: %.c
+	$(E)$(notdir $(NATIVE_CC)) compiling $(notdir $<) to $@
+	$(Q)mkdir -p `dirname $@`
+	$(Q)$(NATIVE_CC) -o $@ $< $(NATIVE_CFLAGS) -c
+
 $(OBJ_PATH)/%.o: %.c
 	$(E)$(notdir $(CC)) compiling $(notdir $<) to $@
 	$(Q)mkdir -p `dirname $@`
-	$(Q)$(CC) -o $@ $< $(CFLAGS)
+	$(Q)$(CC) -o $@ $< $(CFLAGS) -c
 
 $(OBJ_PATH)/%.o: %.s
 	$(E)$(notdir $(AS)) assembling $(notdir $<) to $@
@@ -168,3 +204,7 @@ $(CROSS_HEX): $(CROSS_ELF)
 $(CROSS_ELF): $(OBJ)
 	$(E)$(notdir $(LD)) linking $@
 	$(Q)$(LD) $(LDFLAGS) -o $@ $^
+
+$(NATIVE_TEST_TARGET): $(NATIVE_TEST_OBJ)
+	$(E)$(notdir $(NATIVE_LD)) linking $@
+	$(Q)$(NATIVE_LD) $(NATIVE_LDFLAGS) -o $@ $^
