@@ -13,6 +13,17 @@ include mcu.mk
 # Define result paths
 BUILD_PATH := bin
 OBJ_PATH := $(BUILD_PATH)/obj
+BUILD_DIR := build
+
+# Define cross compiler variables
+CROSS_COMPILER_SRC := gcc-arm-none-eabi-5_4-2016q3
+CROSS_COMPILER_BASE := $(CROSS_COMPILER_SRC)-20160926-linux
+CROSS_COMPILER_TAR := $(CROSS_COMPILER_BASE).tar.bz2
+CROSS_COMPILER_URL := "https://launchpad.net/gcc-arm-embedded/5.0/5-2016-q3-update/+download/$(CROSS_COMPILER_TAR)"
+CROSS_COMPILER_TAR_BUILD := $(BUILD_DIR)/$(CROSS_COMPILER_TAR)
+CROSS_COMPILER_SRC_BUILD := $(BUILD_DIR)/$(CROSS_COMPILER_SRC)
+CC_PATH := $(CROSS_COMPILER_SRC_BUILD)/bin
+
 
 
 # Define dependencies and targets
@@ -105,11 +116,7 @@ endif
 
 # Make commands
 .PHONY: all
-all: $(CROSS_TARGET)
-
-.PHONY: test
-test: $(NTV_TEST_TARGET)
-	./$(NTV_TEST_TARGET)
+all: hw_setup $(CROSS_TARGET)
 
 .PHONY: help
 help:
@@ -122,6 +129,23 @@ help:
 	$(E)"serial: Open up a serial communication (must setup hardware appropriately)"
 	$(E)"clean:  Remove any files created by this Makefile"
 	$(E)
+
+.PHONY: test
+test: $(NTV_TEST_TARGET)
+	./$(NTV_TEST_TARGET)
+
+.PHONY: hw_setup
+hw_setup: $(CROSS_COMPILER_SRC_BUILD)
+
+$(CROSS_COMPILER_SRC_BUILD): $(CROSS_COMPILER_TAR_BUILD)
+	cd $(BUILD_DIR) && tar -xjf $(CROSS_COMPILER_TAR)
+
+$(CROSS_COMPILER_TAR_BUILD): $(BUILD_DIR)
+	wget $(CROSS_COMPILER_URL) -O $(CROSS_COMPILER_TAR_BUILD)
+	# cp ../$(CROSS_COMPILER_TAR) $(CROSS_COMPILER_TAR_BUILD)
+
+$(BUILD_DIR):
+	$(Q)mkdir -p $@
 
 .PHONY: flash
 flash: $(CROSS_TARGET)

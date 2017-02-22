@@ -37,7 +37,8 @@
 *.swo
 
 
-# Custom 
+# Custom
 
 bin/
+build/
 .venv/
